@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+section{
+  color: rgb(22, 18, 18);
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #eeededee;
+  height: 100vh;
+
+}
+.navBg{
+  background-color: #9b989e;
+ color: aqua;
+ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
