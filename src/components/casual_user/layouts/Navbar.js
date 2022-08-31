@@ -10,7 +10,7 @@ const NavBarExample = () => {
    <>
     <Navbar className="navBg" variant="light" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/"><img className='imagen-logo' src={require('../imagenes/icon.png')} alt='xd' width={40} />
+        <Navbar.Brand as={Link} to="/"><img className='imagen-logo' src={require('../../../assets/images/user_casual/icon.png')} alt='xd' width={40} />
             
             Restaurante</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

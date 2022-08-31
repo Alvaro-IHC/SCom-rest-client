@@ -1,11 +1,11 @@
 
 import './App.css';
 import {BrowserRouter,Navigate, Route, Routes} from 'react-router-dom';
-import Acerca_de_nosotros from './componentes/acerca_de_nosotros';
-import Contactanos from './componentes/contactanos';
-import Preguntas_frecuentes from './componentes/preguntas_frecuentes';
-import Inicio from './componentes/inicio';
-import NavBarExample from './layouts/navbar';
+import Acerca_de_nosotros from './components/casual_user/Acerca_de_nosotros';
+import Contactanos from './components/casual_user/Contactanos';
+import Preguntas_frecuentes from './components/casual_user/Preguntas_frecuentes';
+import Inicio from './components/casual_user/Inicio';
+import NavBarExample from './components/casual_user/layouts/Navbar';
 
 function App() {
   return (
