@@ -1,7 +1,7 @@
 import React from "react";
-import "./header.css";
-import messi from "../../../assetes/images/cashier/messi.webp";
-import logo from "../../../assetes/images/cashier/logo.svg";
+import "./Header.css";
+import messi from "../../../assets/images/cashier/messi.webp";
+import logo from "../../../assets/images/cashier/logo.svg";
 const Header = () => {
   return (
     <>
