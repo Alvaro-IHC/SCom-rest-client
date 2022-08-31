@@ -1,9 +1,10 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
+
 import { Outlet, Link} from "react-router-dom"
 import {Navbar, Nav, Container} from "react-bootstrap"
-import Form from 'react-bootstrap/Form';
+
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Navbar2 from './Navbar2.css';
 
 const NavBarExample = () => {
   return (
@@ -16,29 +17,20 @@ const NavBarExample = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-            <Nav.Link as={Link} to="/acerca_de_nosotros">Acerca de nosotros</Nav.Link>
-            <Nav.Link as={Link} to="/contactanos">Contactanos</Nav.Link>
-            <Nav.Link as={Link} to="/preguntas_frecuentes">Preguntas frecuentes</Nav.Link>
+            <Nav.Link as={Link} className="botonl" to="/">Inicio</Nav.Link>
+            <Nav.Link as={Link} className="botonl" to="/acerca_de_nosotros">Acerca de nosotros</Nav.Link>
+            <Nav.Link as={Link} className="botonl" to="/contactanos">Contactanos</Nav.Link>
+            <Nav.Link as={Link} className="botonl" to="/preguntas_frecuentes">Preguntas frecuentes</Nav.Link>
 
 
             
-            <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Buscar"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Buscar</Button>
-          </Form>
+           
 
 
 
-          <NavDropdown title="Sign in" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Sign in</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Log out
+          <NavDropdown className="botonl" title="Sign in" id="navbarScrollingDropdown">
+              <NavDropdown.Item as={Link} to="/sign_in">Sign in</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/log_out">Log out
               </NavDropdown.Item>
               <NavDropdown.Divider />
           

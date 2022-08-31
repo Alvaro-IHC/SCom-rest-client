@@ -3,7 +3,7 @@ import React from 'react'
 const Sign_in = () => {
   return (
     <div>
-        <h1> Form sign in</h1>
+        <h1> Formulario sign in</h1>
 
     </div>
   )
