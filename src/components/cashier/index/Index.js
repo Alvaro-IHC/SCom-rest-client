@@ -1,14 +1,14 @@
-import React from 'react'
-import Header from '../header/Header'
-import Main from '../main/Main'
+import React from "react";
+import Header from "../header/Header";
+import Section from '../section/Section'
 import "./Index.css";
 function Index() {
   return (
     <>
-    <Header/>
-    <Main/>
+      <Header />
+      <Section/>
     </>
-  )
+  );
 }
 
-export default Index
+export default Index;

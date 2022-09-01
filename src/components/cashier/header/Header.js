@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import "./header.css";
 import messi from "../../../assets/images/cashier/messi.webp";
 import logo from "../../../assets/images/cashier/logo.svg";
 const Header = () => {
