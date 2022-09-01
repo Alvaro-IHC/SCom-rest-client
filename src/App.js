@@ -7,7 +7,7 @@ import Preguntas_frecuentes from './components/casual_user/Preguntas_frecuentes'
 import Inicio from './components/casual_user/home/Inicio';
 import NavBarExample from './components/casual_user/layouts/Navbar';
 import Sign_in from './components/casual_user/Sign_in';
-import Log_out from './components/casual_user/Sign_up';
+import Sign_up from './components/casual_user/Sign_up';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Route path='contactanos' element={<Contactanos/>}/>
             <Route path='preguntas_frecuentes' element={<Preguntas_frecuentes/>}/>
             <Route path='sign_in' element={<Sign_in/>}/>
-            <Route path='log_out' element={<Log_out/>}/>
+            <Route path='sign_up' element={<Sign_up/>}/>
             <Route path='*' element={<Navigate replace to="/"/>}/>
           </Route>
         </Routes>

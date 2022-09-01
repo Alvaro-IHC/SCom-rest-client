@@ -30,7 +30,7 @@ const NavBarExample = () => {
 
           <NavDropdown className="botonl" title="Sign in" id="navbarScrollingDropdown">
               <NavDropdown.Item as={Link} to="/sign_in">Sign in</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/log_out">Log out
+              <NavDropdown.Item as={Link} to="/sign_up">Sign up
               </NavDropdown.Item>
               <NavDropdown.Divider />
           
