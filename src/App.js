@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Acerca_de_nosotros from "./components/casual_user/acercaDeNosotros/AcercaDeNosotros";
+import AcercaDeNosotros from "./components/casual_user/acercaDeNosotros/AcercaDeNosotros";
 import Contactanos from "./components/casual_user/contactanos/Contactanos";
-import Preguntas_frecuentes from "./components/casual_user/preguntasFrecuentes/PreguntasFrecuentes";
+import PreguntasFrecuentes from "./components/casual_user/preguntasFrecuentes/PreguntasFrecuentes";
 import Inicio from "./components/casual_user/home/Inicio";
 import NavBarExample from "./components/casual_user/layouts/Navbar";
  import SignIn from "./components/authentication/signin/SignIn";
@@ -17,11 +17,11 @@ function App() {
         <Routes>
           <Route path="/" element={<NavBarExample />}>
             <Route index element={<Inicio />} />
-            <Route path="acerca_de_nosotros" element={<Acerca_de_nosotros />} />
+            <Route path="acerca_de_nosotros" element={<AcercaDeNosotros />} />
             <Route path="contactanos" element={<Contactanos />} />
             <Route
               path="preguntas_frecuentes"
-              element={<Preguntas_frecuentes />}
+              element={<PreguntasFrecuentes />}
             />
                
              <Route path="sign_in" element={<SignIn />} />

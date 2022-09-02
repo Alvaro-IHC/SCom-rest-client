@@ -1,9 +1,9 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
-import Card from 'react-bootstrap/Card';
-import Navbar2 from './Inicio.css';
-import Carousel_c from '../carousel_c/CarouselC'; 
-import Maps_1 from '../mapa/Maps1';
+
+import './Inicio.css';
+import CarouselC from '../carousel_c/CarouselC'; 
+import Maps1 from '../mapa/Maps1';
 
 const Inicio = () => {
   return (
@@ -13,20 +13,20 @@ const Inicio = () => {
         
   
         <td  className='casilla_ubicacion'>
-          <Maps_1/>
+          <Maps1/>
           <h2>Ubicación</h2>
        
 
         </td>
         <td className='celdas'>
         
-        <Carousel_c />
+        <CarouselC />
 
         </td>
         </tr>
 
         <tr>
-        <td colSpan={2} ><h2>24328766-77123123</h2> </td>
+        <td colSpan={2} ><h2>2432876-77123123</h2> </td>
    
       </tr>
   
