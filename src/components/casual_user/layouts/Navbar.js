@@ -5,6 +5,7 @@ import {Navbar, Nav, Container} from "react-bootstrap"
 
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar2 from './Navbar2.css';
+import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 
 const NavBarExample = () => {
   return (

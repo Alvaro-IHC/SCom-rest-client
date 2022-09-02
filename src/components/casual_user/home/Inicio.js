@@ -2,8 +2,8 @@ import React from 'react'
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 import Navbar2 from './Inicio.css';
-import Carousel_c from '../carousel_c/Carousel_c'; 
-import Maps_1 from '../mapa/Maps_1';
+import Carousel_c from '../carousel_c/CarouselC'; 
+import Maps_1 from '../mapa/Maps1';
 
 const Inicio = () => {
   return (
