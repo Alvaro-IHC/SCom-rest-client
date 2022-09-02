@@ -3,17 +3,17 @@ import "./Section.css";
 function Section() {
   return (
     <>
-      <div className="container">
-        <div className="item left">
-          <div className="lefitem left1">
-            <section className="main_1form">
-              <p className="item_1form">DATOS DEL CLIENTE</p>
+      <div className="container_jv">
+        <div className="item_jv left_jv">
+          <div className="lefitem_jv left1_jv">
+            <section className="main_1form_jv">
+              <p className="item_1form_jv p_jv">DATOS DEL CLIENTE</p>
               <form
                 autocomplete="off"
                 onsubmit="onFormSubmit() "
-                className="item_1form item_1container"
+                className="item_1form_jv item_1container_jv"
               >
-                <div className="item1">
+                <div className="item1_jv">
                   <input
                     type="text"
                     name="productCode"
@@ -21,7 +21,7 @@ function Section() {
                     placeholder="Apellido Parterno"
                   />
                 </div>
-                <div className="item1">
+                <div className="item1_jv">
                   <input
                     type="text"
                     name="product"
@@ -29,10 +29,10 @@ function Section() {
                     placeholder="Apellido Materno:"
                   />
                 </div>
-                <div className="item1">
+                <div className="item1_jv">
                   <input type="text" name="qty" id="qty" placeholder="Nombre" />
                 </div>
-                <div className="item1">
+                <div className="item1_jv">
                   <input
                     type="text"
                     name="perPrice"
@@ -40,7 +40,7 @@ function Section() {
                     placeholder="Email"
                   />
                 </div>
-                <div className="item1">
+                <div className="item1_jv">
                   <input
                     type="text"
                     name="perPrice"
@@ -48,7 +48,7 @@ function Section() {
                     placeholder="Nombre de usuario"
                   />
                 </div>
-                <div className="item1">
+                <div className="item1_jv">
                   <input
                     type="password"
                     name="perPrice"
@@ -56,7 +56,7 @@ function Section() {
                     placeholder="Contraseña"
                   />
                 </div>
-                <div className="item1">
+                <div className="item1_jv">
                   <input
                     type="text"
                     name="perPrice"
@@ -64,78 +64,78 @@ function Section() {
                     placeholder="Direccion"
                   />
                 </div>
-                <div className="form_action--button item1">
+                <div className="form_action--button_jv item1_jv">
                   <input
                     type="submit"
                     value="Agregar"
-                    className="item_buttom item_add"
+                    className="item_buttom_jv item_add_jv"
                   />
                   <input
                     type="reset"
                     value="Limpiar"
-                    className="item_buttom item_alert"
+                    className="item_buttom_jv item_alert_jv"
                   />
                 </div>
               </form>
             </section>
           </div>
-          <div className="lefitem left2">
+          <div className="lefitem_jv left2_jv">
             <form
               autocomplete="off"
               onsubmit="onFormSubmit() "
-              className="container2"
+              className="container2_jv"
             >
-              <p className="item1_it2">REPORTE</p>
-              <div className="item_form2">
-                <input type="radio" name="estado" value="a" className="inp"/>
+              <p className="item1_it2_jv p_jv">REPORTE</p>
+              <div className="item_form2_jv">
+                <input type="radio" name="estado" value="a" className="inp_jv"/>
                 ingreso
-                <input type="radio" name="estado" value="" checked className="inp"/>
+                <input type="radio" name="estado" value="" checked className="inp_jv"/>
                 egreso
               </div>
-              <div className="item_form2">
+              <div className="item_form2_jv">
                 <label for="perPrice">Mes:</label>
-                <input type="date" name="perPrice" id="perPrice" className="inp"/>
+                <input type="date" name="perPrice" id="perPrice" className="inp_jv"/>
               </div>
-              <div className="form_action--button item_form">
+              <div className="form_action--button_jv item_form_jv">
                 <input
                   type="submit"
                   value="buscar"
-                  className="item_buttom item_add"
+                  className="item_buttom_jv item_add_jv"
                 />
               </div>
             </form>
           </div>
         </div>
-        <div className="item right">
-        <section className="container3 ">
-      <p className="container_item3 ">FACTURA</p>
+        <div className="item_jv right_jv">
+        <section className="container3_jv ">
+      <p className="container_item3_jv p_jv ">FACTURA</p>
       <form
         autocomplete="off"
         onsubmit="onFormSubmit() "
-        className="container_item3 container_form3 form3"
+        className="container_item3_jv container_form3_jv form3_jv"
       >
-        <div className="item_form3">
+        <div className="item_form3_jv">
           <label for="perPrice">Codigo de pedido</label>
           <input type="text" name="perPrice" id="perPrice" />
         </div>
    
-        <div className="form_action--button item_form3">
+        <div className="form_action--button_jv item_form3_jv">
           <input
             type="submit"
             value="Agregar"
-            className="item_buttom item_add"
+            className="item_buttom_jv item_add_jv"
           />
           <input
             type="reset"
             value="Limpiar"
-            className="item_buttom item_alert"
+            className="item_buttom_jv item_alert_jv"
           />
         </div>
       </form>
-      <p className="title_table">DETALLE</p>
-      <table className="container_item3 main_table item_table">
-        <thead>
-          <tr>
+      <p className="title_table_jv p_jv">DETALLE</p>
+      <table className="container_item3_jv main_table_jv item_table_jv table_jv">
+        <thead className="thead_jv">
+          <tr className="tr_jv">
             <th>CODIGO</th>
             <th>DESCRIPCION</th>
             <th>CANTIDAD</th>
@@ -145,33 +145,33 @@ function Section() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>15-DS</td>
-            <td>soda</td>
-            <td>2</td>
-            <td>15</td>
-            <td>30</td>
-            <td>
+          <tr className="tr_jv">
+            <td className="td_jv" data-label="Codigo">15-DS</td>
+            <td className="td_jv" data-label="Descripcion">soda</td>
+            <td className="td_jv"data-label="Cantidad">2</td>
+            <td className="td_jv" data-label="Precio">15</td>
+            <td className="td_jv" data-label="Total">30</td>
+            <td className="td_jv" data-label="Accion">
               <form action="">
                 <input
                   type="reset"
                   value="Eliminar"
-                  className="item_buttom item_alert"
+                  className="item_buttom_jv item_alert_jv"
                 />
               </form>
             </td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr className="foot_fila">
-            <td>total </td>
-            <td>12</td>
-            <td>
+        <tfoot className="tfoot_jv ">
+          <tr className="foot_fila_jv tr_jv">
+            <td className="td_jv">total </td>
+            <td className="td_jv">12</td>
+            <td className="td_jv">
               <form action="">
                 <input
                   type="reset"
                   value="Facturar"
-                  className="item_buttom item_add"
+                  className="item_buttom_jv item_add_jv"
                 />
               </form>
             </td>
