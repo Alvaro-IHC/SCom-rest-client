@@ -5,30 +5,29 @@ function CarouselC() {
     <Carousel>
       <Carousel.Item>
         <img
-          className="d-block w-1"
+          className="d-block w-100" alt=""         />
          
-          alt=""         />
-         
-        <br/>  <br/>  <br/>  <br/>  <br/>  <br/>
-        <Carousel.Caption>
-       
-          <h3>Producto 1</h3>
-          <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={40} />
-          <p>Características</p>
-        </Carousel.Caption>
+   
+        <h3>Nombre Producto 1</h3>
+      
+        <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={300} />
+        <p>Características</p>
+    <br/>
       </Carousel.Item>
+
+
       <Carousel.Item>
+   
         <img
           className="d-block w-100"
           
           alt=""
         />
-        <br/>  <br/>  <br/>  <br/>  <br/>  <br/>
-        <Carousel.Caption>
-          <h3>Producto 2</h3>
-          <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={40} />
+              <h3>Nombre Producto 2</h3>
+              <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={300} />
           <p>Características</p>
-        </Carousel.Caption>
+          <br/>
+    
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -36,14 +35,13 @@ function CarouselC() {
          
           alt=""
         />
-        <br/>  <br/>  <br/>  <br/>  <br/>  <br/>
-        <Carousel.Caption>
-          <h3>Producto 3</h3>
-          <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={40} />
+           <h3>Nombre Producto 3</h3>
+           <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={300} />
           <p>
           Características
           </p>
-        </Carousel.Caption>
+          <br/>
+   
       </Carousel.Item>
     </Carousel>
   );

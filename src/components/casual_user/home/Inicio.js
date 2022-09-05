@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import './Inicio.css';
 import CarouselC from '../carousel_c/CarouselC'; 
 import Maps1 from '../mapa/Maps1';
+import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
 
 const Inicio = () => {
   return (
@@ -26,7 +27,7 @@ const Inicio = () => {
         </tr>
 
         <tr>
-        <td colSpan={2} ><h2>2432876-77123123</h2> </td>
+        <td colSpan={2} > <ContenedorInferior/> </td>
    
       </tr>
   

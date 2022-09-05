@@ -20,7 +20,7 @@ function ContenedorC() {
     
       <Col>
       <br/><br/><br/><br/><br/>
-      60 Zona Sur, La Paz, ON M5J 1B7, Bolivia <br/>Pedido por teléfono: 2432876 - 77123123<br/>
+      60 Zona Sur, La Paz, Bolivia <br/>Pedido por teléfono: 2432876 - 77123123<br/>
       Pedido por correo electrónico: <h6> Restaurante@gmail.com</h6><br/>
       </Col>
 
