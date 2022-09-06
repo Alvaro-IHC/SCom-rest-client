@@ -1,0 +1,24 @@
+{
+    "users":[
+       {
+        "id":0,
+        "PaternalSurname":"Manani",
+        "maternalSurname" :"tarqui",
+        "name":"Juan",
+        "email":"goten@gmail.com",
+        "username":"goku",
+        "password":"12345",
+        "rol":"chef"
+       } ,
+       {
+        "id":1,
+        "PaternalSurname":"Mendez",
+        "maternalSurname" :"Choque",
+        "name":"Rosa",
+        "email":"rosan@gmail.com",
+        "username":"ross",
+        "password":"123",
+        "rol":"mesero"
+       } 
+    ]
+}
