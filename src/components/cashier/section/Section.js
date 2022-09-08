@@ -1,51 +1,46 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import "./Section.css";
+import "../api/db.json";
+import prod from"../api/prod.json";
 function Section() {
-  const users = [
-    {
-      id: 0,
-      PaternalSurname: "Manani",
-      maternalSurname: "tarqui",
-      name: "Juan",
-      email: "goten@gmail.com",
-      username: "goku",
-      password: "12345",
-      address: "zona sur",
-      rol: "chef"
-    },
-    {
-      id: 1,
-      PaternalSurname: "Mendez",
-      maternalSurname: "Choque",
-      name: "Rosa",
-      email: "rosan@gmail.com",
-      username: "ross",
-      password: "123",
-      address: "zona sur",
-      rol: "mesero"
-    },
-  ];
-
-  const products = [
-    { id: 1, description: "soda", cantidad: 2, price: 150, total: 300 },
+  const productsj = [
+    { id: 1, description: "soda", amount: 2, price: 150, total: 300 },
     { id: 2, description: "ensalada", amount: 3, price: 15, total: 45 },
+    { id: 3, description: "ensalada", amount: 3, price: 15, total: 45 }
   ];
+  const [products, setProducts] = useState([]);
+  const [total,setTotal]=useState(0);
+  const obtenerDatos = async () => {
+    /*const valor=await fetch("");
+    const product=await valor.json();*/
+   
+   /* let url="http://localhost:8080/api/orders/"+codigo;
+    const res = await fetch(url);
+    const resul = await JSON.parse(res);*/
+
+    /*fetch('http://localhost:8080/api/orders/2', options)
+ .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));*/
+
+    setProducts(productsj);
+  };
 
   const [datos, setDatos] = useState({
-    paternal: "",
+    fatherLastname: "",
     maternal: "",
     name: "",
     email: "",
     username: "",
     password: "",
     address: "",
-    rol: ""
+    rol: "",
   });
 
   const [date, setDate] = useState({
     year: "",
     month: "",
-    flag: ""
+    flag: "",
   });
 
   const handleInputChange = (e) => {
@@ -62,23 +57,37 @@ function Section() {
     }));
   };
 
-  const [codigo, setCodigo] = useState(1);
+  const [codigo, setCodigo] = useState();
   const handleInputCodigo = (e) => {
     setCodigo(e.target.value);
     console.log(codigo);
   };
   const enviarDatos = (e) => {
     e.preventDefault();
-    console.log(datos);
+    const options = {
+      method: "POST",
+      body: JSON.stringify(datos),
+    };
+
+    let url = "http://localhost:8080/api/" + datos.rol;
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
   };
   const repCodigo = (e) => {
     e.preventDefault();
     console.log("codigo" + codigo);
   };
+
+  const datoFactura = (e) => {
+    obtenerDatos();
+  };
+
   const limpiar = () => {
     setDatos({
-      paternal: "",
-      maternal: "",
+      fatherLastname: "",
+      motherLastname: "",
       name: "",
       email: "",
       username: "",
@@ -89,6 +98,13 @@ function Section() {
   };
   const limpiaCod = () => {
     setCodigo("");
+    setProducts([])
+  };
+  const report = (e) => {
+    e.preventDefault();
+       /* let url="http://localhost:8080/api/orders/"+codigo;
+    const res = await fetch(url);
+    const resul = await JSON.parse(res);*/
   };
 
   return (
@@ -106,7 +122,7 @@ function Section() {
                 <div className="item1_jv">
                   <input
                     type="text"
-                    name="paternal"
+                    name="fatherLastname"
                     placeholder="Apellido Parterno"
                     onChange={handleInputChange}
                   />
@@ -114,7 +130,7 @@ function Section() {
                 <div className="item1_jv">
                   <input
                     type="text"
-                    name="maternal"
+                    name="motherLastname"
                     placeholder="Apellido Materno:"
                     onChange={handleInputChange}
                   />
@@ -165,10 +181,10 @@ function Section() {
                     <option disabled selected>
                       tipo de usuario
                     </option>
-                    <option value="waiter">Camarero</option>
-                    <option value="cashier">Cajero</option>
-                    <option value="chef">Chef</option>
-                    <option value="administrator">Administrador</option>
+                    <option value="waiters">Camarero</option>
+                    <option value="cashiers">Cajero</option>
+                    <option value="chefs">Chef</option>
+                    <option value="administrators">Administrador</option>
                   </select>
                 </div>
                 <div className="form_action--button_jv item1_jv">
@@ -192,20 +208,27 @@ function Section() {
             </section>
           </div>
           <div className="lefitem_jv left2_jv">
-            <form autoComplete="off" className="container2_jv">
+            <form autoComplete="off" className="container2_jv" onSubmit={report}>
               <p className="item1_it2_jv p_jv">REPORTE</p>
               <div className="item_form2_jv">
-              <select onChange={handleInputDate} name="flag" className="select_jv sele_jv">
+                <select
+                  onChange={handleInputDate}
+                  name="flag"
+                  className="select_jv sele_jv"
+                >
                   <option disabled selected>
                     tipo
                   </option>
                   <option value="1">ingreso</option>
                   <option value="0">egreso</option>
                 </select>
-
               </div>
               <div className="item_form2_jv">
-                <select onChange={handleInputDate} name="month" className="select_jv">
+                <select
+                  onChange={handleInputDate}
+                  name="month"
+                  className="select_jv month_jv"
+                >
                   <option disabled selected>
                     Mes
                   </option>
@@ -223,7 +246,11 @@ function Section() {
                   <option value="december">Diciembre</option>
                 </select>
 
-                <select onChange={handleInputDate} name="year" className="select_jv">
+                <select
+                  onChange={handleInputDate}
+                  name="year"
+                  className="select_jv year_jv"
+                >
                   <option disabled selected>
                     Año
                   </option>
@@ -271,6 +298,7 @@ function Section() {
                   type="submit"
                   value="Reportar"
                   className="item_buttom_jv item_add_jv"
+                  onClick={datoFactura}
                 >
                   Buscar
                 </button>
@@ -297,7 +325,8 @@ function Section() {
               </thead>
               <tbody>
                 {products.map((e) => (
-                  <tr className="tr_jv">
+                  
+                  <tr key={e.id} className="tr_jv">
                     <td className="td_jv" data-label="Codigo">
                       {e.id}
                     </td>
@@ -315,23 +344,7 @@ function Section() {
                     </td>
                   </tr>
                 ))}
-                <tr className="tr_jv">
-                  <td className="td_jv" data-label="Codigo">
-                    15-DS
-                  </td>
-                  <td className="td_jv" data-label="Descripcion">
-                    soda
-                  </td>
-                  <td className="td_jv" data-label="Cantidad">
-                    2
-                  </td>
-                  <td className="td_jv" data-label="Precio">
-                    15
-                  </td>
-                  <td className="td_jv" data-label="Total">
-                    30
-                  </td>
-                </tr>
+  
               </tbody>
               <tfoot className="tfoot_jv ">
                 <tr className="foot_fila_jv tr_jv">
