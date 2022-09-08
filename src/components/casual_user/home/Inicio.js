@@ -2,9 +2,11 @@ import React from 'react'
 import Table from 'react-bootstrap/Table';
 
 import './Inicio.css';
-import CarouselC from '../carousel_c/CarouselC'; 
+
+import CarouselPruebas from '../carouselPB/CarouselPlatos';
 import Maps1 from '../mapa/Maps1';
 import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
+
 
 const Inicio = () => {
   return (
@@ -14,14 +16,20 @@ const Inicio = () => {
         
   
         <td  className='casilla_ubicacion'>
+        <h2>Ubicación</h2>
           <Maps1/>
-          <h2>Ubicación</h2>
+         
        
 
         </td>
         <td className='celdas'>
         
-        <CarouselC />
+     
+
+        <h2>Platos de comida</h2>
+        <CarouselPruebas />
+
+      
 
         </td>
         </tr>

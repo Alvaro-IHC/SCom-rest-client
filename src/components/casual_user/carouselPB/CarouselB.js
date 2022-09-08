@@ -2,17 +2,19 @@ import Carousel from 'react-bootstrap/Carousel';
 
 function CarouselC() {
   return (
+    
     <Carousel>
       <Carousel.Item>
         <img
           className="d-block w-100" alt=""         />
          
    
-        <h3>Nombre Producto 1</h3>
+        <h4>Marca bebida 1</h4>
       
         <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={300} />
-        <p>Características</p>
-    <br/>
+        <p>Grado alcohólico: </p>
+          <p>Volumen: </p>
+          <br/> <br/>
       </Carousel.Item>
 
 
@@ -23,10 +25,11 @@ function CarouselC() {
           
           alt=""
         />
-              <h3>Nombre Producto 2</h3>
+              <h4>Marca bebida 2</h4>
               <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={300} />
-          <p>Características</p>
-          <br/>
+          <p>Grado alcohólico: </p>
+          <p>Volumen: </p>
+          <br/> <br/>
     
       </Carousel.Item>
       <Carousel.Item>
@@ -35,12 +38,11 @@ function CarouselC() {
          
           alt=""
         />
-           <h3>Nombre Producto 3</h3>
+           <h4>Marca bebida 3</h4>
            <img className='imagen-logo' src={require('../../../assets/images/user_casual/iconoRest.png')} alt='xd' width={300} />
-          <p>
-          Características
-          </p>
-          <br/>
+           <p>Grado alcohólico: </p>
+          <p>Volumen: </p>
+          <br/> <br/>
    
       </Carousel.Item>
     </Carousel>
