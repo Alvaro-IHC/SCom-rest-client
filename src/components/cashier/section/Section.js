@@ -11,24 +11,14 @@ function Section() {
   const [products, setProducts] = useState([]);
   const [total,setTotal]=useState(0);
   const obtenerDatos = async () => {
-    /*const valor=await fetch("");
-    const product=await valor.json();*/
-   
-   /* let url="http://localhost:8080/api/orders/"+codigo;
-    const res = await fetch(url);
-    const resul = await JSON.parse(res);*/
 
-    /*fetch('http://localhost:8080/api/orders/2', options)
- .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));*/
 
     setProducts(productsj);
   };
 
   const [datos, setDatos] = useState({
     fatherLastname: "",
-    maternal: "",
+    motherLastname: "",
     name: "",
     email: "",
     username: "",
@@ -102,9 +92,7 @@ function Section() {
   };
   const report = (e) => {
     e.preventDefault();
-       /* let url="http://localhost:8080/api/orders/"+codigo;
-    const res = await fetch(url);
-    const resul = await JSON.parse(res);*/
+
   };
 
   return (
