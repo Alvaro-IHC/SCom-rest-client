@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Producto = (props) => {
+const Plato = (props) => {
   return (
  
     <>
@@ -17,4 +17,4 @@ const Producto = (props) => {
   );
 };
 
-export default Producto;
+export default Plato;

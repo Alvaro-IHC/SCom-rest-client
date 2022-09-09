@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Producto from "./Plato";
+import Plato from "./Plato";
 import Carousel from 'react-bootstrap/Carousel';
 
-const CarouselPruebas = () => {
-  const [productos,setProductos] = useState([
+const CarouselPlatos = () => {
+  const [platos,setPlatos] = useState([
     {
       id: 1,
       nombre: "silpancho",
@@ -36,15 +36,15 @@ const CarouselPruebas = () => {
 
     <div >
    <Carousel>
-      {productos.map((producto) => {
+      {platos.map((plato) => {
         return (
      
           <Carousel.Item  interval={9999}>
-<Producto
-            key={producto.id}
-            nombre={producto.nombre}
-            imagen={producto.imagen}
-            tipo={producto.tipo}
+<Plato
+            key={plato.id}
+            nombre={plato.nombre}
+            imagen={plato.imagen}
+            tipo={plato.tipo}
           />
 
           </Carousel.Item>
@@ -60,4 +60,4 @@ const CarouselPruebas = () => {
    
   );
 };
-export default CarouselPruebas
+export default CarouselPlatos

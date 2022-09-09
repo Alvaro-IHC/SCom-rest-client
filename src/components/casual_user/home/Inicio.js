@@ -3,9 +3,12 @@ import Table from 'react-bootstrap/Table';
 
 import './Inicio.css';
 
-import CarouselPruebas from '../carouselPB/CarouselPlatos';
+import CarouselPlatos from '../carouselPB/CarouselPlatos';
+import CarouselBebidas from '../carouselPB/CarouselBebidas';
 import Maps1 from '../mapa/Maps1';
 import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
+import Cartas from '../cartasDeDestacados/Cartas';
+
 
 
 const Inicio = () => {
@@ -24,10 +27,15 @@ const Inicio = () => {
         </td>
         <td className='celdas'>
         
-     
-
+    
+        <h2>Destacados</h2>
+        <Cartas />
+      <br/>
         <h2>Platos de comida</h2>
-        <CarouselPruebas />
+        <CarouselPlatos />
+
+        <h2>Bebidas</h2>
+        <CarouselBebidas />
 
       
 
