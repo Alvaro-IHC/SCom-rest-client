@@ -29,20 +29,31 @@ function Cartas() {
       const bebidasB = await data2.json()
       setMenuB(bebidasB)
     }
+    
    const platoDestacado1 = 0;
    const platoDestacado2 = 1;
    const bebidaDestacada = 0; 
    const cantPlatos = 3;
 
+   const id_p1d = menuP[platoDestacado1].id;
+   const nom_p1d = menuP[platoDestacado1].name;
+   const tip_p1d = menuP[platoDestacado1].type;
+   const id_p2d = menuP[platoDestacado2].id;
+   const nom_p2d = menuP[platoDestacado2].name;
+   const tip_p2d = menuP[platoDestacado2].type;
+
+   const id_b1d = menuB[bebidaDestacada].id;
+   const mar_b1d = menuB[bebidaDestacada].brand;
+   const grd_b1d = menuB[bebidaDestacada].alcoholicGrade;
 
   return (
   
     <CardGroup>
       <Card>
-      <img className='imagen-logo' src={require('../../../assets/images/user_casual/plato'+menuP[platoDestacado1].id+'.jpg')} alt='xd' width={400} />
+      <img className='imagen-logo' src={require('../../../assets/images/user_casual/plato'+id_p1d+'.jpg')} alt='xd' width={400} />
         <Card.Body>
-          <Card.Title className="letrasCartas2">Nombre del plato: {menuP[platoDestacado1].name}</Card.Title>
-          <Card.Text className="letrasCartas">Tipo de plato: {menuP[platoDestacado1].type}</Card.Text>
+          <Card.Title className="letrasCartas2">Nombre del plato: {nom_p1d}</Card.Title>
+          <Card.Text className="letrasCartas">Tipo de plato: {tip_p1d}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Muy recomendado</small>
@@ -50,10 +61,10 @@ function Cartas() {
       </Card>
 
       <Card>
-      <img className='imagen-logo' src={require('../../../assets/images/user_casual/plato'+menuP[platoDestacado2].id+'.jpg')} alt='xd' width={355} />
+      <img className='imagen-logo' src={require('../../../assets/images/user_casual/plato'+id_p2d+'.jpg')} alt='xd' width={355} />
         <Card.Body>
-          <Card.Title className="letrasCartas2">Nombre del plato: {menuP[platoDestacado2].name}</Card.Title>
-          <Card.Text className="letrasCartas">Tipo de plato: {menuP[platoDestacado2].type}</Card.Text>
+          <Card.Title className="letrasCartas2">Nombre del plato: {nom_p2d}</Card.Title>
+          <Card.Text className="letrasCartas">Tipo de plato: {tip_p2d}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Muy recomendado</small>
@@ -61,10 +72,10 @@ function Cartas() {
       </Card>
 
       <Card>
-      <img className='imagen-logo' src={require('../../../assets/images/user_casual/bebida'+(menuB[bebidaDestacada].id-cantPlatos)+'.jpg')} alt='xd' width={320} />
+      <img className='imagen-logo' src={require('../../../assets/images/user_casual/bebida'+(id_b1d-cantPlatos)+'.jpg')} alt='xd' width={320} />
         <Card.Body>
-          <Card.Title className="letrasCartas2">Bebida: {menuB[bebidaDestacada].brand}</Card.Title>
-          <Card.Text className="letrasCartas">Grado alcohólico: {menuB[bebidaDestacada].alcoholicGrade}</Card.Text>
+          <Card.Title className="letrasCartas2">Bebida: {mar_b1d}</Card.Title>
+          <Card.Text className="letrasCartas">Grado alcohólico: {grd_b1d}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Muy recomendado</small>
