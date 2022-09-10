@@ -6,45 +6,48 @@ import './Cartas.css';
 function Cartas() {
 
  
-    const [menuP,setMenuP] = useState([])
+    const [menuPc,setMenuPc] = useState([])
     useEffect(() => {
-       obtenerDatos()
+       obtenerDatosc()
     }, []);
   
-    const obtenerDatos= async() =>
-    {
-      const data = await fetch('http://localhost:9081/api/foods')
-      const platosP = await data.json()
-      setMenuP(platosP)
-    }
 
-    const [menuB,setMenuB] = useState([])
+
+    const obtenerDatosc= async() =>
+    {
+      const datac = await fetch('http://localhost:9081/api/foods')
+      const platosPc = await datac.json()
+      setMenuPc(platosPc)
+    }
+  
+  
+    const [menuBc,setMenuBc] = useState([])
     useEffect(() => {
-       obtenerDatos2()
+       obtenerDatos2c()
     }, []);
   
-    const obtenerDatos2= async() =>
+    const obtenerDatos2c= async() =>
     {
-      const data2 = await fetch('http://localhost:9081/api/drinks')
-      const bebidasB = await data2.json()
-      setMenuB(bebidasB)
+      const data2c = await fetch('http://localhost:9081/api/drinks')
+      const bebidasBc = await data2c.json()
+      setMenuBc(bebidasBc)
     }
-    
+  
    const platoDestacado1 = 0;
    const platoDestacado2 = 1;
    const bebidaDestacada = 0; 
    const cantPlatos = 3;
 
-   const id_p1d = menuP[platoDestacado1].id;
-   const nom_p1d = menuP[platoDestacado1].name;
-   const tip_p1d = menuP[platoDestacado1].type;
-   const id_p2d = menuP[platoDestacado2].id;
-   const nom_p2d = menuP[platoDestacado2].name;
-   const tip_p2d = menuP[platoDestacado2].type;
+   const id_p1d = menuPc[platoDestacado1].id;
+   const nom_p1d = menuPc[platoDestacado1].name;
+   const tip_p1d = menuPc[platoDestacado1].type;
+   const id_p2d = menuPc[platoDestacado2].id;
+   const nom_p2d = menuPc[platoDestacado2].name;
+   const tip_p2d = menuPc[platoDestacado2].type;
 
-   const id_b1d = menuB[bebidaDestacada].id;
-   const mar_b1d = menuB[bebidaDestacada].brand;
-   const grd_b1d = menuB[bebidaDestacada].alcoholicGrade;
+   const id_b1d = menuBc[bebidaDestacada].id;
+   const mar_b1d = menuBc[bebidaDestacada].brand;
+   const grd_b1d = menuBc[bebidaDestacada].alcoholicGrade;
 
   return (
   
