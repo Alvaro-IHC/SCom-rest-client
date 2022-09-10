@@ -11,6 +11,7 @@ import Cartas from '../cartasDeDestacados/Cartas';
 
 
 
+
 const Inicio = () => {
   return (
     <Table  className='tabla123' striped bordered hover variant="dark">
