@@ -1,11 +1,14 @@
 import React from 'react'
+import ContenedorC from './ContenedorC'
 
 const Contactanos = () => {
   return (
     <div>
-        <h1> Pagina contactanos</h1>
-
+        <h1>Contáctanos</h1>
+        <ContenedorC/>
     </div>
+        
+        
   )
 }
 
