@@ -1,15 +1,16 @@
 import React from "react";
 
 
-const Plato = (props) => {
+const Plato= (props) => {
   return (
  
     <>
-        <h4>Nombre plato: {props.nombre}</h4>
+        <h4>Nombre del plato: {props.name}</h4>
+        <img className='imagen-logo' src={require('../../../assets/images/user_casual/plato'+props.id+'.jpg')} alt='xd' width={250} />
+        <p>Tipo de plato: {props.type}</p>
+      
        
-          <img className='imagen-logo' src={require('../../../assets/images/user_casual/plato'+props.imagen+'.jpg')} alt='xd' width={250} />
-          <p>Tipo de plato: {props.tipo}</p>
-    <br/>  <br/>
+    <br/>  <br/> 
           </>
      
      

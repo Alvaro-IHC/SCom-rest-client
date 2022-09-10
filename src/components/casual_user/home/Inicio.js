@@ -31,7 +31,9 @@ const Inicio = () => {
         <h2>Destacados</h2>
         <Cartas />
       <br/>
-        <h2>Platos de comida</h2>
+       
+
+      <h2>Platos de comida</h2>
         <CarouselPlatos />
 
         <h2>Bebidas</h2>

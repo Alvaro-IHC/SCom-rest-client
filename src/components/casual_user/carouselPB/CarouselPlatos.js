@@ -1,50 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Plato from "./Plato";
 import Carousel from 'react-bootstrap/Carousel';
 
 const CarouselPlatos = () => {
-  const [platos,setPlatos] = useState([
-    {
-      id: 1,
-      nombre: "silpancho",
-      tipo: "primero",
-      imagen:1,
-     
-    },
-    {
-      id: 2,
-      nombre: "milanesa",
-      tipo: "segundo",
-      imagen:2,
-     
-    },
-    {
-      id: 3,
-      nombre: "pique macho",
-      tipo: "tercero",
-      imagen:3,
-     
-    },
-  
-  ]);
+  const [menuP,setMenuP] = useState([])
+  useEffect(() => {
+     obtenerDatos()
+  }, []);
+
+  const obtenerDatos= async() =>
+  {
+    const data = await fetch('http://localhost:9081/api/foods')
+    const platosP = await data.json()
+    setMenuP(platosP)
+  }
 
   return (
-   
-
-
-
-
+  
     <div >
    <Carousel>
-      {platos.map((plato) => {
+      {menuP.map((plato) => {
         return (
      
           <Carousel.Item  interval={9999}>
 <Plato
-            key={plato.id}
-            nombre={plato.nombre}
-            imagen={plato.imagen}
-            tipo={plato.tipo}
+            id={plato.id}
+            name={plato.name}
+            type={plato.type}
+         
           />
 
           </Carousel.Item>
