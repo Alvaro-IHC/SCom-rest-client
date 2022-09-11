@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const NavBarExample = () => {
   return (
    <>
+ 
     <Navbar className="navBg" variant="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/"><img className='imagen-logo' src={require('../../../assets/images/user_casual/icon.png')} alt='xd' width={40} />
@@ -47,6 +48,8 @@ const NavBarExample = () => {
     <section>
         <Outlet></Outlet>
     </section>
+
+
 
    </>
   )
