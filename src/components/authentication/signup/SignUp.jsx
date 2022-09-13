@@ -1,65 +1,98 @@
-import "./SignUp.css";
+import estilo from "./SignUp.module.css";
 import profile from "../../../assets/images/authentication/a.png";
-import email from "../../../assets/images/authentication/email.jpg";
-import pass from "../../../assets/images/authentication/pass.png";
+
+import { useState } from "react";
 
 export default function SignUp() {
-  return (
-    <div className="main">
-      <div className="sub-main">
-        <div>
-          <div className="imgs">
-            <div className="container-image">
-              <img src={profile} alt="profile" className="profile" />
-            </div>
-          </div>
-          <div>
-            <h1>Pagina de Registro</h1>
-            <div className="entrada">
-              <input type="text" placeholder="nombre" className="name" />
-            </div>
-            <div className="entrada">
-              <input
-                type="text"
-                placeholder="nombre de usuario"
-                className="name"
-              />
-            </div>
-            <br />
-            <br />
-            <div>
-              <img src={email} alt="email" className="email" />
-              <input
-                type="text"
-                placeholder="ingresar email"
-                className="name"
-              />
-            </div>
-            <br />
-            <div className="second-input">
-              <img src={pass} alt="pass" className="email" />
-              <input
-                type="password"
-                placeholder="contraseña"
-                className="name"
-              />
-            </div>
-            <div className="second-input">
-              <img src={pass} alt="pass" className="email" />
-              <input
-                type="password"
-                placeholder="repetir contraseña"
-                className="name"
-              />
-            </div>
-            <div className="login-button">
-              <button>Registrar</button>
-            </div>
+  const [nombres, setNombres] = useState("");
+  const [apellidos, setApellidos] = useState("");
+  const [emailRegistro, setEmailRegistro] = useState("");
+  const [passOrigen, setPassOrigen] = useState("");
+  const [passConfirmar, setPassConfirmar] = useState("");
 
-            <p className="link">
-              <a href="https://google.com">¿Ya tiene una cuenta?</a>
-            </p>
+  const sendSignIn = () => {
+    const reqBody = {
+      nombres: nombres,
+      apellidos: apellidos,
+      emailRegistro: emailRegistro,
+      passOrigen: passOrigen,
+      passConfirmar: passConfirmar,
+    };
+
+    fetch("http://localhost:8080/api/customers", {
+      headers: { "Content-type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(reqBody),
+    });
+  };
+
+  return (
+    <div className={estilo.main}>
+      <div className={estilo.sub_main}>
+        <div className={estilo.imgs}>
+          <div className={estilo.container_image}>
+            <img src={profile} alt="profile" className={estilo.profile} />
           </div>
+        </div>
+        <div>
+          <h1>Pagina de Registro</h1>
+          <div className={estilo.entrada}>
+            <input
+              type="text"
+              placeholder="nombre"
+              className={estilo.name}
+              value={nombres}
+              onChange={(event) => setNombres(event.target.value)}
+            />
+          </div>
+          <div className={estilo.entrada}>
+            <input
+              type="text"
+              placeholder="nombre de usuario"
+              className={estilo.name}
+              value={apellidos}
+              onChange={(event) => setApellidos(event.target.value)}
+            />
+          </div>
+          <br />
+          <br />
+          <div>
+            <input
+              type="text"
+              placeholder="Ingresar su email"
+              className={estilo.name}
+              value={emailRegistro}
+              onChange={(event) => setEmailRegistro(event.target.value)}
+            />
+          </div>
+          <br />
+          <div className={estilo.second_input}>
+            <input
+              type="password"
+              placeholder="contraseña"
+              className={estilo.name}
+              value={passOrigen}
+              onChange={(event) => setPassOrigen(event.target.value)}
+            />
+          </div>
+          <div className={estilo.second_input}>
+            <input
+              type="password"
+              placeholder="repetir contraseña"
+              className={estilo.name}
+              value={passConfirmar}
+              onChange={(event) => setPassConfirmar(event.target.value)}
+            />
+          </div>
+          <div className={estilo.login_button}>
+            <button className={estilo.boton_ar} onClick={() => sendSignIn()}>
+              Registrar
+            </button>
+          </div>
+
+          <p className={estilo.link}>
+            <a href="https://google.com">¿Ya tiene una cuenta?</a>
+          </p>
         </div>
       </div>
     </div>
