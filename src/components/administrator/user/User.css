@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,400;1,500&family=Poppins:wght@300;800&display=swap');
+
+
+.container_adm{
+    margin: 0 auto;
+
+}
+
+   .table_jv{
+        margin: 0 auto;
+       border-collapse: collapse;
+       width: 70%;
+       text-align: center;
+       
+   }
+   .td_jv,.tr_jv{
+       padding: 5px;
+   }
+   .thead_jv{
+       
+       background-color: #0088a9;;
+       bottom: 3px solid black;
+   }
+   .tr_jv:nth-child(even){
+       background-color: #ddd;
+   }
+   .tr_jv:hover td{
+       background-color: #369681;
+       color: white;
+   }
+   
+   .item_add_jv{
+    background-color: rgb(14, 86, 180);
+    color: white;
+    border-radius: 7px;
+}
+.item_alert_jv{
+    background-color: red;
+    border-radius: 7px;
+    color: white;
+}
+.item_buttom_jv:hover{
+    color: rgb(55, 170, 247);
+    border: 1px solid rgb(217, 255, 47);
+    font-weight: bold;
+
+}
+.action_jv{
+    cursor: pointer;
+    margin:0 5px;
+}
+
+.title_jv{
+    text-align: center;
+    font-family: "Montserrat",sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #0088a9;
+    text-shadow:2px 2px  black;
+}
+
+.item1_jv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .table_jv {
+        border: 0px;
+    }
+    .table_jv caption {
+        font-size: 22px;
+    }
+    .table_jv thead {
+        display: none;
+    }
+    .table_jv tr {
+        margin-bottom: 8px;
+        border-bottom: 4px solid #ddd;
+        display: block;
+    }
+    .table_jv th, .table_jv td {
+        font-size: 12px;
+    }
+    .table_jv td {
+        display: block;
+        border-bottom: 1px solid #ddd;
+        text-align: right;
+    }
+    .table_jv  td:last-child {
+        border-bottom: 0px;
+    }
+    .table_jv td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        float: left;
+    }
+    .form3_jv{
+        width: auto;
+    }
+}
