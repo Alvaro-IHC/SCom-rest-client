@@ -4,20 +4,59 @@ import profile from "../../../assets/images/authentication/a.png";
 import { useState } from "react";
 
 export default function SignIn() {
+  const prueba = [
+    {
+      error: "mensaje ok",
+      message: "right credentials",
+      success: true,
+      data: "",
+    },
+    {
+      error: "mensaje wrong",
+      message: "bad credentials",
+      success: false,
+      data: "",
+    },
+  ];
+
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
 
-  const sendLogin = () => {
+  /**  const sendLogin = () => {
     const reqBody = {
       password: password,
-      useremail: useremail,
+      usernameOrEmail: useremail,
     };
 
     fetch("http://localhost:8080/api/auth/login", {
       headers: { "Content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(reqBody),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response)); 
+      };*/
+  const sendLogin = async () => {
+    const reqBody = {
+      password: password,
+      usernameOrEmail: useremail,
+    };
+    const resp = await fetch("http://localhost:8080/api/auth/login", {
+      headers: { "Content-type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(reqBody),
+    }).catch((error) => {
+      console.log(error);
     });
+    const salida = await resp.json();
+    const exito = salida.success;
+    console.log(salida);
+
+    if (exito === true) {
+      const dataLog = salida.data;
+      localStorage.setItem("role", dataLog.role);
+      localStorage.setItem("id", dataLog.id);
+    }
   };
 
   return (

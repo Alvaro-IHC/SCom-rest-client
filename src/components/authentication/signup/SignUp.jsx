@@ -9,21 +9,45 @@ export default function SignUp() {
   const [emailRegistro, setEmailRegistro] = useState("");
   const [passOrigen, setPassOrigen] = useState("");
   const [passConfirmar, setPassConfirmar] = useState("");
+  const [usernameReg, setUsernameReg] = useState("");
+
+  let arrApellidos = apellidos.split(" ");
+  console.log(nombres);
 
   const sendSignIn = () => {
-    const reqBody = {
-      nombres: nombres,
-      apellidos: apellidos,
-      emailRegistro: emailRegistro,
-      passOrigen: passOrigen,
-      passConfirmar: passConfirmar,
+    const reqRegisInfo = {
+      name: nombres,
+      fatherLastname: arrApellidos[0],
+      email: emailRegistro,
+      motherLastname: arrApellidos[1],
+      password: passConfirmar,
+      username: usernameReg,
     };
-
-    fetch("http://localhost:8080/api/customers", {
-      headers: { "Content-type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(reqBody),
-    });
+    if (nombres === "") {
+      return window.alert("El campo nombre esta vacio!");
+    }
+    if (arrApellidos[0] === "") {
+      return window.alert("El campo apellidos esta vacio!");
+    }
+    if (emailRegistro === "") {
+      return window.alert("El campo email esta vacio!");
+    }
+    if (passConfirmar === "") {
+      return window.alert("El campo confirmar contraseña esta vacio!");
+    }
+    if (usernameReg === "") {
+      return window.alert("El campo nombre de usuario esta vacio!");
+    }
+    if (passOrigen === "") {
+      return window.alert("El campo contraseña esta vacio!");
+    }
+    if (passOrigen === passConfirmar) {
+      fetch("http://localhost:8080/api/customers", {
+        headers: { "Content-type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(reqRegisInfo),
+      });
+    } else window.alert("Revise su contraseña!");
   };
 
   return (
@@ -36,6 +60,7 @@ export default function SignUp() {
         </div>
         <div>
           <h1>Pagina de Registro</h1>
+          <br />
           <div className={estilo.entrada}>
             <input
               type="text"
@@ -56,7 +81,7 @@ export default function SignUp() {
           </div>
           <br />
           <br />
-          <div>
+          <div className={estilo.entrada}>
             <input
               type="text"
               placeholder="Ingresar su email"
@@ -65,6 +90,17 @@ export default function SignUp() {
               onChange={(event) => setEmailRegistro(event.target.value)}
             />
           </div>
+
+          <div className={estilo.entrada}>
+            <input
+              type="text"
+              placeholder="nombre de usuario"
+              className={estilo.name}
+              value={usernameReg}
+              onChange={(event) => setUsernameReg(event.target.value)}
+            />
+          </div>
+          <br />
           <br />
           <div className={estilo.second_input}>
             <input
