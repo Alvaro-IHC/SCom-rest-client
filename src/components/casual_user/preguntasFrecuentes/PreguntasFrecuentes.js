@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Preguntas_frecuentes = () => {
+const PreguntasFrecuentes = () => {
   return (
     <div>
         <h1> Pagina de preguntas frecuentes</h1>
@@ -9,4 +9,4 @@ const Preguntas_frecuentes = () => {
   )
 }
 
-export default Preguntas_frecuentes
+export default PreguntasFrecuentes

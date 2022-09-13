@@ -9,12 +9,12 @@ export default class Maps_1 extends Component {
           style={{ height: "400px", width: "300px" }}
           zoom={12}
           center={{
-            lat: 40.451824,
-            lng: -3.690759
+            lat:  -16.539290336231364,
+            lng: -68.0775598084796
           }}
           markers={[
-    
-            { lat: 40.451824, lng: -3.690759 }
+        
+            { lat:   -16.539290336231364, lng: -68.0775598084796 }
           ]}
         />
       </div>

@@ -1,9 +1,15 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
-import Card from 'react-bootstrap/Card';
-import Navbar2 from './Inicio.css';
-import Carousel_c from '../carousel_c/Carousel_c'; 
-import Maps_1 from '../mapa/Maps_1';
+
+import './Inicio.css';
+
+import CarouselPlatos from '../carouselPB/CarouselPlatos';
+import CarouselBebidas from '../carouselPB/CarouselBebidas';
+import Maps1 from '../mapa/Maps1';
+import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
+import Cartas from '../cartasDeDestacados/Cartas';
+
+
 
 const Inicio = () => {
   return (
@@ -13,20 +19,33 @@ const Inicio = () => {
         
   
         <td  className='casilla_ubicacion'>
-          <Maps_1/>
-          <h2>Ubicación</h2>
+        <h2>Ubicación</h2>
+          <Maps1/>
+         
        
 
         </td>
         <td className='celdas'>
         
-        <Carousel_c />
+    
+        <h2>Destacados</h2>
+        <Cartas />
+      <br/>
+       
+
+      <h2>Platos de comida</h2>
+        <CarouselPlatos />
+
+        <h2>Bebidas</h2>
+        <CarouselBebidas />
+
+      
 
         </td>
         </tr>
 
         <tr>
-        <td colSpan={2} ><h2>24328766-77123123</h2> </td>
+        <td colSpan={2} > <ContenedorInferior/> </td>
    
       </tr>
   

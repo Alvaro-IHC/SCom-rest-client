@@ -57,6 +57,9 @@ function Section() {
     const options = {
       method: "POST",
       body: JSON.stringify(datos),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
 
     let url = "http://localhost:8080/api/" + datos.rol;
@@ -94,6 +97,7 @@ function Section() {
     e.preventDefault();
 
   };
+  let cont=0;
 
   return (
     <>
@@ -330,6 +334,7 @@ function Section() {
                     <td className="td_jv" data-label="Codigo">
                       {e.total}
                     </td>
+                    {cont=cont+e.total}
                   </tr>
                 ))}
   
@@ -337,7 +342,7 @@ function Section() {
               <tfoot className="tfoot_jv ">
                 <tr className="foot_fila_jv tr_jv">
                   <td className="td_jv">total </td>
-                  <td className="td_jv">12</td>
+                  <td className="td_jv">{cont}</td>
                   <td className="td_jv">
                     <form action="">
                       <input

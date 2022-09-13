@@ -2,7 +2,15 @@ import React from "react";
 import "./header.css";
 import messi from "../../../assets/images/cashier/messi.webp";
 import logo from "../../../assets/images/cashier/logo.svg";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  let navigate = useNavigate();
+  async function handleSubmit(event) {
+    event.preventDefault();
+    localStorage.clear();
+    navigate("/", { replace: true });
+  }
   return (
     <>
       <header className="main_head_jv">
@@ -16,10 +24,12 @@ const Header = () => {
             src={messi}
             alt="usuario"
           />
-          <a href="#" className="main_link_jv jv">
+          
+          <a href="#" className="main_link_jv " onClick={handleSubmit}>
             {" "}
             salir{" "}
           </a>
+
         </div>
       </header>
     </>

@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,400;1,500&family=Poppins:wght@300;800&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  
+}
+
+.nav_links_jv, .link_jv , .nav_butttom_jv{
+    color: #fff;
+    font-family: "Montserrat",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+}
+.link_jv{
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.container_jv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #24252A;
+    margin-bottom: 35px;
+
+}
+.nav_links_jv{
+    list-style: none;
+}
+
+.nav_links_jv li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links_jv li a{
+    transition: all 0.3s ease 0;
+}
+.nav_links_jv li a:hover{
+    color: #0088a9;
+}
+.nav_butttom_jv{
+    padding: 9px 35px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0;
+
+}
+.nav_butttom_jv:hover{
+    background-color: rgba(0,136,169,0.8);
+}
+.active{
+    font-weight: bold;
+    color: #61dafb;
+}
