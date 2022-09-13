@@ -29,11 +29,11 @@ const Inicio = () => {
 
         </td>
         <td className='celdas'>
-        
-    {/*  <h2>Destacados</h2>
-        <Cartas2 />
-      <br/>*/}
-       
+     {/*   
+    <h2>Destacados</h2>
+        <Cartas />
+      <br/>
+  */}
        
 
       <h2>Platos de comida</h2>
