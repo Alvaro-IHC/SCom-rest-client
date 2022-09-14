@@ -12,14 +12,13 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
  //import Cmain from "./components/chef/Cmain";
  
 
- import Index from "./components/cashier/index/Index";
- //import Cmain from "./components/chef/Cmain";
  
 
 
 function App() {
-const rol = "cajero";
-  const rutaPrincipal = (rol === "cajero") ? <Index />:<NavBarExample/>;
+  const rolx = localStorage.getItem("role");
+
+  const rutaPrincipal = (rolx === "cajero") ? <Index />:((rolx === "contactanos") ?<Contactanos /> :<NavBarExample/>);
   
   return (
     <div className="App">
