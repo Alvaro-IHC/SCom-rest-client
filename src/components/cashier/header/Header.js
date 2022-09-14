@@ -2,12 +2,14 @@ import React from "react";
 import "./header.css";
 import messi from "../../../assets/images/cashier/messi.webp";
 import logo from "../../../assets/images/cashier/logo.svg";
-
+import settings from '../../../settings.json';
 const Header = () => {
+
+  const u = settings.url;
   async function handleSubmit(event) {
     event.preventDefault();
     localStorage.clear();
-    window.location.assign("http://localhost:3000/");
+    window.location.assign(u+"3000/");
   }
   return (
     <>

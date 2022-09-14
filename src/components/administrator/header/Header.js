@@ -10,16 +10,16 @@ function header() {
       <nav>
         <ul className="nav_links_jv">
           <li className="nav_item_jv">
-            <NavLink  to="/users"  className="link_jv" activeclassname="active">Usuarios</NavLink>
+            <NavLink  to="/users"  className="link_jv" activeclassname="active_jv">Usuarios</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="/plates"  className="link_jv" activeclassname="active">Platos</NavLink>
+            <NavLink  to="/plates"  className="link_jv" activeclassname="active_jv">Platos</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="/system"  className="link_jv" activeclassname="active">Sistema</NavLink>
+            <NavLink  to="/system"  className="link_jv" activeclassname="active_jv">Sistema</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="/rol"  className="link_jv" activeclassname="active">Roles</NavLink>
+            <NavLink  to="/rol"  className="link_jv" activeclassname="active_jv">Roles</NavLink>
           </li>
         </ul>
       </nav>

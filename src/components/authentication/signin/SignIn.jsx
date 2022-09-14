@@ -1,12 +1,14 @@
 import style from "./SignIn.module.css";
 import profile from "../../../assets/images/authentication/a.png";
 import { useState } from "react";
-
+import settings from '../../../settings.json';
 export default function SignIn() {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
 
   const sendLogin = async () => {
+    const p = settings.puerto;
+    const u = settings.url;
     const reqBody = {
       password: password,
       usernameOrEmail: useremail,
@@ -17,7 +19,7 @@ export default function SignIn() {
     if (password === "") {
       return window.alert("El campo de contraseña esta vacio!");
     }
-    const resp = await fetch("http://localhost:8080/api/auth/login", {
+    const resp = await fetch(u+p+"/api/auth/login", {
       headers: { "Content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -33,7 +35,7 @@ export default function SignIn() {
       localStorage.setItem("role", dataLog.role);
       localStorage.setItem("id", dataLog.id);
 
-      window.location.assign("http://localhost:3000/");
+      window.location.assign(u+"3000/");
     }
   };
 
