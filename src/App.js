@@ -9,7 +9,7 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
  import SignUp from "./components/authentication/signup/SignUp";
 
  import Index from "./components/cashier/index/Index";
- 
+
  //import Cmain from "./components/chef/Cmain";
  
 
@@ -20,7 +20,7 @@ function App() {
   const rolx = localStorage.getItem("role");
 
   const rutaPrincipal = (rolx === "cajero") ? <Index />:((rolx === "contactanos") ?<Contactanos /> :<NavBarExample/>);
-  
+  const puerto = 9081;
   return (
     <div className="App">
 
