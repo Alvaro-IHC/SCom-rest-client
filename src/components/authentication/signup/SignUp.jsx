@@ -64,7 +64,7 @@ export default function SignUp() {
           <div className={estilo.entrada}>
             <input
               type="text"
-              placeholder="nombre"
+              placeholder="nombres"
               className={estilo.name}
               value={nombres}
               onChange={(event) => setNombres(event.target.value)}
@@ -73,7 +73,7 @@ export default function SignUp() {
           <div className={estilo.entrada}>
             <input
               type="text"
-              placeholder="nombre de usuario"
+              placeholder="apellidos"
               className={estilo.name}
               value={apellidos}
               onChange={(event) => setApellidos(event.target.value)}
@@ -125,7 +125,6 @@ export default function SignUp() {
               Registrar
             </button>
           </div>
-
           <p className={estilo.link}>
             <a href="https://google.com">¿Ya tiene una cuenta?</a>
           </p>

@@ -1,46 +1,24 @@
 import style from "./SignIn.module.css";
 import profile from "../../../assets/images/authentication/a.png";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function SignIn() {
-  const prueba = [
-    {
-      error: "mensaje ok",
-      message: "right credentials",
-      success: true,
-      data: "",
-    },
-    {
-      error: "mensaje wrong",
-      message: "bad credentials",
-      success: false,
-      data: "",
-    },
-  ];
-
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
-  /**  const sendLogin = () => {
-    const reqBody = {
-      password: password,
-      usernameOrEmail: useremail,
-    };
-
-    fetch("http://localhost:8080/api/auth/login", {
-      headers: { "Content-type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(reqBody),
-    })
-      .then((response) => response.json())
-      .then((response) => console.log(response)); 
-      };*/
   const sendLogin = async () => {
     const reqBody = {
       password: password,
       usernameOrEmail: useremail,
     };
+    if (useremail === "") {
+      return window.alert("El campo de usuario esta vacio!");
+    }
+    if (password === "") {
+      return window.alert("El campo de contraseña esta vacio!");
+    }
     const resp = await fetch("http://localhost:8080/api/auth/login", {
       headers: { "Content-type": "application/json" },
       method: "POST",
@@ -56,6 +34,8 @@ export default function SignIn() {
       const dataLog = salida.data;
       localStorage.setItem("role", dataLog.role);
       localStorage.setItem("id", dataLog.id);
+
+      navigate("/", { replace: true });
     }
   };
 
