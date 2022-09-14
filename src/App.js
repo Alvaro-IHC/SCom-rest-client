@@ -9,6 +9,7 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
  import SignUp from "./components/authentication/signup/SignUp";
 
  import Index from "./components/cashier/index/Index";
+ 
  //import Cmain from "./components/chef/Cmain";
  
 

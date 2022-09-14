@@ -16,7 +16,7 @@ const Inicio = () => {
   return (
 
 
-    <Table  className='tabla123' striped bordered hover variant="dark">
+    <Table  responsive className='tabla123' striped bordered hover variant="dark">
     <thead>
     <tr>
         

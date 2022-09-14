@@ -1,0 +1,15 @@
+.casilla_ubicacion{
+    width: 200px;
+    vertical-align: top;
+}
+
+.celdas
+{ 
+    height: 80vh;
+    vertical-align: middle;
+}
+
+.tabla1234{
+    text-align: center;
+  
+}
