@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Bebida from "./Bebida";
 import Carousel from 'react-bootstrap/Carousel';
+import settings from '../../../settings.json';
 
 const CarouselBebidas = () => {
-  const puerto = "9081";
+  const p = settings.puerto;
+  const u = settings.url;
+
   const [menuB,setMenuB] = useState([])
   useEffect(() => {
      obtenerDatos2()
@@ -11,7 +14,7 @@ const CarouselBebidas = () => {
 
   const obtenerDatos2= async() =>
   {
-    const data2 = await fetch('http://localhost:'+puerto+'/api/drinks')
+    const data2 = await fetch(u+p+'/api/drinks')
     const bebidasP = await data2.json()
     setMenuB(bebidasP)
   }

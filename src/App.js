@@ -19,8 +19,8 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
 function App() {
   const rolx = localStorage.getItem("role");
 
-  const rutaPrincipal = (rolx === "cajero") ? <Index />:((rolx === "contactanos") ?<Contactanos /> :<NavBarExample/>);
-  const puerto = 9081;
+  const rutaPrincipal = (rolx === "cashier") ? <Index />:((rolx === "contactanos") ?<Contactanos /> :<NavBarExample/>);
+
   return (
     <div className="App">
 
