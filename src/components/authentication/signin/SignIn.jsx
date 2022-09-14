@@ -1,12 +1,10 @@
 import style from "./SignIn.module.css";
 import profile from "../../../assets/images/authentication/a.png";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function SignIn() {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
-  let navigate = useNavigate();
 
   const sendLogin = async () => {
     const reqBody = {
@@ -35,7 +33,7 @@ export default function SignIn() {
       localStorage.setItem("role", dataLog.role);
       localStorage.setItem("id", dataLog.id);
 
-      navigate("/", { replace: true });
+      window.location.assign("http://localhost:3000/");
     }
   };
 
