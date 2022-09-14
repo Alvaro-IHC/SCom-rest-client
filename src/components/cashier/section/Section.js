@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "./Section.css";
 import "../api/db.json";
 import prod from "../api/prod.json";
+import settings from '../../../settings.json';
 function Section() {
+  const p = settings.puerto;
+  const u = settings.url;
   const productsj = [
     { id: 1, description: "soda", amount: 2, price: 150, total: 300 },
     { id: 2, description: "ensalada", amount: 3, price: 15, total: 45 },
@@ -60,7 +63,7 @@ function Section() {
       },
     };
 
-    let url = "http://localhost:8080/api/" + datos.rol;
+    let url = u+p+"/api/" + datos.rol;
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => console.log(response))

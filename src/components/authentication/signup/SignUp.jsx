@@ -1,9 +1,11 @@
 import estilo from "./SignUp.module.css";
 import profile from "../../../assets/images/authentication/a.png";
-
+import settings from '../../../settings.json';
 import { useState } from "react";
 
 export default function SignUp() {
+  const p = settings.puerto;
+  const u = settings.url;
   const [nombres, setNombres] = useState("");
   const [apellidos, setApellidos] = useState("");
   const [emailRegistro, setEmailRegistro] = useState("");
@@ -42,7 +44,7 @@ export default function SignUp() {
       return window.alert("El campo contraseña esta vacio!");
     }
     if (passOrigen === passConfirmar) {
-      fetch("http://localhost:9081/api/customers", {
+      fetch(u+p+"/api/customers", {
         headers: { "Content-type": "application/json" },
         method: "POST",
         body: JSON.stringify(reqRegisInfo),

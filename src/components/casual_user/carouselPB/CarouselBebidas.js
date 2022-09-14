@@ -25,10 +25,10 @@ const CarouselBebidas = () => {
   
     <div >
    <Carousel>
-      {menuB.map((bebida) => {
+      {menuB.map((bebida, index) => {
         return (
      
-          <Carousel.Item  interval={9999}>
+          <Carousel.Item key={index}  interval={9999}>
 <Bebida
             id={bebida.id-cantidadTotalDePlatos}
             brand={bebida.brand}

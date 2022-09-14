@@ -2,14 +2,14 @@ import React from "react";
 import "./header.css";
 import messi from "../../../assets/images/cashier/messi.webp";
 import logo from "../../../assets/images/cashier/logo.svg";
-import { useNavigate } from "react-router-dom";
-
+import settings from '../../../settings.json';
 const Header = () => {
-  let navigate = useNavigate();
+
+  const u = settings.url;
   async function handleSubmit(event) {
     event.preventDefault();
     localStorage.clear();
-    navigate("/", { replace: true });
+    window.location.assign(u+"3000/");
   }
   return (
     <>

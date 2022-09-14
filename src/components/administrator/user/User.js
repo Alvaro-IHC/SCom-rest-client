@@ -5,7 +5,10 @@ import edit from "../../../assets/images/administrator/edit.svg"
 import trash from "../../../assets/images/administrator/trash.svg"
 import Modal from '../modal/Modal'
 import "./User.css"
+import settings from '../../../settings.json';
 function User() {
+  const p = settings.puerto;
+  const u = settings.url;
   const productsj = [
     { id: 1, name: "Jorge", fatherlastname:"Quispe", motherlastname: "Mamani", rol: "Chef" },
     { id: 2, name: "marco", fatherlastname:"Quispe", motherlastname: "Mamani", rol: "cliente" },
@@ -50,7 +53,7 @@ function User() {
       },
     };
 
-    let url = "http://localhost:8080/api/" + datos.rol;
+    let url = u+p+"/api/" + datos.rol;
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => console.log(response))

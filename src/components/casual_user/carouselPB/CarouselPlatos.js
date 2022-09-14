@@ -22,10 +22,10 @@ const CarouselPlatos = () => {
   
     <div >
    <Carousel>
-      {menuP.map((plato) => {
+      {menuP.map((plato,index) => {
         return (
      
-          <Carousel.Item  interval={9999}>
+          <Carousel.Item key={index}  interval={9999}>
 <Plato
             id={plato.id}
             name={plato.name}
