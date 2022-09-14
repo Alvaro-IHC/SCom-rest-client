@@ -2,14 +2,12 @@ import React from "react";
 import "./header.css";
 import messi from "../../../assets/images/cashier/messi.webp";
 import logo from "../../../assets/images/cashier/logo.svg";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  let navigate = useNavigate();
   async function handleSubmit(event) {
     event.preventDefault();
     localStorage.clear();
-    navigate("/", { replace: true });
+    window.location.assign("http://localhost:3000/");
   }
   return (
     <>
