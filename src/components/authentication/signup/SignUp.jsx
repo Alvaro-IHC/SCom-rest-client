@@ -42,7 +42,7 @@ export default function SignUp() {
       return window.alert("El campo contraseña esta vacio!");
     }
     if (passOrigen === passConfirmar) {
-      fetch("http://localhost:8080/api/customers", {
+      fetch("http://localhost:9081/api/customers", {
         headers: { "Content-type": "application/json" },
         method: "POST",
         body: JSON.stringify(reqRegisInfo),

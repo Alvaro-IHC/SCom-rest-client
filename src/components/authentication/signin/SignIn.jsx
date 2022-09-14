@@ -19,7 +19,7 @@ export default function SignIn() {
     if (password === "") {
       return window.alert("El campo de contraseña esta vacio!");
     }
-    const resp = await fetch("http://localhost:8080/api/auth/login", {
+    const resp = await fetch("http://localhost:9081/api/auth/login", {
       headers: { "Content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -35,7 +35,8 @@ export default function SignIn() {
       localStorage.setItem("role", dataLog.role);
       localStorage.setItem("id", dataLog.id);
 
-      navigate("/", { replace: true });
+      window.location.href="http://localhost:9081";
+    
     }
   };
 
