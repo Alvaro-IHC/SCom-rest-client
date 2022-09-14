@@ -53,7 +53,7 @@
 .nav_butttom_jv:hover{
     background-color: rgba(0,136,169,0.8);
 }
-.active{
+.active_jv{
     font-weight: bold;
     color: #61dafb;
 }

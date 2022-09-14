@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import './Cartas.css';
-
+import settings from '../../../settings.json';
 function Cartas() {
 
- 
+  const p = settings.puerto;
+  const u = settings.url;
     const [menuPc,setMenuPc] = useState([])
     useEffect(() => {
        obtenerDatosc()
@@ -15,7 +16,7 @@ function Cartas() {
 
     const obtenerDatosc= async() =>
     {
-      const datac = await fetch('http://localhost:9081/api/foods')
+      const datac = await fetch(u+p+'/api/foods')
       const platosPc = await datac.json()
       setMenuPc(platosPc)
     }
@@ -28,7 +29,7 @@ function Cartas() {
   
     const obtenerDatos2c= async() =>
     {
-      const data2c = await fetch('http://localhost:9081/api/drinks')
+      const data2c = await fetch(u+p+'/api/drinks')
       const bebidasBc = await data2c.json()
       setMenuBc(bebidasBc)
     }
