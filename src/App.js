@@ -12,6 +12,10 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
  //import Cmain from "./components/chef/Cmain";
  
 
+ import Index from "./components/cashier/index/Index";
+ //import Cmain from "./components/chef/Cmain";
+ 
+
 
 function App() {
 const rol = "cajero";
@@ -35,6 +39,7 @@ const rol = "cajero";
                
              <Route path="sign_in" element={<SignIn />} />
             <Route path="sign_up" element={<SignUp />} /> 
+            <Route path="valero" element={<Index />} /> 
             <Route path="*" element={<Navigate replace to="/" />} />
           </Route>
         </Routes>
