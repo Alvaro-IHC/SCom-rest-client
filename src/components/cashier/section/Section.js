@@ -1,18 +1,16 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./Section.css";
 import "../api/db.json";
-import prod from"../api/prod.json";
+import prod from "../api/prod.json";
 function Section() {
   const productsj = [
     { id: 1, description: "soda", amount: 2, price: 150, total: 300 },
     { id: 2, description: "ensalada", amount: 3, price: 15, total: 45 },
-    { id: 3, description: "ensalada", amount: 3, price: 15, total: 45 }
+    { id: 3, description: "ensalada", amount: 3, price: 15, total: 45 },
   ];
   const [products, setProducts] = useState([]);
-  const [total,setTotal]=useState(0);
+  const [total, setTotal] = useState(0);
   const obtenerDatos = async () => {
-
-
     setProducts(productsj);
   };
 
@@ -58,7 +56,7 @@ function Section() {
       method: "POST",
       body: JSON.stringify(datos),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -91,13 +89,12 @@ function Section() {
   };
   const limpiaCod = () => {
     setCodigo("");
-    setProducts([])
+    setProducts([]);
   };
   const report = (e) => {
     e.preventDefault();
-
   };
-  let cont=0;
+  let cont = 0;
 
   return (
     <>
@@ -200,7 +197,11 @@ function Section() {
             </section>
           </div>
           <div className="lefitem_jv left2_jv">
-            <form autoComplete="off" className="container2_jv" onSubmit={report}>
+            <form
+              autoComplete="off"
+              className="container2_jv"
+              onSubmit={report}
+            >
               <p className="item1_it2_jv p_jv">REPORTE</p>
               <div className="item_form2_jv">
                 <select
@@ -317,7 +318,6 @@ function Section() {
               </thead>
               <tbody>
                 {products.map((e) => (
-                  
                   <tr key={e.id} className="tr_jv">
                     <td className="td_jv" data-label="Codigo">
                       {e.id}
@@ -334,10 +334,9 @@ function Section() {
                     <td className="td_jv" data-label="Codigo">
                       {e.total}
                     </td>
-                    {cont=cont+e.total}
+                    {(cont = cont + e.total)}
                   </tr>
                 ))}
-  
               </tbody>
               <tfoot className="tfoot_jv ">
                 <tr className="foot_fila_jv tr_jv">

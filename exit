@@ -1,0 +1,171 @@
+[33mcommit 036e22b43b5e923c8be86d2a3bff9ef69d4bc2bd[m[33m ([m[1;36mHEAD -> [m[1;32mUS_79_vista_login[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: c020ffe f4149f2
+Author: andresjohnvelarde41421356 <75191305+andresjohnvelarde41421356@users.noreply.github.com>
+Date:   Fri Sep 2 12:04:57 2022 -0400
+
+    Merge pull request #7 from Alvaro-IHC/US-73_FIX
+    
+    Us 73 fix
+
+[33mcommit f4149f2d84e339c98fe3b0432e4a07b4f820df7a[m[33m ([m[1;31morigin/US-73_FIX[m[33m)[m
+Author: valero <gotenboy94@gmail.com>
+Date:   Fri Sep 2 10:33:04 2022 -0400
+
+    fix_responsive_cashier
+
+[33mcommit 85a38919831053647443e3ea9351454bf4ccc6e6[m
+Author: valero <gotenboy94@gmail.com>
+Date:   Thu Sep 1 09:21:04 2022 -0400
+
+    correccion de la vista del cajero
+
+[33mcommit c020ffe4c2d762777d3b8270d5ef82b89c1415fd[m[33m ([m[1;32mUS_75_vista_login[m[33m)[m
+Merge: a4ba3d6 967b099
+Author: goten94 <105175937+goten94@users.noreply.github.com>
+Date:   Wed Aug 31 22:21:17 2022 -0400
+
+    Merge pull request #6 from Alvaro-IHC/US-78-chefv1
+    
+    Us 78 chefv1
+
+[33mcommit 967b099efe06491800dd5686e9699c97ed854a99[m[33m ([m[1;31morigin/US-78-chefv1[m[33m)[m
+Merge: c6be120 a4ba3d6
+Author: CarlosAntonioPoloSanchez <105763178+CarlosAntonioPoloSanchez@users.noreply.github.com>
+Date:   Wed Aug 31 22:11:08 2022 -0400
+
+    Merge branch 'develop' of https://github.com/Alvaro-IHC/SCom-rest-client into US-78-chefv1
+
+[33mcommit a4ba3d66d541508fd083157124746d651a1086bd[m
+Merge: f31a30e 94df584
+Author: andresjohnvelarde41421356 <75191305+andresjohnvelarde41421356@users.noreply.github.com>
+Date:   Wed Aug 31 22:01:34 2022 -0400
+
+    Merge pull request #5 from Alvaro-IHC/US_75_vista_login
+    
+    Formularios sign in y sign up
+
+[33mcommit 94df584ed43989a2c5d33b4029f063fff891885d[m[33m ([m[1;31morigin/US_75_vista_login[m[33m)[m
+Author: SphinxBSD <fav6519@gmail.com>
+Date:   Wed Aug 31 21:51:45 2022 -0400
+
+    Formularios sign in y sign up
+
+[33mcommit c6be1200351d3af8688487237315cb99f5e53a50[m
+Merge: a9fee2e f31a30e
+Author: CarlosAntonioPoloSanchez <105763178+CarlosAntonioPoloSanchez@users.noreply.github.com>
+Date:   Wed Aug 31 20:45:43 2022 -0400
+
+    Merge branch 'develop' of https://github.com/Alvaro-IHC/SCom-rest-client into US-78-chefv1
+
+[33mcommit a9fee2ea5433ac550a7972772f7a042b5fcc9dde[m
+Author: CarlosAntonioPoloSanchez <105763178+CarlosAntonioPoloSanchez@users.noreply.github.com>
+Date:   Wed Aug 31 20:40:19 2022 -0400
+
+    un mensaje
+
+[33mcommit f31a30ea86198a45282b2dfb568e435634f0c221[m
+Merge: 6e142fa bd30b60
+Author: Alvaro <52204067+Alvaro-IHC@users.noreply.github.com>
+Date:   Wed Aug 31 20:36:17 2022 -0400
+
+    Merge pull request #1 from Alvaro-IHC/US-55-Vista_inicio_programa_web_para_usuarios_casuales
+    
+    prueba
+
+[33mcommit bd30b605ec31f1b5523837a39a11fff3aca0636b[m[33m ([m[1;31morigin/US-55-Vista_inicio_programa_web_para_usuarios_casuales[m[33m)[m
+Merge: 5a2feb4 6e142fa
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Wed Aug 31 20:33:51 2022 -0400
+
+    develop en US 55
+
+[33mcommit 5a2feb47c8cc5b52781bd18323c3fa5cda32a140[m
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Wed Aug 31 20:25:16 2022 -0400
+
+    ultima actualizacion vista inicio
+
+[33mcommit 62f37d02edc909b197c1e535a2141a20ccd6d66d[m
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Wed Aug 31 14:24:21 2022 -0400
+
+    mapa implementado
+
+[33mcommit 6e142fa52d09fa25a2878778b9c4a83203aaab70[m
+Author: valero <gotenboy94@gmail.com>
+Date:   Wed Aug 31 13:41:47 2022 -0400
+
+    Fixed_cashier_index
+
+[33mcommit 96d01de1092129ddcb264f2d59b810d9ae116447[m
+Author: valero <gotenboy94@gmail.com>
+Date:   Wed Aug 31 08:59:30 2022 -0400
+
+    fixed:corret _name_file_cashier
+
+[33mcommit 6983f705e4a76df962b9a3ffbeebf6c920d6e4f3[m
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Tue Aug 30 23:45:17 2022 -0400
+
+    vista inicio v1.1
+
+[33mcommit 341923c3f8e2ed8567cbcf222e6ac08bb1c1965b[m
+Merge: a66924f e385d8a
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Tue Aug 30 23:27:38 2022 -0400
+
+    update branch
+
+[33mcommit e385d8af7beb182ee57910a7c79823398065a0b1[m
+Merge: a86e3dc 4280d35
+Author: Alvaro <52204067+Alvaro-IHC@users.noreply.github.com>
+Date:   Tue Aug 30 23:14:39 2022 -0400
+
+    Merge pull request #3 from Alvaro-IHC/FIX-Correct_Name
+    
+    Fixed: Correct name for components
+
+[33mcommit 4280d357193bd04b0cdb69ee9575fc6f3c065978[m[33m ([m[1;31morigin/FIX-Correct_Name[m[33m)[m
+Author: Alvaro-IHC <alva0741@gmail.com>
+Date:   Tue Aug 30 23:13:04 2022 -0400
+
+    Fixed: Correct name for components
+
+[33mcommit a86e3dcec1f968b6348e49489ff3014c471bd81d[m
+Merge: 4fb7bbf 89d198b
+Author: andresjohnvelarde41421356 <75191305+andresjohnvelarde41421356@users.noreply.github.com>
+Date:   Tue Aug 30 23:00:52 2022 -0400
+
+    Merge pull request #2 from Alvaro-IHC/US-73-Vista_para_cajero
+    
+    Us 73 vista para cajero
+
+[33mcommit 89d198ba6946b6a7701334d9c95897502ed5d715[m[33m ([m[1;31morigin/US-73-Vista_para_cajero[m[33m)[m
+Author: valero <gotenboy94@gmail.com>
+Date:   Tue Aug 30 22:53:33 2022 -0400
+
+    vista_cajero_final
+
+[33mcommit 4e18688fe76ee9d547f9bb53b91b74dc3ea4b74f[m
+Author: valero <gotenboy94@gmail.com>
+Date:   Tue Aug 30 21:52:32 2022 -0400
+
+    vista_cajero
+
+[33mcommit a66924f6e89e029eceb1080519104a9758c8d59c[m
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Mon Aug 29 23:31:08 2022 -0400
+
+    barra de navegacion
+
+[33mcommit 84372a34fcd375cbe1385200ea576e3a2f6e5816[m
+Author: Andres Velarde L <andresjohnvelarde41421356@gmail.com>
+Date:   Mon Aug 29 12:05:30 2022 -0400
+
+    prueba
+
+[33mcommit 4fb7bbfa826bb1512ba906ea8c7b9b6c9fc289b5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Alvaro-IHC <alva0741@gmail.com>
+Date:   Fri Aug 26 18:52:46 2022 -0400
+
+    Initialize project using Create React App
