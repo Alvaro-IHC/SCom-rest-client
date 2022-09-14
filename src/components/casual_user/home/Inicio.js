@@ -7,13 +7,16 @@ import CarouselPlatos from '../carouselPB/CarouselPlatos';
 import CarouselBebidas from '../carouselPB/CarouselBebidas';
 import Maps1 from '../mapa/Maps1';
 import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
-import Cartas from '../cartasDeDestacados/Cartas';
+//import Cartas from '../cartasDeDestacados/Cartas';
+
 
 
 
 const Inicio = () => {
   return (
-    <Table  className='tabla123' striped bordered hover variant="dark">
+
+
+    <Table  responsive className='tabla123' striped bordered hover variant="dark">
     <thead>
     <tr>
         
@@ -26,11 +29,11 @@ const Inicio = () => {
 
         </td>
         <td className='celdas'>
-        
-    
-        <h2>Destacados</h2>
+     {/*   
+    <h2>Destacados</h2>
         <Cartas />
       <br/>
+  */}
        
 
       <h2>Platos de comida</h2>

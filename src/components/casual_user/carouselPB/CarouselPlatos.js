@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Plato from "./Plato";
 import Carousel from 'react-bootstrap/Carousel';
+import settings from '../../../settings.json';
 
 const CarouselPlatos = () => {
+  const p = settings.puerto;
+  const u = settings.url;
   const [menuP,setMenuP] = useState([])
   useEffect(() => {
      obtenerDatos()
@@ -10,7 +13,7 @@ const CarouselPlatos = () => {
 
   const obtenerDatos= async() =>
   {
-    const data = await fetch('http://localhost:9081/api/foods')
+    const data = await fetch(u+p+'/api/foods')
     const platosP = await data.json()
     setMenuP(platosP)
   }

@@ -1,50 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Bebida from "./Bebida";
 import Carousel from 'react-bootstrap/Carousel';
+import settings from '../../../settings.json';
 
 const CarouselBebidas = () => {
-  const [bebidas,setBebidas] = useState([
-    {
-      id: 1,
-      nombre: "wisky",
-      grado_alcoholico: "80%",
-      imagen:1,
-     
-    },
-    {
-      id: 2,
-      nombre: "vodka",
-      grado_alcoholico: "90%",
-      imagen:2,
-     
-    },
-    {
-      id: 3,
-      nombre: "agua",
-      grado_alcoholico: "0%",
-      imagen:3,
-     
-    },
-  
-  ]);
+  const p = settings.puerto;
+  const u = settings.url;
+
+  const [menuB,setMenuB] = useState([])
+  useEffect(() => {
+     obtenerDatos2()
+  }, []);
+
+  const obtenerDatos2= async() =>
+  {
+    const data2 = await fetch(u+p+'/api/drinks')
+    const bebidasP = await data2.json()
+    setMenuB(bebidasP)
+  }
+
+  const cantidadTotalDePlatos = 3;
 
   return (
-   
-
-
-
-
+  
     <div >
    <Carousel>
-      {bebidas.map((bebida) => {
+      {menuB.map((bebida) => {
         return (
      
           <Carousel.Item  interval={9999}>
 <Bebida
-            key={bebida.id}
-            nombre={bebida.nombre}
-            imagen={bebida.imagen}
-            grado_alcoholico={bebida.grado_alcoholico}
+            id={bebida.id-cantidadTotalDePlatos}
+            brand={bebida.brand}
+            alcoholicGrade={bebida.alcoholicGrade}
+         
           />
 
           </Carousel.Item>

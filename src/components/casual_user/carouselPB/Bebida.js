@@ -5,10 +5,10 @@ const Bebida = (props) => {
   return (
  
     <>
-        <h4>Nombre bebida: {props.nombre}</h4>
+        <h4>Marca de la bebida: {props.brand}</h4>
        
-          <img className='imagen-logo' src={require('../../../assets/images/user_casual/bebida'+props.imagen+'.jpg')} alt='xd' width={250} />
-          <p>Grado alcohólico: {props.grado_alcoholico}</p>
+          <img className='imagen-logo' src={require('../../../assets/images/user_casual/bebida'+props.id+'.jpg')} alt='xd' width={250} />
+          <p>Grado alcohólico: {props.alcoholicGrade}</p>
     <br/>  <br/>
           </>
      
