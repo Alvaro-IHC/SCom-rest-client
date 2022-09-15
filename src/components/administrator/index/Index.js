@@ -7,10 +7,9 @@ export default function Index() {
   return (
 
     <>
-    <Header></Header>
-    <User/>
+
           
-    {/*<BrowserRouter>
+    <BrowserRouter>
         <Header/>
         <Routes>
             <Route  path="/administrator/users" element={<User/>}/>
@@ -20,7 +19,7 @@ export default function Index() {
             <Route path="*" element={<User replace to="/administrator/users" />} />
         </Routes>
     </BrowserRouter>
-  */}
+  
 
 
     </>
