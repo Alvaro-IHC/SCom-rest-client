@@ -109,10 +109,10 @@ function User() {
               </td>
               <td className="td_jv_adm" data-label="ACCION">
                 <a href="#"  >
-                  <img src={edit} alt="" className="action_jv" onClick={()=>editValue(e)}/>
+                  <img src={edit} alt="" className="action_jv_adm" onClick={()=>editValue(e)}/>
                 </a>
                 <a>
-                  <img src={trash} alt=""  className="action_jv"/>
+                  <img src={trash} alt=""  className="action_jv_adm"/>
                 </a>
 
               </td>
