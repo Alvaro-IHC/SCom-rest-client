@@ -1,9 +1,40 @@
 import React from 'react'
+import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
+import Table from 'react-bootstrap/Table';
 
 const AcercaDeNosotros = () => {
   return (
     <div>
-        <h1> Pagina acerca de nosotros</h1>
+     
+
+        <Table responsive className='tabla1234' striped bordered hover variant="dark">
+<thead>
+<tr>
+    
+
+    <td  className='titulopf'>
+    
+ 
+    <h1> Acerca de nosotros</h1>
+   
+
+    </td>
+    
+    </tr><tr>
+    <td className='celdaspf' >
+
+ 
+ 
+    </td>
+    </tr><tr>
+    <td  > <ContenedorInferior/> </td>
+  </tr>
+
+
+</thead>
+
+</Table>
+
 
     </div>
   )

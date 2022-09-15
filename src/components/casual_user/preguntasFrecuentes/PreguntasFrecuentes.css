@@ -5,16 +5,29 @@
 }
 .rellenopf
 {
-    background-color: rgb(182, 192, 192);
+    background-color: rgb(102, 114, 114);
     color: black;
-    font-size: 30px;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
 }
 .rellenopf2
 {
     background-color: rgb(182, 192, 192);
     color: black;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
+}
+.rellenopf3
+{
+    background-color: rgb(182, 192, 192);
+    color: black;
+    text-align: center;
+    font-size: 19;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
 }
 
 .celdaspf
