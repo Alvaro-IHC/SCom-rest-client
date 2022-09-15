@@ -18,6 +18,7 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
 
 
 function App() {
+
   const rolx = localStorage.getItem("role");
 
   const rutaPrincipal = (rolx === "cashier") ? <Index />:((rolx === "chef") ?<Pbody /> :((rolx === "administrator") ? <IndexAdm/>:<NavBarExample/>));
@@ -30,6 +31,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={rutaPrincipal}>
+     
             <Route index element={<Inicio />} />
             <Route path="acerca_de_nosotros" element={<AcercaDeNosotros />} />
             <Route path="contactanos" element={<Contactanos />} />
