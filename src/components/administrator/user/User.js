@@ -77,10 +77,10 @@ function User() {
 
 <>
     <main className="container_adm">
-          <h1 className="title_jv">Usuarios</h1>
-      <table className="table_jv">
-        <thead className="thead_jv">
-          <tr className="tr_jv">
+          <h1 className="title_jv_adm">Usuarios</h1>
+      <table className="table_jv_adm">
+        <thead className="thead_jv_adm">
+          <tr className="tr_jv_adm">
             <th>CODIGO</th>
             <th>NOMBRE</th>
             <th>APELLIDO PATERNO</th>
@@ -91,23 +91,23 @@ function User() {
         </thead>
         <tbody>
           {products.map((e) => (
-            <tr key={e.id} className="tr_jv">
-              <td className="td_jv" data-label="Codigo">
+            <tr key={e.id} className="tr_jv_adm">
+              <td className="td_jv_adm" data-label="Codigo">
                 {e.id}
               </td>
-              <td className="td_jv" data-label="NOMBRE">
+              <td className="td_jv_adm" data-label="NOMBRE">
                 {e.name}
               </td>
-              <td className="td_jv" data-label="APELLIDO PATERNO">
+              <td className="td_jv_adm" data-label="APELLIDO PATERNO">
                 {e.fatherlastname}
               </td>
-              <td className="td_jv" data-label="APELLIDO MATERNO">
+              <td className="td_jv_adm" data-label="APELLIDO MATERNO">
                 {e.motherlastname}
               </td>
-              <td className="td_jv" data-label="ROL">
+              <td className="td_jv_adm" data-label="ROL">
                 {e.rol}
               </td>
-              <td className="td_jv" data-label="ACCION">
+              <td className="td_jv_adm" data-label="ACCION">
                 <a href="#"  >
                   <img src={edit} alt="" className="action_jv" onClick={()=>editValue(e)}/>
                 </a>
@@ -129,14 +129,14 @@ function User() {
      setEstadoM={setEstado}
      productsj
     >
-      <section className="main_1form_jv">
-              <p className="item_1form_jv p_jv">DATOS DEL CLIENTE</p>
+      <section className="main_1form_jv_adm">
+              <p className="item_1form_jv_adm p_jv_adm">DATOS DEL CLIENTE</p>
               <form
                 autoComplete="off"
-                className="item_1form_jv item_1container_jv"
+                className="item_1form_jv_adm item_1container_jv_adm"
                 onSubmit={enviarDatos}
               >
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="text"
                     name="fatherLastname"
@@ -144,7 +144,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="text"
                     name="motherLastname"
@@ -152,7 +152,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="text"
                     name="name"
@@ -160,7 +160,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="text"
                     name="email"
@@ -169,7 +169,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="text"
                     name="username"
@@ -177,7 +177,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="password"
                     name="password"
@@ -185,7 +185,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="item1_jv">
+                <div className="item1_jv_adm">
                   <input
                     type="text"
                     name="address"
@@ -193,7 +193,7 @@ function User() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="form_action--button_jv item1_jv">
+                <div className="form_action--button_jv_adm item1_jv_adm">
                   <select onChange={handleInputChange} name="rol" defaultValue="null">
                     <option disabled selected>
                       tipo de usuario
@@ -204,18 +204,18 @@ function User() {
                     <option value="administrators">Administrador</option>
                   </select>
                 </div>
-                <div className="form_action--button_jv item1_jv">
+                <div className="form_action--button_jv_adm item1_jv_adm">
                   <button
                     type="submit"
                     value="Agregar"
-                    className="item_buttom_jv item_add_jv"
+                    className="item_buttom_jv_adm item_add_jv_adm"
                   >
                     Agregar
                   </button>
                   <button
                     type="reset"
                     value="Limpiar"
-                    className="item_buttom_jv item_alert_jv"
+                    className="item_buttom_jv_adm item_alert_jv_adm"
                     onClick={limpiar}
                   >
                     Limpiar

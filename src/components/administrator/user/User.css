@@ -6,51 +6,51 @@
 
 }
 
-   .table_jv{
+   .table_jv_adm{
         margin: 0 auto;
        border-collapse: collapse;
        width: 70%;
        text-align: center;
        
    }
-   .td_jv,.tr_jv{
+   .td_jv_adm,.tr_jv_adm{
        padding: 5px;
    }
-   .thead_jv{
+   .thead_jv_adm{
        
        background-color: #0088a9;;
        bottom: 3px solid black;
    }
-   .tr_jv:nth-child(even){
+   .tr_jv_adm:nth-child(even){
        background-color: #ddd;
    }
-   .tr_jv:hover td{
+   .tr_jv_adm:hover td{
        background-color: #369681;
        color: white;
    }
    
-   .item_add_jv{
+   .item_add_jv_adm{
     background-color: rgb(14, 86, 180);
     color: white;
     border-radius: 7px;
 }
-.item_alert_jv{
+.item_alert_jv_adm{
     background-color: red;
     border-radius: 7px;
     color: white;
 }
-.item_buttom_jv:hover{
+.item_buttom_jv_adm:hover{
     color: rgb(55, 170, 247);
     border: 1px solid rgb(217, 255, 47);
     font-weight: bold;
 
 }
-.action_jv{
+.action_jv_adm{
     cursor: pointer;
     margin:0 5px;
 }
 
-.title_jv{
+.title_jv_adm{
     text-align: center;
     font-family: "Montserrat",sans-serif;
     font-weight: 700;
@@ -60,7 +60,7 @@
     text-shadow:2px 2px  black;
 }
 
-.item1_jv{
+.item1_jv_adm{
     display: flex;
     flex-direction: column;
     align-items: center;

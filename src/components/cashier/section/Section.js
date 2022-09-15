@@ -68,6 +68,7 @@ function Section() {
       .then((response) => response.json())
       .then((response) => console.log(response))
       .catch((err) => console.error(err));
+    alert("datos guardados")
   };
   const repCodigo = (e) => {
     e.preventDefault();
