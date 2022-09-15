@@ -1,6 +1,9 @@
 import React from 'react'
 import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
 import Table from 'react-bootstrap/Table';
+import './AcercaDeNosotros.css';
+
+import ContenedorAcordeon from './ContenedorAcordeon';
 
 const AcercaDeNosotros = () => {
   return (
@@ -12,7 +15,7 @@ const AcercaDeNosotros = () => {
 <tr>
     
 
-    <td  className='titulopf'>
+    <td  className='tituloan'>
     
  
     <h1> Acerca de nosotros</h1>
@@ -21,9 +24,17 @@ const AcercaDeNosotros = () => {
     </td>
     
     </tr><tr>
-    <td className='celdaspf' >
+    <td className='celdasan' >
+
 
  
+<ContenedorAcordeon  titulo="MISIÓN" contenido="Superar las expectativas de nuestros clientes de forma tal que nuestro nombre sea conocido como una experiencia memorable.
+
+Ser opción destacable y diferente.
+
+Mantener una excelente calidad en nuestros platos."/>
+<br/><br/>
+<ContenedorAcordeon  titulo="VISIÓN" contenido="Ser reconocidos entre los mejores restaurantes a nivel local y nacional por nuestra oferta gastronómica, ambiente y atención."/>
  
     </td>
     </tr><tr>

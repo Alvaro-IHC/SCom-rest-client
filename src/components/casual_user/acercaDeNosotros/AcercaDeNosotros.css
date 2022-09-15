@@ -1,0 +1,35 @@
+.tituloan{
+    width: 200px;
+    vertical-align: top;
+    text-align: center;
+}
+
+.celdasan
+{ 
+    height: 80vh;
+    vertical-align: top;
+}
+
+
+.rellenoan
+{
+    background-color: rgb(182, 192, 192);
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
+}
+
+
+
+
+.tabla1234{
+    text-align: left;
+  
+}
+
+.centrotit{
+    text-align: center;
+    color: rgb(214, 16, 16);
+}
