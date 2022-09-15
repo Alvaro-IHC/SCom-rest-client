@@ -4,7 +4,7 @@ function ContenedorAcordeon(props) {
     const tit = props.titulo;
     const cont = props.contenido;
   return (
-    <Accordion defaultActiveKey="0">
+    <Accordion >
       <Accordion.Item >
         <Accordion.Header className='centrotit'>{tit}</Accordion.Header>
         <Accordion.Body className='rellenoan'>
