@@ -11,6 +11,7 @@
        border-collapse: collapse;
        width: 70%;
        text-align: center;
+
        
    }
    .td_jv_adm,.tr_jv_adm{
@@ -68,41 +69,54 @@
     
 }
 
+.title_adm{
+    font-size: 12px;
+}
 
+.btn_adm{
+    margin: 15px;
+}
 
-@media screen and (max-width: 600px) {
-    .table_jv {
+.ct_admin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+    .table_jv_adm {
         border: 0px;
     }
-    .table_jv caption {
+    .table_jv_adm caption {
         font-size: 22px;
     }
-    .table_jv thead {
+    .table_jv_adm thead {
         display: none;
     }
-    .table_jv tr {
+    .table_jv_adm tr {
         margin-bottom: 8px;
         border-bottom: 4px solid #ddd;
         display: block;
     }
-    .table_jv th, .table_jv td {
+    .table_jv_adm th, .table_jv_adm td {
         font-size: 12px;
     }
-    .table_jv td {
+    .table_jv_adm td {
         display: block;
         border-bottom: 1px solid #ddd;
         text-align: right;
     }
-    .table_jv  td:last-child {
+    .table_jv_adm  td:last-child {
         border-bottom: 0px;
     }
-    .table_jv td::before {
+    .table_jv_adm td::before {
         content: attr(data-label);
         font-weight: bold;
         text-transform: uppercase;
         float: left;
     }
-    .form3_jv{
+    .form3_jv_adm{
         width: auto;
     }
 }

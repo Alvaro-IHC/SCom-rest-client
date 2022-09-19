@@ -338,7 +338,7 @@ function Section() {
                     <td className="td_jv" data-label="Codigo">
                       {e.total}
                     </td>
-                    {(cont = cont + e.total)}
+               
                   </tr>
                 ))}
               </tbody>
