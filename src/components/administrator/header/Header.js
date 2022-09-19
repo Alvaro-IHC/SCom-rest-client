@@ -3,7 +3,7 @@ import './Header.css'
 import log from "../../../assets/images/administrator/logoH.svg"
 import { Link ,NavLink} from "react-router-dom";
 import settings from '../../../settings.json';
-function header() {
+function header({toPage}) {
   const u = settings.url;
 const comeback=(event)=>{
   event.preventDefault();
@@ -17,16 +17,16 @@ const comeback=(event)=>{
       <nav>
         <ul className="nav_links_jv">
           <li className="nav_item_jv">
-            <NavLink  to="/administrator/users"  className="link_jv" activeclassname="active_jv">Usuarios</NavLink>
+            <NavLink  to="#"  className="link_jv" activeclassname="active_jv" onClick={toPage("users")} >Usuarios</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="/administrator/plates"  className="link_jv" activeclassname="active_jv">Platos</NavLink>
+            <NavLink  to="#"  className="link_jv" activeclassname="active_jv" onClick={toPage("plates")}>Platos</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="/administrator/system"  className="link_jv" activeclassname="active_jv">Sistema</NavLink>
+            <NavLink  to="#"  className="link_jv" activeclassname="active_jv" onClick={toPage("system")}>Sistema</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="/administrator/roles"  className="link_jv" activeclassname="active_jv">Roles</NavLink>
+            <NavLink  to="# " className="link_jv" activeclassname="active_jv"onClick={toPage("roles")}>Roles</NavLink>
           </li>
         </ul>
       </nav>
