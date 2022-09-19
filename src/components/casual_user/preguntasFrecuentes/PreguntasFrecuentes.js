@@ -4,8 +4,24 @@ import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
 import Table from 'react-bootstrap/Table';
 import './PreguntasFrecuentes.css';
 import ContenedorPyR from './ContenedorPyR';
+// import settings from '../../../settings.json';
 
 const PreguntasFrecuentes = () => {
+
+  // const p = settings.puerto;
+  // const u = settings.url;
+  // const [menuPrFr,setMenuPrFr] = useState([])
+  // useEffect(() => {
+  //    obtenerDatosPrFr()
+  // }, []);
+
+  // const obtenerDatosPrFr= async() =>
+  // {
+  //   const dataPrFr = await fetch(u+p+'/api/answersquestions')
+  //   const pregfrecP = await dataPrFr.json()
+  //   setMenuPrFr(pregfrecP)
+  // }
+
 
   return (
     <div>
@@ -34,7 +50,16 @@ const PreguntasFrecuentes = () => {
    <ContenedorPyR  preg="¿Cuáles son las medidas COVID-19 que debo conocer antes de acudir a las instalaciones?" resp="El restaurante fue preparado como un lugar seguro en cumplimiento de todas las medidas de prevención, los máximos niveles de seguridad.
 Todo el centro se somete periódicamente a intervenciones de limpieza, higiene y desinfección. La colaboración de los usuarios es fundamental de cara a garantizar la efectividad de estas medidas." />
     
- 
+    {/* {menuPrFr.map((contenedorPyR,index) => {
+        return (
+     
+          <ContenedorPyR key={index} preg={contenedorPyR.question} resp={contenedorPyR.answer}/>
+        );
+
+      })} */}
+
+
+
     </td>
     </tr><tr>
     <td  > <ContenedorInferior/> </td>

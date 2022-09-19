@@ -26,17 +26,10 @@ const CarouselPlatos = () => {
         return (
      
           <Carousel.Item key={index}  interval={9999}>
-<Plato
-            id={plato.id}
-            name={plato.name}
-            type={plato.type}
-         
-          />
-
+<Plato id={plato.id} name={plato.name} type={plato.type}/>
           </Carousel.Item>
-         
-      
         );
+
       })}
 
 </Carousel>
