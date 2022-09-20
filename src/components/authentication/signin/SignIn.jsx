@@ -1,7 +1,7 @@
 import style from "./SignIn.module.css";
 import profile from "../../../assets/images/authentication/a.png";
 import { useState } from "react";
-import settings from '../../../settings.json';
+import settings from "../../../settings.json";
 export default function SignIn() {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ export default function SignIn() {
     if (password === "") {
       return window.alert("El campo de contraseña esta vacio!");
     }
-    const resp = await fetch(u+p+"/api/auth/login", {
+    const resp = await fetch(u + p + "/api/auth/login", {
       headers: { "Content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -34,9 +34,9 @@ export default function SignIn() {
       const dataLog = salida.data;
       localStorage.setItem("role", dataLog.role);
       localStorage.setItem("id", dataLog.id);
-
-      window.location.assign(u+"3000/");
-    }
+      localStorage.setItem("username", useremail);
+      window.location.assign(u + "3000/");
+    } else window.alert("El usuario no se encuentra registrado!");
   };
 
   return (
