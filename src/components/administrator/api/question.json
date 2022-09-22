@@ -1,0 +1,14 @@
+[
+    { "id": 1, 
+    "question": " ¿Es posible pedir platos con un mes de anticipación?",
+    "answer": "Si es posible hacerlo mediante nuestra aplicación movil."},
+    { "id": 2, 
+    "question": " En que horario podemos comer o cenar en el restaurante",
+    "answer": "Todos los días de 13:00 a 15:30h. Y por las noches, viernes y sábado de 20:00h a 22:30h"},
+    { "id": 3, 
+    "question": " Cuáles son las medidas COVID-19 que debo conocer antes de acudir a las instalaciones",
+    "answer": "El restaurante fue preparado como un lugar seguro en cumplimiento de todas las medidas de prevención, los máximos niveles de seguridad. Todo el centro se somete periódicamente a intervenciones de limpieza, higiene y desinfección. La colaboración de los usuarios es fundamental de cara a garantizar la efectividad de estas medidas"},
+    { "id": 4, 
+    "question": " existe alguna promocion",
+    "answer": ""}
+]
