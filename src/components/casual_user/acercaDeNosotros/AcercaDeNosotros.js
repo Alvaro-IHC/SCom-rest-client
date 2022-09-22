@@ -4,8 +4,24 @@ import Table from 'react-bootstrap/Table';
 import './AcercaDeNosotros.css';
 
 import ContenedorAcordeon from './ContenedorAcordeon';
+// import settings from '../../../settings.json';
 
 const AcercaDeNosotros = () => {
+
+  // const p = settings.puerto;
+  // const u = settings.url;
+  // const [menuMV,setMenuMV] = useState([])
+  // useEffect(() => {
+  //    obtenerDatosMV()
+  // }, []);
+
+  // const obtenerDatosMV= async() =>
+  // {
+  //   const dataMV = await fetch(u+p+'/api/misionvision')
+  //   const misionV = await dataMV.json()
+  //   setMenuMV(misionV)
+  // }
+
   return (
     <div>
      
@@ -35,7 +51,17 @@ Ser opción destacable y diferente.
 Mantener una excelente calidad en nuestros platos."/>
 <br/><br/>
 <ContenedorAcordeon  titulo="VISIÓN" contenido="Ser reconocidos entre los mejores restaurantes a nivel local y nacional por nuestra oferta gastronómica, ambiente y atención."/>
- 
+    
+      {/* {menuMV.map((contenedorAcordeon,index) => {
+        return (
+     
+          <ContenedorAcordeon key={index} titulo="MISIÓN" contenido={contenedorAcordeon.mision}/>
+          <ContenedorAcordeon key={index} titulo="VISIÓN" contenido={contenedorAcordeon.vision}/>
+        );
+
+      })} */}
+
+
     </td>
     </tr><tr>
     <td  > <ContenedorInferior/> </td>
