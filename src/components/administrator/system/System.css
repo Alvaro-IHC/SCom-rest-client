@@ -1,0 +1,22 @@
+.container_system{
+    display: flex;
+    justify-content: space-between;
+
+}
+.item_systemLeft{
+    width: 60%;
+    margin-left: 6px;
+}
+.item_systemRight{
+    width: 40%;
+}
+.form_system{
+    background-color: rgba(0,136,169,0.8);
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 10px;
+}
+.input_system{
+    width: 100%;
+
+}

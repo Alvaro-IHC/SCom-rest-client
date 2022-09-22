@@ -3,6 +3,7 @@
 
 .container_adm{
     margin: 0 auto;
+    
 
 }
 
@@ -11,6 +12,7 @@
        border-collapse: collapse;
        width: 70%;
        text-align: center;
+       height: 50px;
 
        
    }

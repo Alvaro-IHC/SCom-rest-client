@@ -10,7 +10,7 @@ function Modal({children, estadoM,
     <div className='container_modal'>
         <div className='container_datos'>
             <header className='container_title'>
-                <h1>title</h1>
+                <h1>Editar</h1>
             </header>
             <button className='modal_button' onClick={()=>setEstadoM(false)}>
                 <img src={close} className="modal_logo"></img>

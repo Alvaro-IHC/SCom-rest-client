@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import Header from '../header/Header'
 import User from '../user/User'
+import System from '../system/System'
 export default function Index() {
   console.log("estoy en adm");
   const [page,setPage]=useState("users")
@@ -12,7 +13,7 @@ export default function Index() {
     }else if(page==="plates"){
       return <h1>plates</h1>;
     }else if(page==="system"){
-      return <h1>sistema</h1>;
+      return <System/>;
     }else{
       return <h1>roles</h1>;
     }
@@ -29,16 +30,6 @@ export default function Index() {
     <Header  toPage={toPage}></Header>
     {getContent()}
           
-    {/*<BrowserRouter>
-        <Header/>
-        <Routes>
-            <Route  path="/administrator/users" element={<User/>}/>
-            <Route  path="/administrator/plates" element={<h1>platos</h1>}/>
-            <Route  path="/administrator/system" element={<h1>sistema</h1>}/>
-            <Route  path="/administrator/roles" element={<h1>roles</h1>}/>
-            <Route path="*" element={<User replace to="/administrator/users" />} />
-        </Routes>
-  </BrowserRouter>*/}
   
 
 
