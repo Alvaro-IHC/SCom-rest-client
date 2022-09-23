@@ -6,16 +6,23 @@ import Modal from "../modal/Modal";
 import "./User.css";
 import settings from "../../../settings.json";
 import bd from "../api/productsj.json";
-import { Button } from "react-bootstrap";
+import Administrator from './Administrator'
+import Cashier from './Cashier'
+import Chef from './Chef'
+import Customer from './Customer'
+import Waiter from './Waiter'
+
 function User() {
   const p = settings.puerto;
   const u = settings.url;
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     setProducts(bd);
   }, []);
 
   const [rol, setRol] = useState("");
+  const [rolAdd, setRolAdd] = useState("");
   const [estado, setEstado] = useState(false);
   const [datos, setDatos] = useState({
     fatherLastname: "",
@@ -25,8 +32,15 @@ function User() {
     username: "",
     password: "",
     address: "",
-    rol: "",
+    salary:"",
+    experience:"",
+    healthCode:"",
+    degree:"",
+    nationality:"",
+    specialty:"",
+    nit:""
   });
+
   const initailForm = {
     fatherLastname: "",
     motherLastname: "",
@@ -35,7 +49,13 @@ function User() {
     username: "",
     password: "",
     address: "",
-    rol: "",
+    salary:"",
+    experience:"",
+    healthCode:"",
+    degree:"",
+    nationality:"",
+    specialty:"",
+    nit:""
   };
   const [dataToEdit, setDataToEdit] = useState(null);
 
@@ -57,6 +77,8 @@ function User() {
   const editValue = (e) => {
     setEstado(!estado);
     setDataToEdit(e);
+    setRolAdd(e.rol)
+    console.log(e)
   };
 
   const deletValue = (e) => {
@@ -82,7 +104,8 @@ function User() {
       },
     };
 
-    let url = u + p + "/api/" + datos.rol;
+    let url = u + p + "/api/" + rolAdd;
+    console.log(url)
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => console.log(response))
@@ -97,7 +120,13 @@ function User() {
       username: "",
       password: "",
       address: "",
-      rol: "",
+      salary:"",
+      experience:"",
+      healthCode:"",
+      degree:"",
+      nationality:"",
+      specialty:"",
+      nit:""
     });
   };
 
@@ -106,9 +135,14 @@ function User() {
       ...rol,
       [e.target.name]: e.target.value,
     }));
+    
+    
+  };
 
-    console.log(rol)
-    console.log(bd)
+  const handleChangeAdd = (e) => {
+    setRolAdd(e.target.value);
+
+    console.log(e.target.value)
     
   };
 
@@ -116,9 +150,34 @@ function User() {
     setEstado(!estado);
   }
   const handleClickRol=()=>{
-    console.log(rol)
-    
+
+    let datosFil=bd.filter(function(e){
+      return e.rol===rol.rol;
+    })
+    if(rol.rol==="all"){
+      setProducts(bd)
+    }else{
+      setProducts(datosFil)
+    }
+
   }
+
+  const getContent=()=>{
+    if(rolAdd==="cashiers"){
+      return <Cashier enviarDatos={enviarDatos} handleInputChange={handleInputChange} limpiar={limpiar}/>;
+    }else if(rolAdd==="administrators"){
+      return <Administrator enviarDatos={enviarDatos} handleInputChange={handleInputChange} limpiar={limpiar}/>;
+    }else if(rolAdd==="chefs"){
+      return <Chef enviarDatos={enviarDatos} handleInputChange={handleInputChange} limpiar={limpiar}/>;
+    }else if(rolAdd==="customers"){
+      return <Customer enviarDatos={enviarDatos} handleInputChange={handleInputChange} limpiar={limpiar}/>;
+    }else if(rolAdd==="waiters"){
+      return <Waiter enviarDatos={enviarDatos} handleInputChange={handleInputChange} limpiar={limpiar} datos={datos} />;
+    }else{
+      return <h1>Error, Elija un rol</h1>;
+    }
+  }
+
 
   return (
     <>
@@ -133,10 +192,23 @@ function User() {
             <option value="cashiers">Cajero</option>
             <option value="chefs">Chef</option>
             <option value="administrators">Administrador</option>
+            <option value="customers">Cliente</option>
+            <option value="all">todos</option>
+            
           </select>
           <button  className="item_buttom_jv_adm item_add_jv_adm btn_adm" onClick={handleClickRol}> filtrar </button>
         </div>
         <div>
+          <select onChange={handleChangeAdd} name="rol">
+            <option disabled selected>
+              tipo de usuario
+            </option>
+            <option value="waiters">Camarero</option>
+            <option value="cashiers">Cajero</option>
+            <option value="chefs">Chef</option>
+            <option value="administrators">Administrador</option>
+            <option value="customers">Cliente</option>
+          </select>
           <button  className="item_buttom_jv_adm item_add_jv_adm btn_adm" onClick={handleOnClick}>adicionar</button>
         </div>
         <table className="table_jv_adm">
@@ -204,112 +276,8 @@ function User() {
         </table>
       </main>
       <Modal estadoM={estado} setEstadoM={setEstado} productsj>
-        <section className="main_1form_jv_adm">
-          <p className="item_1form_jv_adm p_jv_adm">DATOS DEL CLIENTE</p>
-          <form
-            autoComplete="off"
-            className="item_1form_jv_adm item_1container_jv_adm"
-            onSubmit={enviarDatos}
-          >
-            <div className="item1_jv_adm">
-              <input
-                type="text"
-                name="fatherLastname"
-                placeholder="Apellido Parterno"
-                onChange={handleInputChange}
-                value={datos.fatherLastname}
-              />
-            </div>
-            <div className="item1_jv_adm">
-              <input
-                type="text"
-                name="motherLastname"
-                placeholder="Apellido Materno:"
-                onChange={handleInputChange}
-                value={datos.motherLastname}
-              />
-            </div>
-            <div className="item1_jv_adm">
-              <input
-                type="text"
-                name="name"
-                placeholder="Nombre"
-                onChange={handleInputChange}
-                value={datos.name}
-              />
-            </div>
-            <div className="item1_jv_adm">
-              <input
-                type="text"
-                name="email"
-                id="email"
-                placeholder="Email"
-                onChange={handleInputChange}
-                value={datos.email}
-              />
-            </div>
-            <div className="item1_jv_adm">
-              <input
-                type="text"
-                name="username"
-                placeholder="Nombre de usuario"
-                onChange={handleInputChange}
-                value={datos.username}
-              />
-            </div>
-            <div className="item1_jv_adm">
-              <input
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                onChange={handleInputChange}
-                value={datos.password}
-              />
-            </div>
-            <div className="item1_jv_adm">
-              <input
-                type="text"
-                name="address"
-                placeholder="Direccion"
-                onChange={handleInputChange}
-                value={datos.address}
-              />
-            </div>
-            <div className="form_action--button_jv_adm item1_jv_adm">
-              <select
-                onChange={handleInputChange}
-                name="rol"
-                defaultValue="null"
-                value={datos.rol}
-              >
-                <option disabled selected>
-                  tipo de usuario
-                </option>
-                <option value="waiters">Camarero</option>
-                <option value="cashiers">Cajero</option>
-                <option value="chefs">Chef</option>
-                <option value="administrators">Administrador</option>
-              </select>
-            </div>
-            <div className="form_action--button_jv_adm item1_jv_adm">
-              <button
-                type="submit"
-                value="Agregar"
-                className="item_buttom_jv_adm item_add_jv_adm"
-              >
-                Guardar
-              </button>
-              <button
-                type="reset"
-                value="Limpiar"
-                className="item_buttom_jv_adm item_alert_jv_adm"
-                onClick={limpiar}
-              >
-                Limpiar
-              </button>
-            </div>
-          </form>
-        </section>
+      {getContent()}
+       
       </Modal>
     </>
   );
