@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ContenedorInferior2 from '../casual_user/contenedorInferior/ContenedorInferior';
+import ContenedorInferior from '../casual_user/contenedorInferior/ContenedorInferior';
 import Table from 'react-bootstrap/Table';
 import './Cliente.css';
 import BotonesImagenes3 from '../casual_user/botonesImagenes/BotonesImagenes3';
@@ -18,13 +18,9 @@ const Cliente = () => {
 <thead>
 <tr>
     
-
     <td  className='titulocl'>
     
    <CabeceraCl/>
-   
-   
-   
 
     </td>
     
@@ -39,7 +35,7 @@ const Cliente = () => {
 
     </td>
     </tr><tr>
-    <td  > <ContenedorInferior2/> </td>
+    <td  > <ContenedorInferior/> </td>
   </tr>
 
 
