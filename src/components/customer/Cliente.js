@@ -40,13 +40,8 @@ const Cliente = () => {
 
 
 </thead>
-
 </Table>
-
-
-    </div>
-        
-        
+    </div>          
   )
 }
 
