@@ -5,10 +5,14 @@ import settings from "../../../settings.json";
 export default function SignIn() {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
-
+  const u = settings.url;
+  const puertoReact = 3000;
+  const url = u+puertoReact+"/sign_up";
+  const urlh = u+puertoReact+"/contactanos";
+  const p = settings.puerto;
   const sendLogin = async () => {
-    const p = settings.puerto;
-    const u = settings.url;
+   
+    
     const reqBody = {
       password: password,
       usernameOrEmail: useremail,
@@ -38,7 +42,7 @@ export default function SignIn() {
       window.location.assign(u + "3000/");
     } else window.alert("El usuario no se encuentra registrado!");
   };
-
+  
   return (
     <div className={style.main}>
       <div className={style.sub_main}>
@@ -75,11 +79,13 @@ export default function SignIn() {
             </div>
 
             <p className={style.link}>
-              <a className={style.a_link} href="https://google.com">
+              <a className={style.a_link} href={urlh}>
                 ¿Necesitas ayuda?
               </a>{" "}
               O{" "}
-              <a className={style.a_link} href="https://google.com">
+     
+              <a className={style.a_link} href={url}
+               >
                 Registrarme
               </a>
             </p>
