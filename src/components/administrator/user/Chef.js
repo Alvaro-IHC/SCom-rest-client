@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
+function Chef({enviarDatos, handleInputChange, limpiar,datos}) {
   return (
     <>
             <section className="main_1form_jv_adm">
@@ -16,7 +16,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="fatherLastname"
                 placeholder="Apellido Parterno"
                 onChange={handleInputChange}
-
+                value={datos.fatherLastname}
               />
             </div>
             <div className="item1_jv_adm">
@@ -25,6 +25,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="motherLastname"
                 placeholder="Apellido Materno:"
                 onChange={handleInputChange}
+                value={datos.motherLastname}
               />
             </div>
             <div className="item1_jv_adm">
@@ -33,6 +34,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="name"
                 placeholder="Nombre"
                 onChange={handleInputChange}
+                value={datos.name}
               />
             </div>
             <div className="item1_jv_adm">
@@ -42,6 +44,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 id="email"
                 placeholder="Email"
                 onChange={handleInputChange}
+                value={datos.email}
               />
             </div>
             <div className="item1_jv_adm">
@@ -50,6 +53,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="username"
                 placeholder="Nombre de usuario"
                 onChange={handleInputChange}
+                value={datos.username}
               />
             </div>
             <div className="item1_jv_adm">
@@ -58,6 +62,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="password"
                 placeholder="Contraseña"
                 onChange={handleInputChange}
+                value={datos.password}
               />
             </div>
             <div className="item1_jv_adm">
@@ -66,15 +71,17 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="address"
                 placeholder="Direccion"
                 onChange={handleInputChange}
+                value={datos.address}
               />
             </div>
 
             <div className="item1_jv_adm">
               <input
-                type="text"
+                type="number"
                 name="salary"
                 placeholder="Salario"
                 onChange={handleInputChange}
+                value={datos.salary}
               />
             </div>
             <div className="item1_jv_adm">
@@ -83,6 +90,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="specialty"
                 placeholder="Especialidad"
                 onChange={handleInputChange}
+                value={datos.specialty}
               />
             </div>
             <div className="item1_jv_adm">
@@ -91,6 +99,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="healthCode"
                 placeholder="Codigo de sanidad"
                 onChange={handleInputChange}
+                value={datos.healthCode}
               />
             </div>
             <div className="item1_jv_adm">
@@ -99,6 +108,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,setDatos}) {
                 name="nationality"
                 placeholder="Nacionalidad"
                 onChange={handleInputChange}
+                value={datos.nationality}
               />
             </div>
         

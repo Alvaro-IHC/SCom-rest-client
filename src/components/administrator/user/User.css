@@ -12,7 +12,7 @@
        border-collapse: collapse;
        width: 70%;
        text-align: center;
-       height: 50px;
+       height: auto;
 
        
    }
@@ -84,6 +84,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.container_table{
+    max-height: 200px;
+    text-align: center;
+    overflow: scroll;
+
 }
 
 @media screen and (max-width: 700px) {

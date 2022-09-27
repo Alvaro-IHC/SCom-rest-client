@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import edit from "../../../assets/images/administrator/edit.svg";
 import trash from "../../../assets/images/administrator/trash.svg";
-import bd from "../api/question.json";
 import "./System.css";
 import settings from "../../../settings.json";
 import Modal from "../modal/Modal";
@@ -10,22 +9,37 @@ function System() {
   const [products, setProducts] = useState([]);
   const [estado, setEstado] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
+  const [bd, setBd] = useState([]);
 
   const p = settings.puerto;
   const u = settings.url;
   const [datos, setDatos] = useState({
-    fatherLastname: "",
-    motherLastname: "",
+    question: "",
+    answer: "",
     name: "",
   });
   const editValue = (e) => {
     setEstado(!estado);
     setDataToEdit(e);
+    setDatos(e)
+
+
   };
 
   useEffect(() => {
-    setProducts(bd);
+    let url = u + p + "/api/question-answers";
+    const options = { method: "GET" };
+
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => cargar(response))
+      .catch((err) => console.error(err));
   }, []);
+
+  const cargar = (response) => {
+    setProducts(response);
+    setBd(response);
+  };
   const deletValue = (e) => {
     console.log(e);
     let isDelete = window.confirm(
@@ -158,7 +172,8 @@ function System() {
             </div>
           </form>
       </div>
-      <Modal estadoM={estado} setEstadoM={setEstado} productsj>
+      <Modal estadoM={estado} setEstadoM={setEstado} setDatos={setDatos}
+        initailForm={initailForm} productsj>
         <section className="main_1form_jv_adm">
           <p className="item_1form_jv_adm p_jv_adm">Preguntas y Respuestas</p>
           <form
