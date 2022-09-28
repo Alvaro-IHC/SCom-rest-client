@@ -1,6 +1,21 @@
 import React from 'react'
 
-function Chef({enviarDatos, handleInputChange, limpiar,datos}) {
+function Chef({enviarDatos, handleInputChange, limpiar,datos, flag}) {
+  const getPass = () => {
+    if (flag) {
+      return (
+        <div className="item1_jv_adm">
+          <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            onChange={handleInputChange}
+            value={datos.password}
+          />
+        </div>
+      );
+    }
+  };
   return (
     <>
             <section className="main_1form_jv_adm">
@@ -56,15 +71,7 @@ function Chef({enviarDatos, handleInputChange, limpiar,datos}) {
                 value={datos.username}
               />
             </div>
-            <div className="item1_jv_adm">
-              <input
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                onChange={handleInputChange}
-                value={datos.password}
-              />
-            </div>
+            {getPass()}
             <div className="item1_jv_adm">
               <input
                 type="text"

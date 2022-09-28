@@ -99,18 +99,25 @@ function User() {
       .then((response) => {
         console.log(response);
         setDataToEdit(response);
-        console.log(dataToEdit);
       })
       .catch((err) => console.error(err));
   };
 
   const deletValue = (e) => {
-    console.log(e);
+
+   
     let isDelete = window.confirm(
       `¿Estás seguro de eliminar el registro con el id '${e.id}'?`
     );
 
     if (isDelete) {
+
+      console.log(e);
+      let nbd=bd.filter((x)=>x.id!=e.id)
+      console.log(nbd)
+      console.log(bd)
+      setProducts(nbd)
+      setBd(nbd)
       let url = u + p + "/api/users/" + e.id;
 
       fetch(url, {
@@ -124,6 +131,17 @@ function User() {
           // this is the data we get after doing the delete request, do whatever you want with this data
           console.log(data)
         );
+
+       url = u + p + "/api/users";
+        const options = { method: "GET" };
+    
+        fetch(url, options)
+          .then((response) => response.json())
+          .then((response) => setProducts(response))
+          .catch((err) => console.error(err));
+        console.log("elininado")
+
+
     } else {
       console.log("cancelado");
     }
@@ -163,7 +181,17 @@ function User() {
 
   const actualizarDatos = (e) => {
     e.preventDefault();
-    console.log("actulizar datos");
+    console.log(datos)
+    let url = u + p + "/api/" + datos.role + "s/" + datos.id;
+    const options = {
+      method: 'PUT',
+      body: JSON.stringify(datos)
+    };
+    
+    fetch(url, options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
   };
   const limpiar = () => {
     setDatos({
@@ -220,6 +248,7 @@ function User() {
           handleInputChange={handleInputChange}
           limpiar={limpiar}
           datos={datos}
+          flag={flag}
         />
       );
     } else if (rolAdd === "administrator") {
@@ -229,6 +258,7 @@ function User() {
           handleInputChange={handleInputChange}
           limpiar={limpiar}
           datos={datos}
+          flag={flag}
         />
       );
     } else if (rolAdd === "chef") {
@@ -238,6 +268,7 @@ function User() {
           handleInputChange={handleInputChange}
           limpiar={limpiar}
           datos={datos}
+          flag={flag}
         />
       );
     } else if (rolAdd === "customer") {
@@ -247,6 +278,7 @@ function User() {
           handleInputChange={handleInputChange}
           limpiar={limpiar}
           datos={datos}
+          flag={flag}
         />
       );
     } else if (rolAdd === "waiter") {
@@ -256,6 +288,7 @@ function User() {
           handleInputChange={handleInputChange}
           limpiar={limpiar}
           datos={datos}
+          flag={flag}
         />
       );
     } else {
