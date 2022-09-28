@@ -104,47 +104,33 @@ function User() {
   };
 
   const deletValue = (e) => {
+    let url = u + p + "/api/users/" + e.id;
 
-   
-    let isDelete = window.confirm(
-      `¿Estás seguro de eliminar el registro con el id '${e.id}'?`
-    );
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) =>
+        // this is the data we get after doing the delete request, do whatever you want with this data
+        console.log(data)
+      );
+    let isDelete = window.confirm(`los datos de '${e.name}' fueron eliminados`);
 
     if (isDelete) {
+      url = u + p + "/api/users";
+      const options = { method: "GET" };
 
-      console.log(e);
-      let nbd=bd.filter((x)=>x.id!=e.id)
-      console.log(nbd)
-      console.log(bd)
-      setProducts(nbd)
-      setBd(nbd)
-      let url = u + p + "/api/users/" + e.id;
-
-      fetch(url, {
-        method: "DELETE"
-  
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) =>
-          // this is the data we get after doing the delete request, do whatever you want with this data
-          console.log(data)
-        );
-
-       url = u + p + "/api/users";
-        const options = { method: "GET" };
-    
-        fetch(url, options)
-          .then((response) => response.json())
-          .then((response) => setProducts(response))
-          .catch((err) => console.error(err));
-        console.log("elininado")
-
-
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((response) => cargar(response))
+        .catch((err) => console.error(err));
+      console.log("elininado");
     } else {
       console.log("cancelado");
     }
+    Location.href = Location.href;
   };
 
   const enviarDatos = (e) => {
@@ -172,26 +158,40 @@ function User() {
         .then((response) => response.json())
         .then((response) => console.log(response))
         .catch((err) => console.error(err));
-      let isDelete = window.confirm(`datos guardados de ${datos.name}`);
+      window.confirm(`datos guardados de ${datos.name}`);
     } else {
-      let isDelete = window.confirm(`Error, no debe existir campos vacios`);
+      window.confirm(`Error, no debe existir campos vacios`);
     }
     limpiar();
   };
 
   const actualizarDatos = (e) => {
     e.preventDefault();
-    console.log(datos)
+    console.log(datos);
     let url = u + p + "/api/" + datos.role + "s/" + datos.id;
-    const options = {
-      method: 'PUT',
-      body: JSON.stringify(datos)
+    let options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(datos),
     };
-    
+
     fetch(url, options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+    alert(`Datos actulizados `);
+
+    setEstado(!estado);
+    url = u + p + "/api/users";
+    options = { method: "GET" };
+
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => setProducts(response))
+      .catch((err) => console.error(err));
+    Location.href = Location.href;
   };
   const limpiar = () => {
     setDatos({
@@ -346,6 +346,7 @@ function User() {
           <table className="table_jv_adm">
             <thead className="thead_jv_adm">
               <tr className="tr_jv_adm">
+                <th className="title_adm">Nro</th>
                 <th className="title_adm">PATERNO</th>
                 <th className="title_adm">MATERNO</th>
                 <th className="title_adm">NOMBRE</th>
@@ -355,8 +356,11 @@ function User() {
               </tr>
             </thead>
             <tbody>
-              {products.map((e) => (
-                <tr key={e.id} className="tr_jv_adm">
+              {products.map((e, key) => (
+                <tr key={key} className="tr_jv_adm">
+                  <td className="td_jv_adm" data-label="fatherlastname">
+                    {key}
+                  </td>
                   <td className="td_jv_adm" data-label="fatherlastname">
                     {e.fatherLastname}
                   </td>
