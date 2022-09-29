@@ -46,10 +46,10 @@ function Derecha(){
     const [nro,setNro]=useState(data.length)
     const [Solicitud,setSolicitud]=useState(data)
     return <div>
-        <div class="container px-0 text-center">
-        <div class="row gx-0">
-            <div class="col">
-            <div class="p-3 border bg-light">
+        <div className="container px-0 text-center">
+        <div className="row gx-0">
+            <div className="col">
+            <div className="p-3 border bg-light">
             <form
                 onSubmit={ev => {
                     ev.preventDefault();   
@@ -64,22 +64,22 @@ function Derecha(){
                 }}
                 ><label><b>Descripcion</b></label>  <input  id="descripcion" type="text" name="descripcion" autocomplete="off" onChange={setDes}></input>  <br></br>  <br></br>
                 <label><b>Cantidad</b></label>  <input  id="cantidad" type="text" name="cantidad" autocomplete="off" onChange={setCan}></input>  <br></br> <br></br>
-                <button type="reset" class="btn btn-danger">Cancelar</button>
-                <button type="submit"  class="btn btn-success">Añadir</button> 
+                <button type="reset" className="btn btn-danger">Cancelar</button>
+                <button type="submit"  className="btn btn-success">Añadir</button> 
             </form>
             </div>
             </div>
         </div>
         </div>
          <br></br>
-        <div class="container px-0 text-center">
-        <div class="row gx-0">
-            <div class="col">
-            <div class="p-3 border bg-light">
+        <div className="container px-0 text-center">
+        <div className="row gx-0">
+            <div className="col">
+            <div className="p-3 border bg-light">
                 
 
             <b>Nro de ingredientes {nro}</b>
-            <table class="table">
+            <table className="table">
             <thead>
                 <tr>
                 
@@ -95,13 +95,13 @@ function Derecha(){
                     
                     <td>{elemenento.descripcion}</td>
                     <td>{elemenento.cantidad}</td>
-                    <td><button type="button" onClick={()=>{setSolicitud(Eliminar(elemenento.codigo));setNro(data.length);}} class="btn btn-danger">Eliminar</button></td>
+                    <td><button type="button" onClick={()=>{setSolicitud(Eliminar(elemenento.codigo));setNro(data.length);}} className="btn btn-danger">Eliminar</button></td>
                     </tr>
                 ))}
 
             </tbody>
             </table>
-            <button type="button"  class="btn btn-success" onClick={()=>JsonGen1(data)}>Solicitar</button> 
+            <button type="button"  className="btn btn-success" onClick={()=>JsonGen1(data)}>Solicitar</button> 
 
             </div>
             </div>
