@@ -3,6 +3,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import settings from '../../../settings.json';
+import Form from 'react-bootstrap/Form';
+import './PreguntasFrecuentes.css';
+
 function AdicionarPreg() {
     const u = settings.url;
     async function volverPag(event) {
@@ -13,11 +16,26 @@ function AdicionarPreg() {
   return (
     <Container>
       <Row>
-      <Col xs={1}>  </Col>
-        <Col xs={10}>  </Col>
+      
+        <Col xs={12}>
+        <Form>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>¿En que le podemos ayudar?</Form.Label>
+        <Form.Control as="textarea" rows={3} columns={20}/>
+      </Form.Group>
+
+  
      
-        <Col xs={1}><Button href="#"  onClick={volverPag} size="lg" variant="light">{" "}Volver{" "}</Button></Col>
-      </Row>
+    </Form>
+ 
+        </Col>
+        </Row>
+        <Row>
+       
+        <Col className="alinearderbot"  xs={12}><Button className="botonpreguntaf" href="#" variant="secondary" onClick={volverPag} >{" "}Enviar pregunta{" "}</Button> </Col>
+        </Row>
+
+     
     </Container>
   );
 }
