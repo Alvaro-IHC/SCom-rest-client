@@ -12,7 +12,7 @@ export default function SignUp() {
   const [passOrigen, setPassOrigen] = useState("");
   const [passConfirmar, setPassConfirmar] = useState("");
   const [usernameReg, setUsernameReg] = useState("");
-  const urlr = u+"3000/sign_in";
+  const urlLogin = u+"3000/sign_in";
   let arrApellidos = apellidos.split(" ");
   console.log(nombres);
 
@@ -130,7 +130,7 @@ export default function SignUp() {
             </button>
           </div>
           <p className={estilo.link}>
-            <a href={urlr}>¿Ya tiene una cuenta?</a>
+            <a href={urlLogin}>¿Ya tiene una cuenta?</a>
           </p>
         </div>
       </div>

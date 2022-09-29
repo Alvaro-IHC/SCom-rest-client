@@ -7,8 +7,8 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const u = settings.url;
   const puertoReact = 3000;
-  const url = u+puertoReact+"/sign_up";
-  const urlh = u+puertoReact+"/contactanos";
+  const urlRegistrarse = u+puertoReact+"/sign_up";
+  const urlContactanos = u+puertoReact+"/contactanos";
   const p = settings.puerto;
   const sendLogin = async () => {
    
@@ -79,12 +79,12 @@ export default function SignIn() {
             </div>
 
             <p className={style.link}>
-              <a className={style.a_link} href={urlh}>
+              <a className={style.a_link} href={urlContactanos}>
                 ¿Necesitas ayuda?
               </a>{" "}
               O{" "}
      
-              <a className={style.a_link} href={url}
+              <a className={style.a_link} href={urlRegistrarse}
                >
                 Registrarme
               </a>
