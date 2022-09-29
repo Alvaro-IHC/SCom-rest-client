@@ -10,7 +10,7 @@ const CarouselBebidas = () => {
   const [menuB,setMenuB] = useState([])
   useEffect(() => {
      obtenerDatos2()
-  }, []);
+  });
 
   const obtenerDatos2= async() =>
   {
@@ -19,7 +19,7 @@ const CarouselBebidas = () => {
     setMenuB(bebidasP)
   }
 
-  const cantidadTotalDePlatos = 3;
+
 
   return (
   
@@ -30,7 +30,7 @@ const CarouselBebidas = () => {
      
           <Carousel.Item key={index}  interval={9999}>
 <Bebida
-            id={bebida.id-cantidadTotalDePlatos}
+            urlb={bebida.urlImage}
             brand={bebida.brand}
             alcoholicGrade={bebida.alcoholicGrade}
          

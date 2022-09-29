@@ -12,7 +12,7 @@ export default function SignUp() {
   const [passOrigen, setPassOrigen] = useState("");
   const [passConfirmar, setPassConfirmar] = useState("");
   const [usernameReg, setUsernameReg] = useState("");
-
+  const urlLogin = u+"3000/sign_in";
   let arrApellidos = apellidos.split(" ");
   console.log(nombres);
 
@@ -49,6 +49,8 @@ export default function SignUp() {
         method: "POST",
         body: JSON.stringify(reqRegisInfo),
       });
+      localStorage.setItem("role", "customer");
+      window.location.assign(u + "3000/");
     } else window.alert("Revise su contraseña!");
   };
 
@@ -128,7 +130,7 @@ export default function SignUp() {
             </button>
           </div>
           <p className={estilo.link}>
-            <a href="https://google.com">¿Ya tiene una cuenta?</a>
+            <a href={urlLogin}>¿Ya tiene una cuenta?</a>
           </p>
         </div>
       </div>

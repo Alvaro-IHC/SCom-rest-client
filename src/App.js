@@ -10,7 +10,7 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
 
  import Index from "./components/cashier/index/Index";
  import IndexAdm from "./components/administrator/index/Index";
-
+import Cliente from "./components/customer/Cliente";
  import {Pbody} from "./components/chef/Cmain";
  
 
@@ -21,7 +21,11 @@ function App() {
 
   const rolx = localStorage.getItem("role");
 
-  const rutaPrincipal = (rolx === "cashier") ? <Index />:((rolx === "chef") ?<Pbody /> :((rolx === "administrator") ? <IndexAdm/>:<NavBarExample/>));
+  const rutaPrincipal = (rolx === "cashier") ? <Index />:
+  ((rolx === "chef") ?<Pbody /> :
+  ((rolx === "administrator") ? <IndexAdm/>:
+  ((rolx === "customer") ? <Cliente/>:
+  <NavBarExample/>)));
 
   return (
     <div className="App">
