@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./CarouselPB.css";
 
 const Bebida = (props) => {
   return (
@@ -7,7 +7,7 @@ const Bebida = (props) => {
     <>
         <h4>Marca de la bebida: {props.brand}</h4>
        
-          <img className='imagen-logo' src={require('../../../assets/images/user_casual/bebida'+props.id+'.jpg')} alt='xd' width={250} />
+        <img className='imagenBebidaCar' src={props.urlb} alt='xd'/>
           <p>Grado alcohólico: {props.alcoholicGrade}</p>
     <br/>  <br/>
           </>

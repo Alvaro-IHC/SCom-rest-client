@@ -9,17 +9,23 @@ import NavBarExample from "./components/casual_user/layouts/Navbar";
  import SignUp from "./components/authentication/signup/SignUp";
 
  import Index from "./components/cashier/index/Index";
-
- //import Cmain from "./components/chef/Cmain";
+ import IndexAdm from "./components/administrator/index/Index";
+import Cliente from "./components/customer/Cliente";
+ import {Pbody} from "./components/chef/Cmain";
  
 
  
 
 
 function App() {
+
   const rolx = localStorage.getItem("role");
 
-  const rutaPrincipal = (rolx === "cashier") ? <Index />:((rolx === "contactanos") ?<Contactanos /> :<NavBarExample/>);
+  const rutaPrincipal = (rolx === "cashier") ? <Index />:
+  ((rolx === "chef") ?<Pbody /> :
+  ((rolx === "administrator") ? <IndexAdm/>:
+  ((rolx === "customer") ? <Cliente/>:
+  <NavBarExample/>)));
 
   return (
     <div className="App">
@@ -29,6 +35,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={rutaPrincipal}>
+     
             <Route index element={<Inicio />} />
             <Route path="acerca_de_nosotros" element={<AcercaDeNosotros />} />
             <Route path="contactanos" element={<Contactanos />} />
@@ -39,7 +46,6 @@ function App() {
                
              <Route path="sign_in" element={<SignIn />} />
             <Route path="sign_up" element={<SignUp />} /> 
-            <Route path="valero" element={<Index />} /> 
             <Route path="*" element={<Navigate replace to="/" />} />
           </Route>
         </Routes>
