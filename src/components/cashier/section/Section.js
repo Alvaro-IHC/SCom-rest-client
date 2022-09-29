@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Section.css";
 import "../api/db.json";
 import prod from "../api/prod.json";
-import settings from '../../../settings.json';
+import settings from "../../../settings.json";
 function Section() {
   const p = settings.puerto;
   const u = settings.url;
@@ -55,20 +55,33 @@ function Section() {
   };
   const enviarDatos = (e) => {
     e.preventDefault();
-    const options = {
-      method: "POST",
-      body: JSON.stringify(datos),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    let url = u+p+"/api/" + datos.rol;
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
-    alert("datos guardados")
+    if(datos.address.length>0&& datos.email.length>0 && datos.fatherLastname.length>0
+      && datos.motherLastname.length>0 && datos.name.length>0 && datos.password.length>0 
+      && datos.rol.length>0 && datos.username.length>0){
+      e.preventDefault();
+      const options = {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let url = u + p + "/api/" + datos.rol;
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+        let isDelete = window.confirm(
+          `datos guardados de ${datos.name}`
+        );
+    }else{
+      
+      let isDelete = window.confirm(
+        `Error, no debe existir campos vacios`
+      );
+    }
+    limpiar();
+    
   };
   const repCodigo = (e) => {
     e.preventDefault();
@@ -94,10 +107,52 @@ function Section() {
   const limpiaCod = () => {
     setCodigo("");
     setProducts([]);
+
+    let isDelete = window.confirm(
+      `¿Estás seguro de eliminar el registro con el id ${datos.id}?`
+    );
   };
   const report = (e) => {
     e.preventDefault();
+    const url=`${u}${p}/api/stats/income-expenses?month=${date.month}&year=${date.year}`
+    
+    if(date.flag>=0 && date.month.length>0 && date.year.length>0){
+      const options = { method: "GET" };
+      fetch(
+        url,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {evaluar(response)})
+        .catch((err) => console.error(err));
+    }else{
+      let isDelete = window.confirm(
+        `Error,  debe seleccionar el mes, año y el tipo de reporte`
+      );
+    }
+    console.log(date)
+    
+
   };
+
+  const evaluar=(response)=>{
+    let isDelete=true
+    console.log(response)
+    if(date.flag==="1"){
+      isDelete = window.confirm(
+        `ingreso: ${response[0].value} Bs`
+      );
+    }else{
+      isDelete = window.confirm(
+        `egreso: ${response[1].value} Bs`
+      )
+    }
+    if (isDelete) {
+      console.log("eliminado");
+    } else {
+      console.log("cancelado");
+    }
+  }
   let cont = 0;
 
   return (
@@ -106,7 +161,7 @@ function Section() {
         <div className="item_jv left_jv">
           <div className="lefitem_jv left1_jv">
             <section className="main_1form_jv">
-              <p className="item_1form_jv p_jv">DATOS DEL CLIENTE</p>
+              <p className="item_1form_jv p_jv">DATOS DEL EMPLEADO</p>
               <form
                 autoComplete="off"
                 className="item_1form_jv item_1container_jv"
@@ -170,8 +225,12 @@ function Section() {
                   />
                 </div>
                 <div className="form_action--button_jv item1_jv">
-                  <select onChange={handleInputChange} name="rol">
-                    <option disabled selected>
+                  <select
+                    onChange={handleInputChange}
+                    name="rol"
+                    defaultValue={"DEFAULT"}
+                  >
+                    <option disabled value="DEFAULT">
                       tipo de usuario
                     </option>
                     <option value="waiters">Camarero</option>
@@ -212,8 +271,9 @@ function Section() {
                   onChange={handleInputDate}
                   name="flag"
                   className="select_jv sele_jv"
+                  defaultValue={"DEFAULT"}
                 >
-                  <option disabled selected>
+                  <option disabled value="DEFAULT">
                     tipo
                   </option>
                   <option value="1">ingreso</option>
@@ -225,30 +285,32 @@ function Section() {
                   onChange={handleInputDate}
                   name="month"
                   className="select_jv month_jv"
+                  defaultValue={"DEFAULT"}
                 >
-                  <option disabled selected>
+                  <option disabled value="DEFAULT">
                     Mes
                   </option>
-                  <option value="january">Enero</option>
-                  <option value="february">Febrero</option>
-                  <option value="march">Marzo</option>
-                  <option value="april">Abril</option>
-                  <option value="may">Mayo</option>
-                  <option value="june">Junio</option>
-                  <option value="july">Julio</option>
-                  <option value="august">Agosto</option>
-                  <option value="september">Septiembre</option>
-                  <option value="october">Octubre</option>
-                  <option value="november">Noviembre</option>
-                  <option value="december">Diciembre</option>
+                  <option value="1">Enero</option>
+                  <option value="2">Febrero</option>
+                  <option value="3">Marzo</option>
+                  <option value="4">Abril</option>
+                  <option value="5">Mayo</option>
+                  <option value="6">Junio</option>
+                  <option value="7">Julio</option>
+                  <option value="8">Agosto</option>
+                  <option value="9">Septiembre</option>
+                  <option value="10">Octubre</option>
+                  <option value="11">Noviembre</option>
+                  <option value="12">Diciembre</option>
                 </select>
 
                 <select
                   onChange={handleInputDate}
                   name="year"
                   className="select_jv year_jv"
+                  defaultValue={"DEFAULT"}
                 >
-                  <option disabled selected>
+                  <option disabled value="DEFAULT">
                     Año
                   </option>
                   <option value="2015">2015</option>
@@ -338,7 +400,6 @@ function Section() {
                     <td className="td_jv" data-label="Codigo">
                       {e.total}
                     </td>
-               
                   </tr>
                 ))}
               </tbody>

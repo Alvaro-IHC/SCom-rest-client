@@ -1,7 +1,21 @@
 import React from 'react'
 
-function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
-  
+function Waiter({enviarDatos, handleInputChange, limpiar, datos, flag}) {
+  const getPass = () => {
+    if (flag) {
+      return (
+        <div className="item1_jv_adm">
+          <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            onChange={handleInputChange}
+            value={datos.password}
+          />
+        </div>
+      );
+    }
+  };
   return (
     <>
            <section className="main_1form_jv_adm">
@@ -17,7 +31,7 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 name="fatherLastname"
                 placeholder="Apellido Parterno"
                 onChange={handleInputChange}
-
+                value={datos.fatherLastname}
               />
             </div>
             <div className="item1_jv_adm">
@@ -26,6 +40,7 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 name="motherLastname"
                 placeholder="Apellido Materno:"
                 onChange={handleInputChange}
+                value={datos.motherLastname}
               />
             </div>
             <div className="item1_jv_adm">
@@ -34,6 +49,7 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 name="name"
                 placeholder="Nombre"
                 onChange={handleInputChange}
+                value={datos.name}
               />
             </div>
             <div className="item1_jv_adm">
@@ -43,6 +59,7 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 id="email"
                 placeholder="Email"
                 onChange={handleInputChange}
+                value={datos.email}
               />
             </div>
             <div className="item1_jv_adm">
@@ -51,39 +68,36 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 name="username"
                 placeholder="Nombre de usuario"
                 onChange={handleInputChange}
+                value={datos.username}
               />
             </div>
-            <div className="item1_jv_adm">
-              <input
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                onChange={handleInputChange}
-              />
-            </div>
+            {getPass()}
             <div className="item1_jv_adm">
               <input
                 type="text"
                 name="address"
                 placeholder="Direccion"
                 onChange={handleInputChange}
+                value={datos.address}
               />
             </div>
 
             <div className="item1_jv_adm">
               <input
-                type="text"
+                type="number"
                 name="salary"
                 placeholder="Salario"
                 onChange={handleInputChange}
+                value={datos.salary}
               />
             </div>
             <div className="item1_jv_adm">
               <input
-                type="text"
+                type="number"
                 name="experience"
                 placeholder="Experiencia"
                 onChange={handleInputChange}
+                value={datos.experience}
               />
             </div>
             <div className="item1_jv_adm">
@@ -92,6 +106,7 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 name="healthCode"
                 placeholder="Codigo de sanidad"
                 onChange={handleInputChange}
+                value={datos.healthCode}
               />
             </div>
 
@@ -100,6 +115,7 @@ function Waiter({enviarDatos, handleInputChange, limpiar, datos}) {
                 type="submit"
                 value="Agregar"
                 className="item_buttom_jv_adm item_add_jv_adm"
+
               >
                 Guardar
               </button>

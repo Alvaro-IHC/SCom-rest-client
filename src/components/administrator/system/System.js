@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import edit from "../../../assets/images/administrator/edit.svg";
 import trash from "../../../assets/images/administrator/trash.svg";
-import bd from "../api/question.json";
 import "./System.css";
 import settings from "../../../settings.json";
 import Modal from "../modal/Modal";
@@ -10,22 +9,44 @@ function System() {
   const [products, setProducts] = useState([]);
   const [estado, setEstado] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
+  const [bd, setBd] = useState([]);
 
   const p = settings.puerto;
   const u = settings.url;
   const [datos, setDatos] = useState({
-    fatherLastname: "",
-    motherLastname: "",
-    name: "",
+    question: "",
+    answer: "",
+  });
+
+  const [datosV, setDatosV] = useState({
+    adminId:"",
+    mission: "",
+    vision: "",
   });
   const editValue = (e) => {
+    console.log(e)
     setEstado(!estado);
-    setDataToEdit(e);
+    setDataToEdit(e)
+
+
+
   };
 
   useEffect(() => {
-    setProducts(bd);
+    let url = u + p + "/api/question-answers";
+    const options = { method: "GET" };
+
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => cargar(response))
+      .catch((err) => console.error(err));
   }, []);
+
+  const cargar = (response) => {
+    setProducts(response);
+    setBd(response);
+
+  };
   const deletValue = (e) => {
     console.log(e);
     let isDelete = window.confirm(
@@ -59,27 +80,88 @@ function System() {
       answer: ""
     });
   };
+
+  const limpiarV = () => {
+    setDatosV({
+      adminId:"",
+      mission: "",
+      vision: "",
+    });
+  };
   const handleInputChange = (e) => {
     setDatos((datos) => ({
       ...datos,
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleMision=(e)=>{
+    setDatosV((datosV) => ({
+      ...datosV,
+      [e.target.name]: e.target.value,
+    }));
+  }
   const enviarDatos = (e) => {
     e.preventDefault();
+    console.log(datos);
+    let url = u + p + "/api/question-answers/" +datos.id+"?adminId="+localStorage.getItem("id");
     const options = {
-      method: "POST",
-      body: JSON.stringify(datos),
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
+      body: JSON.stringify(datos),
     };
 
-    let url = u + p + "/api/" + datos.rol;
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => console.log(response))
       .catch((err) => console.error(err));
+    let isDelete = window.confirm(
+      `Datos actulizados `
+    );
+
+    if(isDelete){
+      setEstado(!estado)
+      url = u + p + "/api/question-answers";
+      const options = { method: "GET" };
+  
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((response) => cargar(response))
+        .catch((err) => console.error(err));
+      Location.href=Location.href;
+    }
+
+  };
+
+  
+  const enviarDatosV = (e) => {
+    e.preventDefault();
+    datosV.adminId=localStorage.getItem("id")
+    console.log(datosV)
+    if (
+      datosV.vision.length > 0 &&
+      datosV.mission.length > 0 
+    ) {
+      const options = {
+        method: "POST",
+        body: JSON.stringify(datosV),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let url = u + p + "/api/mission-vision" ;
+      console.log(url);
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+      alert("datos guardados")
+    } else {
+      window.confirm(`Error, no debe existir campos vacios`);
+    }
+    limpiarV();
   };
 
   return (
@@ -90,14 +172,18 @@ function System() {
       <table className="table_jv_adm  item_systemLeft">
         <thead className="thead_jv_adm">
           <tr className="tr_jv_adm">
+          <th className="title_adm">Nro</th>
             <th className="title_adm">PREGUNTAS</th>
             <th className="title_adm">RESPUESTAS</th>
             <th className="title_adm">ACCION</th>
           </tr>
         </thead>
         <tbody>
-          {products.map((e) => (
+          {products.map((e, key) => (
             <tr key={e.id} className="tr_jv_adm">
+              <td className="td_jv_adm" data-label="question">
+                {key}
+              </td>
               <td className="td_jv_adm" data-label="question">
                 {e.question}
               </td>
@@ -130,15 +216,15 @@ function System() {
       <form
             autoComplete="off"
             className="item_1form_jv_adm item_1container_jv_adm form_system"
-            
+            onSubmit={enviarDatosV}
           >
             <div className="item1_jv_adm">
-            <label htmlFor="mision">Mision</label>
-              <textarea name="mision" id="" cols="30" rows="3"></textarea>
+            <label htmlFor="mission">Mision</label>
+              <textarea name="mission" id="" cols="30" rows="3" onChange={handleMision} value={datosV.mission}></textarea>
             </div>
             <div className="item1_jv_adm">
               <label htmlFor="vision">Vision</label>
-              <textarea name="vision" id="" cols="30" rows="3"></textarea>
+              <textarea name="vision" id="" cols="30" rows="3" onChange={handleMision} value={datosV.vision}></textarea>
             </div>
             <div className="form_action--button_jv_adm item1_jv_adm">
               <button
@@ -152,13 +238,15 @@ function System() {
                 type="reset"
                 value="Limpiar"
                 className="item_buttom_jv_adm item_alert_jv_adm"
+                onClick={limpiarV}
               >
                 Limpiar
               </button>
             </div>
           </form>
       </div>
-      <Modal estadoM={estado} setEstadoM={setEstado} productsj>
+      <Modal estadoM={estado} setEstadoM={setEstado} setDatos={setDatos}
+        initailForm={initailForm} productsj>
         <section className="main_1form_jv_adm">
           <p className="item_1form_jv_adm p_jv_adm">Preguntas y Respuestas</p>
           <form
@@ -168,8 +256,8 @@ function System() {
           >
             <div className="item1_jv_adm">
               <textarea  type="text"
-                name="fatherLastname"
-                placeholder="Apellido Parterno"
+                name="question"
+                placeholder="Pregunta"
                 onChange={handleInputChange}
                 value={datos.question}
                 className="input_system" cols="30" rows="5"></textarea>
@@ -177,8 +265,8 @@ function System() {
             </div>
             <div className="item1_jv_adm">
               <textarea   type="text"
-                name="motherLastname"
-                placeholder="Apellido Materno:"
+                name="answer"
+                placeholder="Respuesta:"
                 onChange={handleInputChange}
                 value={datos.answer}
                 className="input_system"cols="30" rows="5"></textarea>
