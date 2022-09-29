@@ -20,3 +20,20 @@
     width: 100%;
 
 }
+
+@media screen and (max-width: 700px) {
+    .container_system{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    
+    }
+    .item_systemLeft{
+        width: auto;
+        margin-left: 6px;
+    }
+    .item_systemRight{
+        width: auto;
+    }
+   
+}
