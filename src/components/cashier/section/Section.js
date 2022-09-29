@@ -71,16 +71,16 @@ function Section() {
         .then((response) => response.json())
         .then((response) => console.log(response))
         .catch((err) => console.error(err));
-        let isDelete = window.confirm(
-          `datos guardados de ${datos.name}`
-        );
+        alert(`datos guardados de ${datos.name}`)
+        limpiar()
+        
     }else{
       
-      let isDelete = window.confirm(
-        `Error, no debe existir campos vacios`
-      );
+      alert(`Error, no debe existir campos vacios`)
+        
+
     }
-    limpiar();
+    
     
   };
   const repCodigo = (e) => {
