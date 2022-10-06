@@ -12,7 +12,7 @@ function Section() {
     { id: 3, description: "ensalada", amount: 3, price: 15, total: 45 },
   ];
   const [products, setProducts] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [order, setOrder] = useState({});
   const obtenerDatos = async () => {
     setProducts(productsj);
   };
@@ -34,6 +34,15 @@ function Section() {
     flag: "",
   });
 
+  const [nit, setNit] = useState(null);
+
+  const handleInputNit = (e) => {
+    setNit((nit) => ({
+      ...nit,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleInputChange = (e) => {
     setDatos((datos) => ({
       ...datos,
@@ -51,13 +60,20 @@ function Section() {
   const [codigo, setCodigo] = useState();
   const handleInputCodigo = (e) => {
     setCodigo(e.target.value);
-    console.log(codigo);
+
   };
   const enviarDatos = (e) => {
     e.preventDefault();
-    if(datos.address.length>0&& datos.email.length>0 && datos.fatherLastname.length>0
-      && datos.motherLastname.length>0 && datos.name.length>0 && datos.password.length>0 
-      && datos.rol.length>0 && datos.username.length>0){
+    if (
+      datos.address.length > 0 &&
+      datos.email.length > 0 &&
+      datos.fatherLastname.length > 0 &&
+      datos.motherLastname.length > 0 &&
+      datos.name.length > 0 &&
+      datos.password.length > 0 &&
+      datos.rol.length > 0 &&
+      datos.username.length > 0
+    ) {
       e.preventDefault();
       const options = {
         method: "POST",
@@ -71,26 +87,60 @@ function Section() {
         .then((response) => response.json())
         .then((response) => console.log(response))
         .catch((err) => console.error(err));
-        let isDelete = window.confirm(
-          `datos guardados de ${datos.name}`
-        );
-    }else{
-      
-      let isDelete = window.confirm(
-        `Error, no debe existir campos vacios`
-      );
+      let isDelete = window.confirm(`datos guardados de ${datos.name}`);
+    } else {
+      let isDelete = window.confirm(`Error, no debe existir campos vacios`);
     }
     limpiar();
-    
   };
   const repCodigo = (e) => {
     e.preventDefault();
-    console.log("codigo" + codigo);
+    if(codigo!=null){
+      datoFactura()
+    }else{
+      alert("Error, no debe existir campos vacios")
+    }
+    
   };
 
-  const datoFactura = (e) => {
+  const datoFactura = async ( ) =>{
+    console.log(codigo);
+    let url = u + p + "/api/orders";
+    const response = await fetch(url);
+ 
+   //turning the response into the usable data
+    const data = await response.json( );
+ 
+    //now do whatever your want with this data. 
+    console.log(data);
+
+    let datosFil = data.filter(function (e) {
+      return e.id === parseInt(codigo);
+    });
+    setOrder(datosFil)
+    console.log(order);
+    //obtenerDatos();
+ }
+
+ const facturar = async ( ) =>{
+  console.log(order);
+  if(nit !=null){
+    console.log(nit);
     obtenerDatos();
-  };
+  }else{
+    alert("Error, no debe existir campos vacios")
+  }
+  
+  /*let url = u + p + "/api/orders";
+  const response = await fetch(url);
+  const data = await response.json( );
+  console.log(data);*/
+  
+
+
+  //obtenerDatos();
+}
+
 
   const limpiar = () => {
     setDatos({
@@ -108,51 +158,44 @@ function Section() {
     setCodigo("");
     setProducts([]);
 
-    let isDelete = window.confirm(
-      `¿Estás seguro de eliminar el registro con el id ${datos.id}?`
-    );
+
   };
   const report = (e) => {
     e.preventDefault();
-    const url=`${u}${p}/api/stats/income-expenses?month=${date.month}&year=${date.year}`
-    
-    if(date.flag>=0 && date.month.length>0 && date.year.length>0){
+    const url = `${u}${p}/api/stats/income-expenses?month=${date.month}&year=${date.year}`;
+
+    if (date.flag >= 0 && date.month.length > 0 && date.year.length > 0) {
       const options = { method: "GET" };
-      fetch(
-        url,
-        options
-      )
+      fetch(url, options)
         .then((response) => response.json())
-        .then((response) => {evaluar(response)})
+        .then((response) => {
+          evaluar(response);
+        })
         .catch((err) => console.error(err));
-    }else{
+    } else {
       let isDelete = window.confirm(
         `Error,  debe seleccionar el mes, año y el tipo de reporte`
       );
     }
-    console.log(date)
-    
-
+    console.log(date);
   };
 
-  const evaluar=(response)=>{
-    let isDelete=true
-    console.log(response)
-    if(date.flag==="1"){
-      isDelete = window.confirm(
-        `ingreso: ${response[0].value} Bs`
-      );
-    }else{
-      isDelete = window.confirm(
-        `egreso: ${response[1].value} Bs`
-      )
+  const evaluar = (response) => {
+    let isDelete = true;
+    console.log(response);
+    if (date.flag === "1") {
+      isDelete = window.confirm(`ingreso: ${response[0].value} Bs`);
+    } else {
+      isDelete = window.confirm(`egreso: ${response[1].value} Bs`);
     }
     if (isDelete) {
       console.log("eliminado");
     } else {
       console.log("cancelado");
     }
-  }
+  };
+
+  
   let cont = 0;
 
   return (
@@ -349,7 +392,7 @@ function Section() {
             >
               <div className="item_form3_jv">
                 <label>Codigo de pedido</label>
-                <input type="text" name="codigo" onChange={handleInputCodigo} />
+                <input type="number" name="codigo" onChange={handleInputCodigo} />
               </div>
 
               <div className="form_action--button_jv item_form3_jv">
@@ -357,19 +400,24 @@ function Section() {
                   type="submit"
                   value="Reportar"
                   className="item_buttom_jv item_add_jv"
-                  onClick={datoFactura}
+
                 >
                   Buscar
                 </button>
+             
+              </div>
+            </form>
+            <form action="" className=" form3_jv">
+                <label>Nit / CI</label>
+                <input type="number" name="nit" onChange={handleInputNit} />
                 <button
                   type="reset"
                   value="Limpiar"
                   className="item_buttom_jv item_alert_jv"
-                  onClick={limpiaCod}
+                  onClick={facturar}
                 >
-                  Limpiar
+                  Facturar
                 </button>
-              </div>
             </form>
             <p className="title_table_jv p_jv">DETALLE</p>
             <table className="container_item3_jv main_table_jv item_table_jv table_jv">
@@ -407,15 +455,6 @@ function Section() {
                 <tr className="foot_fila_jv tr_jv">
                   <td className="td_jv">total </td>
                   <td className="td_jv">{cont}</td>
-                  <td className="td_jv">
-                    <form action="">
-                      <input
-                        type="reset"
-                        value="Facturar"
-                        className="item_buttom_jv item_add_jv"
-                      />
-                    </form>
-                  </td>
                 </tr>
               </tfoot>
             </table>

@@ -103,22 +103,26 @@ function User() {
       .catch((err) => console.error(err));
   };
 
-  const deletValue = (e) => {
-    let url = u + p + "/api/users/" + e.id;
+  const deletValue = async (e) => {
 
-    fetch(url, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) =>
-        // this is the data we get after doing the delete request, do whatever you want with this data
-        console.log(data)
-      );
-    let isDelete = window.confirm(`los datos de '${e.name}' fueron eliminados`);
+    let isDelete = window.confirm(`esta seguro de eliminar el registro de '${e.name}' `);
+   
+    
 
     if (isDelete) {
+      let url = u + p + "/api/" + e.role + "s/" + e.id;
+      console.log(e);
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const data = await response.json();
+  
+      console.log(data);
+
       url = u + p + "/api/users";
       const options = { method: "GET" };
 
