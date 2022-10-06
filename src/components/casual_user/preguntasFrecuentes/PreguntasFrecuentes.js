@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 import './PreguntasFrecuentes.css';
 import ContenedorPyR from './ContenedorPyR';
 import settings from '../../../settings.json';
-
+import AdicionarPreg from './AdicionarPreg';
 
 const PreguntasFrecuentes = () => {
 
@@ -53,10 +53,7 @@ const PreguntasFrecuentes = () => {
 
       })}
 
-    
-
-
-
+      <AdicionarPreg/>
     </td>
     </tr><tr>
     <td  > <ContenedorInferior/> </td>

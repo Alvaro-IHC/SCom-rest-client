@@ -11,7 +11,7 @@ function ContenedorInferior() {
       <Row>
       <Col xs={6}>
      
-     60 Zona Sur, La Paz, Bolivia. Teléfonos: 2432876 - 77123123
+     UMSA, Carrera de Informática, La Paz, Bolivia.
 
      
      </Col>
