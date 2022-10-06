@@ -2,20 +2,26 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {useState} from 'react'
+import {useEffect} from 'react'
 var data2 = [
-    { codigo: 1, descripcion: "papa", cantidad: "5"},
-    { codigo: 2, descripcion: "frijol", cantidad: "2 latas"},
-    { codigo: 3, descripcion: "pimienta", cantidad: "1/2 kilos"},
-    { codigo: 4, descripcion: "almidon", cantidad: "a"}
+    { id: 1, name: "papa", stock: "5"},
+    { id: 2, name: "frijol", stock: "2 latas"},
+    { id: 3, name: "pimienta", stock: "1/2 kilos"},
+    { id: 4, name: "almidon", stock: "a"}
 ];
 var data =[
     
 ]
-var temporal={codigo: 0, descripcion:"", cantidad:""}
+var temporal={
+    id: 0,
+    name: "string",
+    price: 0,
+    stock: 0
+  }
 function Eliminar(a){
     data.splice(a-1, 1)
     data.map((orden)=>(
-        orden.codigo=data.indexOf(orden)+1
+        orden.id=data.indexOf(orden)+1
     ))
     return data
 }
@@ -34,9 +40,17 @@ function LoaData(){
     alreadyloaded=true
 }
 function Derecha(){
-    LoaData()
-    const [descripcion, setD]=useState("");
-    const [cantidad, setC]=useState("");
+    const [loadeddata, setloadeddata] = useState([]);
+    useEffect(()=>{
+      
+      fetch("http://localhost:8081/api/ingredients")
+      .then(response => response.json())
+      .then(data => setloadeddata(data));
+      
+    },[])
+    data=loadeddata
+    const [name, setD]=useState("");
+    const [stock, setC]=useState("");
     const setDes = (e) => {
         setD(e.target.value);
     }
@@ -46,45 +60,45 @@ function Derecha(){
     const [nro,setNro]=useState(data.length)
     const [Solicitud,setSolicitud]=useState(data)
     return <div>
-        <div class="container px-0 text-center">
-        <div class="row gx-0">
-            <div class="col">
-            <div class="p-3 border bg-light">
+        <div className="container px-0 text-center">
+        <div className="row gx-0">
+            <div className="col">
+            <div className="p-3 border bg-light">
             <form
                 onSubmit={ev => {
                     ev.preventDefault();   
-                    temporal.descripcion=descripcion;
-                    temporal.cantidad=cantidad;
-                    temporal.codigo=data.length+1;
-                    //console.log(temporal.descripcion);
-                    //console.log(temporal.cantidad);
-                    //console.log(temporal.codigo);
+                    temporal.name=name;
+                    temporal.stock=stock;
+                    temporal.id=data.length+1;
+                    //console.log(temporal.name);
+                    //console.log(temporal.stock);
+                    //console.log(temporal.id);
                     data.push(Object.assign({},temporal));
                     setNro(data.length);
                 }}
-                ><label><b>Descripcion</b></label>  <input  id="descripcion" type="text" name="descripcion" autocomplete="off" onChange={setDes}></input>  <br></br>  <br></br>
-                <label><b>Cantidad</b></label>  <input  id="cantidad" type="text" name="cantidad" autocomplete="off" onChange={setCan}></input>  <br></br> <br></br>
-                <button type="reset" class="btn btn-danger">Cancelar</button>
-                <button type="submit"  class="btn btn-success">Añadir</button> 
+                ><label><b>name</b></label>  <input  id="name" type="text" name="name" autocomplete="off" onChange={setDes}></input>  <br></br>  <br></br>
+                <label><b>stock</b></label>  <input  id="stock" type="text" name="stock" autocomplete="off" onChange={setCan}></input>  <br></br> <br></br>
+                <button type="reset" className="btn btn-danger">Cancelar</button>
+                <button type="submit"  className="btn btn-success">Añadir</button> 
             </form>
             </div>
             </div>
         </div>
         </div>
          <br></br>
-        <div class="container px-0 text-center">
-        <div class="row gx-0">
-            <div class="col">
-            <div class="p-3 border bg-light">
+        <div className="container px-0 text-center">
+        <div className="row gx-0">
+            <div className="col">
+            <div className="p-3 border bg-light">
                 
 
             <b>Nro de ingredientes {nro}</b>
-            <table class="table">
+            <table className="table">
             <thead>
                 <tr>
                 
-                <th scope="col">Descripcion</th>
-                <th scope="col">Cantidad</th>
+                <th scope="col">name</th>
+                <th scope="col">stock</th>
                 <th scope="col">Accion</th>
                 </tr>
             </thead>
@@ -93,15 +107,15 @@ function Derecha(){
                 {Solicitud.map((elemenento)=>(
                     <tr>
                     
-                    <td>{elemenento.descripcion}</td>
-                    <td>{elemenento.cantidad}</td>
-                    <td><button type="button" onClick={()=>{setSolicitud(Eliminar(elemenento.codigo));setNro(data.length);}} class="btn btn-danger">Eliminar</button></td>
+                    <td>{elemenento.name}</td>
+                    <td>{elemenento.stock}</td>
+                    <td><button type="button" onClick={()=>{setSolicitud(Eliminar(elemenento.id));setNro(data.length);}} className="btn btn-danger">Eliminar</button></td>
                     </tr>
                 ))}
 
             </tbody>
             </table>
-            <button type="button"  class="btn btn-success" onClick={()=>JsonGen1(data)}>Solicitar</button> 
+            <button type="button"  className="btn btn-success" onClick={()=>JsonGen1(data)}>Solicitar</button> 
 
             </div>
             </div>
