@@ -22,10 +22,10 @@ const Contactanos = () => {
 
     </td>
     
-    </tr><tr>
+    </tr>
+    
+    <tr>
     <td className='celdasco' >
-
-  
     <ContenedorC/>
 
     </td>
