@@ -9,55 +9,39 @@ var infocentro ={
     nomborden: " X"
 }
 var Data_products = [
-    
+  
 ]
-var Data_products3=[
-    {
-        chef: {
-          id: 0
-        },
-        date: "2022-09-26T21:35:32.010Z",
-        id: 0,
-        products: [
-          {
-            amount: 0,
-            description: "string",
-            id: 0,
-            nameOrBrand: "string",
-            type: "string"
-          }
-        ],
-        table: {
-          capacity: 0,
-          id: 0,
-          number: "string"
-        }
-      }
-  ]
 var Data_products2 = [
     
 ]
-var PedAct={
-        chef: {
-          id: 0
-        },
-        date: "2022-09-26T21:35:32.010Z",
+var PedAct=
+  {
+    bill: {
+      id: 0
+    },
+    chef: {
+      "id": 0
+    },
+    customer: {
+      id: 0
+    },
+    date: "2022-10-05T17:17:33.273Z",
+    id: 0,
+    products: [
+      {
+        amount: 0,
+        description: "string",
         id: 0,
-        products: [
-          {
-            amount: 0,
-            description: "string",
-            id: 0,
-            nameOrBrand: "string",
-            type: "string"
-          }
-        ],
-        table: {
-          capacity: 0,
-          id: 0,
-          number: "string"
-        }
+        nameOrBrand: "string",
+        type: "string"
       }
+    ],
+    table: {
+      capacity: 0,
+      id: 0,
+      number: "string"
+    }
+        }
 function CPedAct(a){
     PedAct=a
 }
@@ -95,11 +79,18 @@ function LoaData(){
     }
     alreadyloaded=true
 }
-var temporal={
-    chef: {
+var temporal=
+  {
+    bill: {
       id: 0
     },
-    date: "2022-09-26T21:35:32.010Z",
+    chef: {
+      "id": 0
+    },
+    customer: {
+      id: 0
+    },
+    date: "2022-10-05T17:17:33.273Z",
     id: 0,
     products: [
       {
@@ -184,7 +175,7 @@ function Izquierda(){
                     {Data_products.map((elemenento)=>(
                         <tr>
                         <td></td>
-                        <td><button type="button" className="btn btn-warning btn-lg" onClick={()=>{Formatear(elemenento.id, elemenento.products);CPedAct(elemenento);setOrden(Formatear(elemenento.id, elemenento.products));}}>Mesa {elemenento.id}</button></td>
+                        <td><button type="button" className="btn btn-warning btn-lg" onClick={()=>{Formatear(elemenento.table.id, elemenento.products);CPedAct(elemenento);setOrden(Formatear(elemenento.table.id, elemenento.products));}}>Mesa {elemenento.table.id}</button></td>
                         </tr>
                     ))}
 

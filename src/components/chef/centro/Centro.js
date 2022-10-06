@@ -3,20 +3,68 @@ import ReactDOM from 'react-dom/client'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Izquierda, Data_pedido} from "./../Izquierda/Izquierda"
 import {useState} from 'react'
+import {useEffect} from 'react'
 var food2=[
-    {id: 1, nombre:"milanesa",tipo:"comida",  ingredientes:["pechuga", "huevo", "sal", "pimienta", "pan molido"], estado:false},
-    {id: 2, nombre:"alfajor",tipo:"comida",  ingredientes:["arina","chocolate", "dulce de leche"], estado:true},
-    {id: 3, nombre:"cocacola",tipo:"jugo",  ingredientes:["N/A"], estado:false}
+    {id: 1, name:"milanesa",type:"comida",  ingredients:["pechuga", "huevo", "sal", "pimienta", "pan molido"], available:false},
+    {id: 2, name:"alfajor",type:"comida",  ingredients:["arina","chocolate", "dulce de leche"], available:true},
+    {id: 3, name:"cocacola",type:"jugo",  ingredients:["N/A"], available:false}
 ]
 var food=[
     
 ]
 const infoplato={
-    nombre:"Nombre Del plato",
-    ingredientes:"N/A",
-    estado:"agotado"
+    name:"name Del plato",
+    ingredients:"N/A",
+    available:"agotado"
 }
-var pActual={id: -1, nombre:"",tipo:"", ingredientes:["N/A"], estado:false}
+var pActual={
+    available: true,
+    id: 0,
+    ingredients: [
+      {
+        amount: 0,
+        ingredient: {
+          chefs: [
+            {
+              chef: {
+                address: "string",
+                email: "string",
+                fatherLastname: "string",
+                healthCode: "string",
+                id: 0,
+                motherLastname: "string",
+                name: "string",
+                nationality: "string",
+                role: "string",
+                salary: 0,
+                specialty: "string",
+                username: "string"
+              },
+              date: "2022-10-05T17:58:06.838Z",
+              id: {},
+              ingredient: {
+                chefs: [
+                  null
+                ],
+                id: 0,
+                name: "string",
+                price: 0,
+                stock: 0
+              }
+            }
+          ],
+          id: 0,
+          name: "string",
+          price: 0,
+          stock: 0
+        }
+      }
+    ],
+    name: "string",
+    price: 0,
+    type: "string",
+    urlImage: "string"
+  }
 function SetAct(a){
     pActual=a
     
@@ -28,22 +76,35 @@ function sta(a){
         return "agotado"
     }
 }
+var forchange1={
+    available: true,
+    id: 0
+  }
 function Change(a){
-    if(food[food.indexOf(a)].estado==false){
-        food[food.indexOf(a)].estado=true
+    if(food[food.indexOf(a)].available==false){
+        food[food.indexOf(a)].available=true
     }else{
-        food[food.indexOf(a)].estado=false
+        food[food.indexOf(a)].available=false
     }
-    const Jsonestado = JSON.stringify(pActual);
-    console.log(Jsonestado)
+    forchange1.available= pActual.available;
+    forchange1.id= pActual.id;
+    const Jsonavailable = JSON.stringify(forchange1);
+    console.log(Jsonavailable)
+    var url = "http://localhost:8081/api/products/"+forchange1.id;
+    fetch(url, {
+        headers: { "Content-type": "application/json" },
+        method: "PATCH",
+        body: Jsonavailable,
+        
+      });
     //console.log("------------carga----------------")
     //console.log(JSON.stringify(food))
 }
 function Formatear(a,b,c){
-    infoplato.nombre=a;
+    infoplato.name=a;
     
-    infoplato.ingredientes=b.map((ingrediente)=>(ingrediente+", "));
-    infoplato.estado=c;
+    infoplato.ingredients=b.map((ingrediente)=>(ingrediente.name+", "));
+    infoplato.available=c;
     return a
 }
 function gete(a){
@@ -59,19 +120,27 @@ function LoaData(){
 
 function Centro(){
     
-    LoaData()
+    const [loadeddata, setloadeddata] = useState([]);
+    useEffect(()=>{
+      
+      fetch("http://localhost:8081/api/foods")
+      .then(response => response.json())
+      .then(data => setloadeddata(data));
+      
+    },[])
+    food=loadeddata
     
     const [plato,setPlato]=useState(false)
-    const [nomp,setNom]=useState("Nombre Plato")
+    const [nomp,setNom]=useState("name Plato")
     return <div>
         <div class="container px-0 text-center">
             <div class="row gx-0">
                 <div class="col">
                     <div class="p-3 border bg-light">
                         <b>{nomp}<br /></b>
-                        <b>Ingredientes:<br /></b>
-                        <p>{infoplato.ingredientes}<br /></p>
-                        <b>Estado anterior<br /></b>
+                        <b>ingredients:<br /></b>
+                        <p>{infoplato.ingredients}<br /></p>
+                        <b>available anterior<br /></b>
                         <p>{sta(plato)}<br /> </p>
                         
                         
@@ -89,9 +158,9 @@ function Centro(){
                             <thead>
                                 <tr>
                                 <th scope="col">id</th>
-                                <th scope="col">nombre</th>
+                                <th scope="col">name</th>
                                 
-                                <th scope="col">estado</th>
+                                <th scope="col">available</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,9 +169,9 @@ function Centro(){
                                     
                                     <tr>
                                     <td>{elemenento.id}</td>
-                                    <td>{elemenento.nombre}</td>
+                                    <td>{elemenento.name}</td>
                                     
-                                    <td><button type="button" onClick={()=>{Formatear(elemenento.nombre, elemenento.ingredientes, elemenento.estado);setNom(Formatear(elemenento.nombre, elemenento.ingredientes, elemenento.estado));setPlato(gete(elemenento.estado));SetAct(elemenento);Change(elemenento)}} class="btn btn-info">{sta(elemenento.estado)}</button></td>
+                                    <td><button type="button" onClick={()=>{Formatear(elemenento.name, elemenento.ingredients, elemenento.available);setNom(Formatear(elemenento.name, elemenento.ingredients, elemenento.available));setPlato(gete(elemenento.available));SetAct(elemenento);Change(elemenento)}} class="btn btn-info">{sta(elemenento.available)}</button></td>
                                     </tr>
                                 ))}
                             </tbody>
