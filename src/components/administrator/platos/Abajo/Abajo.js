@@ -3,26 +3,57 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {useEffect} from 'react'
+import settings from  './../../../../settings.json'
 var data2 = [
     
 ];
 var data =[
-    { codigo: 1, descripcion: "papa", cantidad: "5"},
-    { codigo: 2, descripcion: "frijol", cantidad: "2 latas"},
-    { codigo: 3, descripcion: "pimienta", cantidad: "1/2 kilos"},
-    { codigo: 4, descripcion: "almidon", cantidad: "a"}
+    { name: "papa", price:1, stock: 1},
+    { name: "frijol", price:1, stock: 555},
+    { name: "pimienta", price:1, stock: 999999},
+    { name: "almidon", price:1, stock: 88888}
 ]
-var temporal={codigo: 0, descripcion:"", cantidad:""}
+var temporal={id:-500, name: "almidon", price:1, stock: 88888}
 function Aceptar(a){
-    data2.push(a)
+    //data2.push(a)
+    temporal.name=a.name;
+    temporal.price=a.price;
+    temporal.stock=a.stock;
+    data2.push(Object.assign({},temporal));
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    var url = setingsu+setingsp+"/api/ingredients";
+    fetch(url, {
+        headers: { "Content-type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(a),
+        
+      });
     data.splice(data.indexOf(a),1)
     return data
 }
 function Eliminar(a){
+    
     data2.splice(data2.indexOf(a),1)
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    
+    var url = setingsu+setingsp+"/api/ingredients/"+a.id;
+    fetch(url, { method: 'DELETE' });
     return data2
 }
 function Abajo(){
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    const [loadeddata, setloadeddata] = useState([]);
+    useEffect(()=>{
+      
+      fetch(setingsu+setingsp+"/api/ingredients")
+      .then(response => response.json())
+      .then(data => setloadeddata(data));
+      
+    },[])
+    data2=loadeddata;
     const [descripcion, setD]=useState("");
     const [cantidad, setC]=useState("");
     const setDes = (e) => {
@@ -34,7 +65,6 @@ function Abajo(){
     const [nro,setNro]=useState(data.length)
     const [nro2,setNro2]=useState(data2.length)
     const [Solicitud,setSolicitud]=useState(data)
-    const [Solicitud2,setSolicitud2]=useState(data2)
     return (
         <div>
             <div class="container px-4 text-center">
@@ -57,8 +87,8 @@ function Abajo(){
                             {Solicitud.map((elemenento)=>(
                                 <tr>
                                 
-                                <td>{elemenento.descripcion}</td>
-                                <td>{elemenento.cantidad}</td>
+                                <td>{elemenento.name}</td>
+                                <td>{elemenento.stock}</td>
                                 <td><button type="button" onClick={()=>{setSolicitud(Aceptar(elemenento));setNro(data.length);}} className="btn btn-success">Aceptar</button></td>
                                 </tr>
                             ))}
@@ -80,11 +110,11 @@ function Abajo(){
                             </tr>
                         </thead>
                         <tbody>
-                            {Solicitud2.map((elemenento2)=>(
+                            {data2.map((elemenento2)=>(
                                 <tr>
-                                <td>{elemenento2.descripcion}</td>
-                                <td>{elemenento2.cantidad}</td>
-                                <td><button type="button" onClick={()=>{setSolicitud2(Eliminar(elemenento2));setNro2(data2.length);}} className="btn btn-danger">Eliminar</button></td>
+                                <td>{elemenento2.name}</td>
+                                <td>{elemenento2.stock}</td>
+                                <td><button type="button" onClick={()=>{(Eliminar(elemenento2));setNro2(data2.length);}} className="btn btn-danger">Eliminar</button></td>
                                 </tr>
                             ))}
                         </tbody>

@@ -2,7 +2,8 @@ import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {useState} from 'react'
 import {useEffect} from 'react'
-
+import settings from './../../../settings.json'
+var setings={}
 
 var infocentro ={
     orden: "Informacion de la orden.",
@@ -53,12 +54,21 @@ function cancelar(){
     
 }
 function Enviar(){
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
     const JsonEnviar = JSON.stringify(PedAct);
     console.log(JsonEnviar)
     const JsoneIzent = JSON.stringify(Data_products2);
     
     Data_products=JSON.parse(JsoneIzent)
     
+    var url = setingsu+setingsp+"/api/orders/"+PedAct.id+"?flag=confirmed&value=false";
+    fetch(url, {
+        headers: { "Content-type": "application/json" },
+        method: "PATCH",
+        
+        
+      });
 }
 
 
@@ -128,12 +138,14 @@ function DataRecovery(){
     alreadyRecovery=true;
 }
 function Izquierda(){
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
     //const JsoneIzent = JSON.stringify(Data_products2);
     //Data_products=JSON.parse(JsoneIzent)
     const [loadeddata, setloadeddata] = useState([]);
     useEffect(()=>{
       
-      fetch("http://localhost:8081/api/orders")
+      fetch(setingsu+setingsp+"api/orders/billed-undelivered")
       .then(response => response.json())
       .then(data => setloadeddata(data));
       

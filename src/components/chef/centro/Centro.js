@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import {Izquierda, Data_pedido} from "./../Izquierda/Izquierda"
 import {useState} from 'react'
 import {useEffect} from 'react'
+import settings from './../../../settings.json'
+var setings={}
 var food2=[
     {id: 1, name:"milanesa",type:"comida",  ingredients:["pechuga", "huevo", "sal", "pimienta", "pan molido"], available:false},
     {id: 2, name:"alfajor",type:"comida",  ingredients:["arina","chocolate", "dulce de leche"], available:true},
@@ -12,6 +14,7 @@ var food2=[
 var food=[
     
 ]
+var drink=[]
 const infoplato={
     name:"name Del plato",
     ingredients:"N/A",
@@ -65,8 +68,13 @@ var pActual={
     type: "string",
     urlImage: "string"
   }
+var pActual2={}
 function SetAct(a){
     pActual=a
+    
+}
+function SetAct2(a){
+    pActual2=a
     
 }
 function sta(a){
@@ -80,7 +88,31 @@ var forchange1={
     available: true,
     id: 0
   }
+function Change2(a){
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    if(drink[drink.indexOf(a)].available==false){
+        drink[drink.indexOf(a)].available=true
+    }else{
+        drink[drink.indexOf(a)].available=false
+    }
+    forchange1.available= pActual2.available;
+    forchange1.id= pActual2.id;
+    const Jsonavailable = JSON.stringify(forchange1);
+    console.log(Jsonavailable)
+    var url = setingsu+setingsp+"/api/products/"+forchange1.id;
+    fetch(url, {
+        headers: { "Content-type": "application/json" },
+        method: "PATCH",
+        body: Jsonavailable,
+        
+      });
+    //console.log("------------carga----------------")
+    //console.log(JSON.stringify(food))
+}
 function Change(a){
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
     if(food[food.indexOf(a)].available==false){
         food[food.indexOf(a)].available=true
     }else{
@@ -90,7 +122,7 @@ function Change(a){
     forchange1.id= pActual.id;
     const Jsonavailable = JSON.stringify(forchange1);
     console.log(Jsonavailable)
-    var url = "http://localhost:8081/api/products/"+forchange1.id;
+    var url = setingsu+setingsp+"/api/products/"+forchange1.id;
     fetch(url, {
         headers: { "Content-type": "application/json" },
         method: "PATCH",
@@ -107,6 +139,13 @@ function Formatear(a,b,c){
     infoplato.available=c;
     return a
 }
+function Formatear2(a,b){
+    infoplato.name=a;
+    
+    
+    infoplato.available=b;
+    return a
+}
 function gete(a){
     return a
 }
@@ -119,16 +158,26 @@ function LoaData(){
 }
 
 function Centro(){
-    
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
     const [loadeddata, setloadeddata] = useState([]);
     useEffect(()=>{
       
-      fetch("http://localhost:8081/api/foods")
+      fetch(setingsu+setingsp+"/api/foods")
       .then(response => response.json())
       .then(data => setloadeddata(data));
       
     },[])
-    food=loadeddata
+    food=loadeddata;
+    const [loadeddata3, setloadeddata3] = useState([]);
+    useEffect(()=>{
+      
+      fetch(setingsu+setingsp+"/api/drinks")
+      .then(response => response.json())
+      .then(data => setloadeddata3(data));
+      
+    },[])
+  drink=loadeddata3;
     
     const [plato,setPlato]=useState(false)
     const [nomp,setNom]=useState("name Plato")
@@ -172,6 +221,15 @@ function Centro(){
                                     <td>{elemenento.name}</td>
                                     
                                     <td><button type="button" onClick={()=>{Formatear(elemenento.name, elemenento.ingredients, elemenento.available);setNom(Formatear(elemenento.name, elemenento.ingredients, elemenento.available));setPlato(gete(elemenento.available));SetAct(elemenento);Change(elemenento)}} class="btn btn-info">{sta(elemenento.available)}</button></td>
+                                    </tr>
+                                ))}
+                                {drink.map((elemenento)=>(
+                                    
+                                    <tr>
+                                    <td>{elemenento.id}</td>
+                                    <td>{elemenento.brand}</td>
+                                    
+                                    <td><button type="button" onClick={()=>{Formatear2(elemenento.brand,  elemenento.available);setNom(Formatear2(elemenento.name, elemenento.available));setPlato(gete(elemenento.available));SetAct2(elemenento);Change2(elemenento)}} class="btn btn-info">{sta(elemenento.available)}</button></td>
                                     </tr>
                                 ))}
                             </tbody>
