@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {useState} from 'react'
 import {useEffect} from 'react'
+import settings from './../../../settings.json'
+var setings={}
 var data2 = [
     { id: 1, name: "papa", stock: "5"},
     { id: 2, name: "frijol", stock: "2 latas"},
@@ -28,8 +30,24 @@ function Eliminar(a){
 function getElemene(a){
     return data
 }
-function JsonGen1(a){
-    const JsonArray = JSON.stringify(a);
+function JsonGen1(b){
+    var a = {name:"", price:0, stock:0}
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    var url = setingsu+setingsp+"/api/ingredients";
+    b.map((elemenentox)=>{
+        a.name=elemenentox.name;
+        a.price = elemenentox.price;
+        a.stock = elemenentox.stock;
+        fetch(url, {
+            headers: { "Content-type": "application/json" },
+            method: "POST",
+            body: JSON.stringify(a),
+            
+        });
+});
+    
+    const JsonArray = JSON.stringify(b);
     console.log(JsonArray)
 }
 var alreadyloaded=false
@@ -40,10 +58,13 @@ function LoaData(){
     alreadyloaded=true
 }
 function Derecha(){
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    
     const [loadeddata, setloadeddata] = useState([]);
     useEffect(()=>{
       
-      fetch("http://localhost:8081/api/ingredients")
+      fetch(setingsu+setingsp+"/api/ingredients")
       .then(response => response.json())
       .then(data => setloadeddata(data));
       
@@ -104,7 +125,7 @@ function Derecha(){
             </thead>
             <tbody>
                 
-                {Solicitud.map((elemenento)=>(
+                {data.map((elemenento)=>(
                     <tr>
                     
                     <td>{elemenento.name}</td>

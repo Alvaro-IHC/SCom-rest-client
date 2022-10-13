@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from '../header/Header'
 import User from '../user/User'
 import System from '../system/System'
+import PMain from '../platos/PMain'
 export default function Index() {
   console.log("estoy en adm");
   const [page,setPage]=useState("users")
@@ -11,7 +12,7 @@ export default function Index() {
     if(page==="users"){
       return <User/>;
     }else if(page==="plates"){
-      return <h1>plates</h1>;
+      return <PMain/>;
     }else if(page==="system"){
       return <System/>;
     }else{
