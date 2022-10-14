@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Section.css";
 import "../api/db.json";
 import prod from "../api/prod.json";
 import settings from "../../../settings.json";
+import { getDefaultNormalizer } from "@testing-library/react";
+import add from "../../../assets/images/cashier/add.svg";
+import addR from "../../../assets/images/cashier/addR.svg";
+import load from "../../../assets/images/cashier/load.svg";
 function Section() {
   const p = settings.puerto;
   const u = settings.url;
+  let vp = [];
   const productsj = [
     { id: 1, description: "soda", amount: 2, price: 150, total: 300 },
     { id: 2, description: "ensalada", amount: 3, price: 15, total: 45 },
@@ -13,10 +18,23 @@ function Section() {
   ];
   const [products, setProducts] = useState([]);
   const [order, setOrder] = useState({});
+  const [pedido, setPedido] = useState([]);
+  const [nit, setNit] = useState(0);
   const obtenerDatos = async () => {
     setProducts(productsj);
   };
 
+  const getData = async () => {
+    let url = u + p + "/api/orders/all-delivered";
+    const response = await fetch(url);
+    const data = await response.json();
+    setPedido(data);
+    console.log("hola");
+    console.log(data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   const [datos, setDatos] = useState({
     fatherLastname: "",
     motherLastname: "",
@@ -25,7 +43,6 @@ function Section() {
     username: "",
     password: "",
     address: "",
-    rol: "",
   });
 
   const [date, setDate] = useState({
@@ -34,7 +51,7 @@ function Section() {
     flag: "",
   });
 
-  const [nit, setNit] = useState(null);
+ 
 
   const handleInputNit = (e) => {
     setNit((nit) => ({
@@ -60,7 +77,6 @@ function Section() {
   const [codigo, setCodigo] = useState();
   const handleInputCodigo = (e) => {
     setCodigo(e.target.value);
-
   };
   const enviarDatos = (e) => {
     e.preventDefault();
@@ -71,7 +87,6 @@ function Section() {
       datos.motherLastname.length > 0 &&
       datos.name.length > 0 &&
       datos.password.length > 0 &&
-      datos.rol.length > 0 &&
       datos.username.length > 0
     ) {
       e.preventDefault();
@@ -82,7 +97,7 @@ function Section() {
           "Content-Type": "application/json",
         },
       };
-      let url = u + p + "/api/" + datos.rol;
+      let url = u + p + "/api/customers";
       fetch(url, options)
         .then((response) => response.json())
         .then((response) => console.log(response))
@@ -95,53 +110,51 @@ function Section() {
   };
   const repCodigo = (e) => {
     e.preventDefault();
-    if(codigo!=null){
-      datoFactura()
-    }else{
-      alert("Error, no debe existir campos vacios")
+    if (codigo != null) {
+      datoFactura();
+    } else {
+      alert("Error, no debe existir campos vacios");
     }
-    
   };
 
-  const datoFactura = async ( ) =>{
+  const datoFactura = async () => {
     console.log(codigo);
     let url = u + p + "/api/orders";
     const response = await fetch(url);
- 
-   //turning the response into the usable data
-    const data = await response.json( );
- 
-    //now do whatever your want with this data. 
+
+    //turning the response into the usable data
+    const data = await response.json();
+
+    //now do whatever your want with this data.
     console.log(data);
 
     let datosFil = data.filter(function (e) {
       return e.id === parseInt(codigo);
     });
-    setOrder(datosFil)
+    setOrder(datosFil);
     console.log(order);
     //obtenerDatos();
- }
+  };
 
- const facturar = async ( ) =>{
-  console.log(order);
-  if(nit !=null){
-    console.log(nit);
-    obtenerDatos();
-  }else{
-    alert("Error, no debe existir campos vacios")
-  }
-  
-  /*let url = u + p + "/api/orders";
-  const response = await fetch(url);
-  const data = await response.json( );
-  console.log(data);*/
-  
+  const [contT, setContT] = useState(0);
+  const facturar = async () => {
+    let cont = 0;
+    console.log("siiii")
+    for (let i = 0; i < vp.length; i++) {
+      cont = cont + vp[i].price * vp[i].amount;
+    }
+    setContT(cont);
+    setProducts(vp);
+    setNit(0)
+  };
 
-
-  //obtenerDatos();
-}
-
-
+  const detallar = () => {
+    setContT(0);
+    setProducts([]);
+    vp=[]
+    setNit(0)
+    alert("¡¡¡¡Imprimiendo....!!!!")
+  };
   const limpiar = () => {
     setDatos({
       fatherLastname: "",
@@ -157,8 +170,6 @@ function Section() {
   const limpiaCod = () => {
     setCodigo("");
     setProducts([]);
-
-
   };
   const report = (e) => {
     e.preventDefault();
@@ -195,8 +206,48 @@ function Section() {
     }
   };
 
-  
-  let cont = 0;
+  const putData = async (e) => {
+    let datas={
+      "idCashier": parseInt(localStorage.getItem("id")),
+      "idCustomer": e.customer.id,
+      "nit": parseInt( nit)
+    }
+    //console.log(datas)
+    let url = u + p + "/api/orders/"+e.id+"/customer-info";
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datas),
+    });
+
+    const data = await response.json();
+    //console.log(data);
+  };
+
+  const editValue = (e) => {
+    const filped = e.products;
+    if (parseInt(nit.nit)> 0) {
+      let isDelete = window.confirm(
+        `¿esta seguro de seleccionar el pedido ${e.id} ?`
+      );
+      if (isDelete) {
+        
+        vp = [...vp, ...filped];
+        console.log(vp)
+        putData(e)
+
+      } else {
+        console.log("cancelado");
+      }
+    } else {
+      alert("Error, no debe existir campos vacios (Nit/Ci)");
+    }
+    //Location.href = Location.href;
+    //getData()
+
+  };
 
   return (
     <>
@@ -204,7 +255,7 @@ function Section() {
         <div className="item_jv left_jv">
           <div className="lefitem_jv left1_jv">
             <section className="main_1form_jv">
-              <p className="item_1form_jv p_jv">DATOS DEL EMPLEADO</p>
+              <h3 className="item_1form_jv p_jv title_jv">DATOS DEL CLIENTE</h3>
               <form
                 autoComplete="off"
                 className="item_1form_jv item_1container_jv"
@@ -267,21 +318,7 @@ function Section() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="form_action--button_jv item1_jv">
-                  <select
-                    onChange={handleInputChange}
-                    name="rol"
-                    defaultValue={"DEFAULT"}
-                  >
-                    <option disabled value="DEFAULT">
-                      tipo de usuario
-                    </option>
-                    <option value="waiters">Camarero</option>
-                    <option value="cashiers">Cajero</option>
-                    <option value="chefs">Chef</option>
-                    <option value="administrators">Administrador</option>
-                  </select>
-                </div>
+
                 <div className="form_action--button_jv item1_jv">
                   <button
                     type="submit"
@@ -308,7 +345,7 @@ function Section() {
               className="container2_jv"
               onSubmit={report}
             >
-              <p className="item1_it2_jv p_jv">REPORTE</p>
+              <h3 className="item1_it2_jv p_jv title_jv">REPORTE</h3>
               <div className="item_form2_jv">
                 <select
                   onChange={handleInputDate}
@@ -384,30 +421,9 @@ function Section() {
         </div>
         <div className="item_jv right_jv">
           <section className="container3_jv ">
-            <p className="container_item3_jv p_jv ">FACTURA</p>
-            <form
-              autoComplete="off"
-              className="container_item3_jv container_form3_jv form3_jv"
-              onSubmit={repCodigo}
-            >
-              <div className="item_form3_jv">
-                <label>Codigo de pedido</label>
-                <input type="number" name="codigo" onChange={handleInputCodigo} />
-              </div>
-
-              <div className="form_action--button_jv item_form3_jv">
-                <button
-                  type="submit"
-                  value="Reportar"
-                  className="item_buttom_jv item_add_jv"
-
-                >
-                  Buscar
-                </button>
-             
-              </div>
-            </form>
-            <form action="" className=" form3_jv">
+            <h3 className="container_item3_jv p_jv ">FACTURA</h3>
+            <div className="cont_pedido">
+              <form action="" className=" nit_jv">
                 <label>Nit / CI</label>
                 <input type="number" name="nit" onChange={handleInputNit} />
                 <button
@@ -418,12 +434,64 @@ function Section() {
                 >
                   Facturar
                 </button>
-            </form>
-            <p className="title_table_jv p_jv">DETALLE</p>
+                <button
+                  type="reset"
+                  value="Limpiar"
+                  className="item_buttom_jv item_add_jv"
+                  onClick={detallar}
+                >
+                  Imprimir
+                </button>
+              </form>
+              <div>
+                <a href="#">
+                  <img
+                    src={load}
+                    alt=""
+                    className="action_jv_adm"
+                    onClick={() => getData()}
+                  />
+                </a>
+              </div>
+              <div className="cont_ped_jv">
+                <table className=" tb_ped">
+                  <thead className="thead_jv">
+                    <tr className="tr_jv">
+                      <th> PEDIDO</th>
+                      <th>MESA</th>
+                      <th>ACCION</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pedido.map((e) => (
+                      <tr key={e.id} className="tr_jv">
+                        <td className="td_jv" data-label="Codigo">
+                          {e.id}
+                        </td>
+                        <td className="td_jv" data-label="Codigo">
+                          {e.table.number}
+                        </td>
+                        <td className="td_jv" data-label="Codigo">
+                          <a href="#">
+                            <img
+                              src={add}
+                              alt=""
+                              className="action_jv_adm"
+                              onClick={() => editValue(e)}
+                            />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <h3 className="title_table_jv p_jv">DETALLE</h3>
             <table className="container_item3_jv main_table_jv item_table_jv table_jv">
               <thead className="thead_jv">
                 <tr className="tr_jv">
-                  <th>CODIGO</th>
+                  <th>Nro</th>
                   <th>DESCRIPCION</th>
                   <th>CANTIDAD</th>
                   <th>PRECIO</th>
@@ -431,22 +499,22 @@ function Section() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((e) => (
-                  <tr key={e.id} className="tr_jv">
-                    <td className="td_jv" data-label="Codigo">
-                      {e.id}
+                {products.map((e, key) => (
+                  <tr key={key} className="tr_jv">
+                    <td className="td_jv" data-label="Nro">
+                      {key + 1}
                     </td>
-                    <td className="td_jv" data-label="Codigo">
-                      {e.description}
+                    <td className="td_jv" data-label="name">
+                      {e.nameOrBrand}
                     </td>
-                    <td className="td_jv" data-label="Codigo">
+                    <td className="td_jv" data-label="amount">
                       {e.amount}
                     </td>
-                    <td className="td_jv" data-label="Codigo">
+                    <td className="td_jv" data-label="price">
                       {e.price}
                     </td>
-                    <td className="td_jv" data-label="Codigo">
-                      {e.total}
+                    <td className="td_jv" data-label="total">
+                      {e.price * e.amount}
                     </td>
                   </tr>
                 ))}
@@ -454,7 +522,7 @@ function Section() {
               <tfoot className="tfoot_jv ">
                 <tr className="foot_fila_jv tr_jv">
                   <td className="td_jv">total </td>
-                  <td className="td_jv">{cont}</td>
+                  <td className="td_jv">{contT}</td>
                 </tr>
               </tfoot>
             </table>
