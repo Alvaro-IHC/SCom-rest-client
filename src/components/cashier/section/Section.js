@@ -511,10 +511,10 @@ function Section() {
                       {e.amount}
                     </td>
                     <td className="td_jv" data-label="price">
-                      {e.price}
+                      {e.price} Bs
                     </td>
                     <td className="td_jv" data-label="total">
-                      {e.price * e.amount}
+                      {e.price * e.amount} Bs
                     </td>
                   </tr>
                 ))}
@@ -522,7 +522,7 @@ function Section() {
               <tfoot className="tfoot_jv ">
                 <tr className="foot_fila_jv tr_jv">
                   <td className="td_jv">total </td>
-                  <td className="td_jv">{contT}</td>
+                  <td className="td_jv">{contT} Bs</td>
                 </tr>
               </tfoot>
             </table>

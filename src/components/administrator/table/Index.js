@@ -22,7 +22,12 @@ export default function Index() {
   const [number, setNumber] = useState({
     number: "",
   });
+  const [idT, setIdT] = useState(0);
+  const [viU, setViU] = useState([]);
   let vw = [];
+  let vi = [];
+  let vwd = [];
+
   const handleOnchange = (e) => {
     setDatos((datos) => ({
       ...datos,
@@ -73,13 +78,15 @@ export default function Index() {
     const data = await response.json();
   };
   const putData = async () => {
+    let vws = vi.concat(vw);
+    console.log(vws);
     let url = u + p + "/api/tables/" + number.number + "/waiters";
     const response = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(vw),
+      body: JSON.stringify(vws),
     });
 
     const data = await response.json();
@@ -88,6 +95,26 @@ export default function Index() {
       number: "",
     });
     vw = [];
+    vi = [];
+  };
+
+  const putDataD = async () => {
+
+    let url = u + p + "/api/tables/" +idT + "/waiters";
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(viU),
+    });
+
+    const data = await response.json();
+    console.log(data);
+    setNumber({
+      number: "",
+    });
+     
   };
 
   const enviarDatosV = (e) => {
@@ -120,12 +147,31 @@ export default function Index() {
 
   const addWaiter = (e) => {
     if (number.number.length > 0) {
-      let isDelete = window.confirm(`esta seguro de agregar a '${e.name}' `);
-      if (isDelete) {
-        vw.push(e.id);
+      let datosFil = tables.filter(function (e) {
+        return e.id === parseInt(number.number);
+      });
+      let pw = datosFil[0].waiters;
+      vi = pw.map((e) => e.id);
+      if (pw.some((pw) => pw.id === e.id)) {
+        alert(
+          "Alerta, " +
+            e.name +
+            " ya fue asignada a la mesa con ID" +
+            number.number
+        );
+      } else {
+        if (vw.some((vw) => vw === e.id)) {
+          alert("Alerta, " + e.name + " ya fue seleccionado");
+        } else {
+          let isDelete = window.confirm(
+            `¿Esta seguro de agregar a '${e.name}' ?`
+          );
+          if (isDelete) {
+            vw.push(e.id);
+            console.log(vw);
+          }
+        }
       }
-
-      console.log(vw);
     } else {
       alert("Error, no debe existir campos vacios");
     }
@@ -141,6 +187,7 @@ export default function Index() {
       if (datosFil.length > 0) {
         if (vw.length > 0) {
           putData();
+          alert("Datos guardados");
         } else {
           alert("Error, debe seleccionar al menos un mesero");
         }
@@ -156,8 +203,23 @@ export default function Index() {
     getData();
   };
 
+  const putDataTable = async () => {
+    let url = u + p + "/api/tables/" + idT;
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datos),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+
   const editTable = (e) => {
     console.log(e);
+    setIdT(e.id);
     setEstado(true);
     setWaitersA(e.waiters);
     let obj = {
@@ -165,11 +227,33 @@ export default function Index() {
       number: e.number,
     };
     setDatos(obj);
+    let pw = e.waiters;
+    console.log(pw);
+    vi = pw.map((e) => e.id);
+    setViU(vi);
   };
+
 
   const update = (e) => {
     e.preventDefault();
     console.log("actulizando");
+    putDataTable( );
+    putDataD()
+    getData()
+    setEstado(false);
+    Location.href = Location.href;
+  };
+
+  const deleteWaiter = (e) => {
+    let isDelete = window.confirm(`¿Esta seguro de eliminar a '${e.name}' ?`);
+    if (isDelete) {
+      let ix = viU.indexOf(e.id);
+      viU.splice(ix, 1);
+      console.log(ix);
+      console.log(viU);
+      vwd.push(e.id);
+    }
+
   };
   return (
     <>
@@ -276,7 +360,7 @@ export default function Index() {
               src={updata}
               alt=""
               className="adm_img"
-              onClick={()=>getData()}
+              onClick={() => getData()}
             />
           </a>
           <table className="table_jv_adm  table_jv">
@@ -377,7 +461,7 @@ export default function Index() {
                         src={add}
                         alt=""
                         className="action_jv_adm"
-                        onClick={() => addWaiter(e)}
+                        onClick={() => deleteWaiter(e)}
                       />
                     </a>
                   </td>
