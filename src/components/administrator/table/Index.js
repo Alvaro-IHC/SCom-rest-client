@@ -4,6 +4,7 @@ import "./Index.css";
 import settings from "../../../settings.json";
 import add from "../../../assets/images/administrator/add.svg";
 import edit from "../../../assets/images/administrator/edit.svg";
+import updata from "../../../assets/images/administrator/update.png";
 import Modal from "../modal/Modal";
 import Edit from "./Edit";
 
@@ -86,6 +87,7 @@ export default function Index() {
     setNumber({
       number: "",
     });
+    vw = [];
   };
 
   const enviarDatosV = (e) => {
@@ -100,28 +102,40 @@ export default function Index() {
       if (datosFil.length > 0) {
         alert("Error, La mesa " + datos.number + " ya existe");
       } else {
-        postData();
+        if (parseInt(datos.capacity) >= 0 && parseInt(datos.number) >= 0) {
+          postData();
+          alert(" La mesa " + datos.number + " fue adicionado exitosamente");
+          console.log(datos);
+          setDatos(initailForm);
+        } else {
+          alert(" Error, no debe existir numeros negativos");
+        }
       }
     } else {
       alert("Error, no debe existir campos vacios");
     }
     console.log(datos);
+    getData();
   };
 
   const addWaiter = (e) => {
-    let isDelete = window.confirm(`esta seguro de agregar a '${e.name}' `);
-    if (isDelete) {
-      vw.push(e.id);
-    }
+    if (number.number.length > 0) {
+      let isDelete = window.confirm(`esta seguro de agregar a '${e.name}' `);
+      if (isDelete) {
+        vw.push(e.id);
+      }
 
-    console.log(vw);
+      console.log(vw);
+    } else {
+      alert("Error, no debe existir campos vacios");
+    }
   };
 
   const sendWaiter = (e) => {
     e.preventDefault();
     console.log(number);
     let datosFil = tables.filter(function (e) {
-      return e.number === number.number;
+      return e.id === parseInt(number.number);
     });
     if (number.number.length > 0) {
       if (datosFil.length > 0) {
@@ -138,12 +152,14 @@ export default function Index() {
     } else {
       alert("Error, no debe existir campos vacios");
     }
+    Location.href = Location.href;
+    getData();
   };
 
   const editTable = (e) => {
     console.log(e);
     setEstado(true);
-    setWaitersA(e.waiters)
+    setWaitersA(e.waiters);
     let obj = {
       capacity: e.capacity,
       number: e.number,
@@ -173,6 +189,7 @@ export default function Index() {
                   onChange={handleOnchange}
                   placeholder="Capadidad"
                   type="number"
+                  value={datos.capacity}
                 ></input>
               </div>
               <div className="item1_jv_adm">
@@ -181,6 +198,7 @@ export default function Index() {
                   onChange={handleOnchange}
                   placeholder="numero"
                   type="number"
+                  value={datos.number}
                 ></input>
               </div>
               <div className="form_action--button_jv_adm item1_jv_adm">
@@ -205,7 +223,8 @@ export default function Index() {
                 <input
                   name="number"
                   onChange={handleOnchangeN}
-                  placeholder="numero de la mesa"
+                  value={number.number}
+                  placeholder="ID mesa"
                   type="number"
                 ></input>
               </div>
@@ -252,9 +271,18 @@ export default function Index() {
         </div>
         <div className="right_tb">
           <h4>Actualizar </h4>
+          <a href="#">
+            <img
+              src={updata}
+              alt=""
+              className="adm_img"
+              onClick={()=>getData()}
+            />
+          </a>
           <table className="table_jv_adm  table_jv">
             <thead className="thead_jv_adm">
               <tr className="tr_jv_adm">
+                <th className="title_adm">ID</th>
                 <th className="title_adm">Numero de mesa</th>
                 <th className="title_adm">Capacidad</th>
                 <th className="title_adm">Accion</th>
@@ -263,6 +291,7 @@ export default function Index() {
             <tbody>
               {tables.map((e, key) => (
                 <tr key={e.id} className="tr_jv_adm">
+                  <td className="td_jv_adm">{e.id}</td>
                   <td className="td_jv_adm">{e.number}</td>
                   <td className="td_jv_adm">{e.capacity}</td>
                   <td className="td_jv_adm">
@@ -326,38 +355,37 @@ export default function Index() {
           </div>
         </form>
         <div className="cont_form_jv">
-        <h4>Lista de los camareros asignados a la mesa  </h4>
-        <table className="table_jv_adm  ">
-              <thead className="thead_jv_adm">
-                <tr className="tr_jv_adm">
-                  <th className="title_adm">Nro</th>
-                  <th className="title_adm">Nombre</th>
-                  <th className="title_adm">Apellido Paterno</th>
-                  <th className="title_adm">ACCION</th>
+          <h4>Lista de los camareros asignados a la mesa </h4>
+          <table className="table_jv_adm  ">
+            <thead className="thead_jv_adm">
+              <tr className="tr_jv_adm">
+                <th className="title_adm">Nro</th>
+                <th className="title_adm">Nombre</th>
+                <th className="title_adm">Apellido Paterno</th>
+                <th className="title_adm">ACCION</th>
+              </tr>
+            </thead>
+            <tbody>
+              {waitersA.map((e, key) => (
+                <tr key={e.id} className="tr_jv_adm">
+                  <td className="td_jv_adm">{key}</td>
+                  <td className="td_jv_adm">{e.name}</td>
+                  <td className="td_jv_adm">{e.fatherLastname}</td>
+                  <td className="td_jv_adm" data-label="ACCION">
+                    <a href="#">
+                      <img
+                        src={add}
+                        alt=""
+                        className="action_jv_adm"
+                        onClick={() => addWaiter(e)}
+                      />
+                    </a>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {waitersA.map((e, key) => (
-                  <tr key={e.id} className="tr_jv_adm">
-                    <td className="td_jv_adm">{key}</td>
-                    <td className="td_jv_adm">{e.name}</td>
-                    <td className="td_jv_adm">{e.fatherLastname}</td>
-                    <td className="td_jv_adm" data-label="ACCION">
-                      <a href="#">
-                        <img
-                          src={add}
-                          alt=""
-                          className="action_jv_adm"
-                          onClick={() => addWaiter(e)}
-                        />
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              ))}
+            </tbody>
+          </table>
         </div>
-        
       </Modal>
     </>
   );
