@@ -3,7 +3,10 @@ import ContenedorInferior from '../contenedorInferior/ContenedorInferior';
 import Table from 'react-bootstrap/Table';
 import './AcercaDeNosotros.css';
 
-import ContenedorAcordeon from './ContenedorAcordeon';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
  import settings from '../../../settings.json';
 
 const AcercaDeNosotros = () => {
@@ -13,7 +16,7 @@ const AcercaDeNosotros = () => {
    const [menuMV,setMenuMV] = useState([])
    useEffect(() => {
   obtenerDatosMV()
-   });
+   },[]);
 
    const obtenerDatosMV= async() =>
    {
@@ -44,10 +47,22 @@ const AcercaDeNosotros = () => {
 
 
 
+    <Container>
      
-          <ContenedorAcordeon  titulo="MISIÓN" contenido={menuMV.mission}/>
-          <br/><br/>
-          <ContenedorAcordeon  titulo="VISIÓN" contenido={menuMV.vision}/>
+      <Row  >
+        <Col className='centrotit' xs={12}>Misión </Col>
+        <Col className='rellenoan' xs={12}>{menuMV.mission}<p></p></Col>
+       
+      </Row>
+      <br/><br/>
+      <Row >
+        <Col className='centrotit' xs={12}>Visión</Col>
+        <Col className='rellenoan' xs={12}>{menuMV.vision}<p></p></Col>
+    
+      </Row>
+    </Container>
+
+     
 
 
 
