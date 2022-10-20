@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Abajo from "./Abajo/Abajo"
 import {useEffect} from 'react'
+import settings from  './../../../settings.json'
 //import Mcrear from './Modal/Mcrear'
 var data_platos=[
   
@@ -11,6 +12,7 @@ var data_platos=[
 var data_ingredientes=[
 
 ]
+var data_bebidas=[]
 var temporal=  {
   
     available: true,
@@ -67,11 +69,42 @@ function Miniformat(a,c,d,e){
     }
   )
 }
+function EstoNoEsInutil(x){
+
+  var v=x;
+  return ["Adicionar"];
+}
+var poradi=[]
+function AdicionarCreacion(adicionar, elemenentox){
+  var aux = Object.assign({},adicionar)
+  //console.log(elemenentox);
+  var amo=elemenentox.stock;
+  var idd=elemenentox.id;                                    
+  if(adicionar[data_ingredientes.indexOf(elemenentox)]==="Adicionar"){
+    //setIngP(ingredientesP.concat(elemenentox));
+    //console.log("entro");
+    poradi.push({amount: amo, id: idd});
+
+    aux[data_ingredientes.indexOf(elemenentox)]="Adicionado";
+    return(aux);
+  }else{
+    //setIngP(ingredientesP.splice(ingredientesP.indexOf(elemenentox)));
+    //console.log("entro");
+    poradi.splice(poradi.elemenentox,1)
+
+    aux[data_ingredientes.indexOf(elemenentox)]="Adicionar";
+    return(aux);
+
+  }
+
+}
 function PMain(){
+  const setingsu=settings.url;
+  const setingsp=settings.puerto;
   const [loadeddata, setloadeddata] = useState([]);
     useEffect(()=>{
       
-      fetch("http://localhost:8081/api/foods")
+      fetch(setingsu+setingsp+"/api/foods")
       .then(response => response.json())
       .then(data => setloadeddata(data));
       
@@ -80,12 +113,21 @@ function PMain(){
   const [loadeddata2, setloadeddata2] = useState([]);
     useEffect(()=>{
       
-      fetch("http://localhost:8081/api/ingredients")
+      fetch(setingsu+setingsp+"/api/ingredients")
       .then(response => response.json())
-      .then(data => setloadeddata(data));
+      .then(data => setloadeddata2(data));
       
     },[])
   data_ingredientes=loadeddata2;
+  const [loadeddata3, setloadeddata3] = useState([]);
+    useEffect(()=>{
+      
+      fetch(setingsu+setingsp+"/api/drinks")
+      .then(response => response.json())
+      .then(data => setloadeddata3(data));
+      
+    },[])
+  data_bebidas=loadeddata3;
   const [show, setShow] = useState(false);
   const [nro,setNro]=useState(data_platos.length);
   const [name, setN]=useState("");
@@ -93,7 +135,7 @@ function PMain(){
   const [price, setP]=useState("");
   const [id, setI]=useState(0);
   const [imag, setIm]= useState("");
-  const [adicionar, setAdi]= useState([]);
+  const [adicionar, setAdicionar]= useState([]);
   const [counter, setcounter]= useState(-1);
   const [ingi, setIngi]= useState({
     
@@ -101,10 +143,11 @@ function PMain(){
   const [ingredientesP, setIngP]= useState([]);
   const [ing, setIn]= useState([]);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {setShow(true)};
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
   const [nrox, setNrox]=useState(0);
+  const [ediIngredient, setedii]=useState([]);
   return(
       <div>
         <h1 className="title_jv_adm">Platos</h1>
@@ -131,19 +174,38 @@ function PMain(){
                       <td>{dato.type}</td>
                       <td>{dato.price}</td>
                       <td>
-                      <button type="button" className="btn btn-primary" onClick={()=>{setIm(dato.urlImage);setI(dato.id);setN(dato.name);setT(dato.type);setP(dato.price);setShow2(true);temporal.id=dato.id}}>
+                      <button type="button" className="btn btn-primary" onClick={()=>{setedii(dato.ingredients);setIm(dato.urlImage);setI(dato.id);setN(dato.name);setT(dato.type);setP(dato.price);setShow2(true);temporal.id=dato.id}}>
                         Editar 
                       </button>
 
                       
                           {" "}
-                      <button type="button" className="btn btn-danger" onClick={()=>{setIm(dato.urlImage);Eliminar(dato); setNro(data_platos.length)}}>Eliminar</button>
+                      <button type="button" className="btn btn-danger" onClick={()=>{setIm(dato.urlImage);Eliminar(dato); setNro(data_platos.length+data_bebidas.lenght)}}>Eliminar</button>
+                      
+                      </td>
+                      </tr>
+                  ))}
+                  {data_bebidas.map((dato3) => (
+                      <tr key={dato3.id}>
+                      <td>{dato3.id}</td>
+                      <td>{dato3.brand}</td>
+                      <td><img width="100" class="img-fluid" src={dato3.urlImage} alt="Responsive image"></img></td>
+                      <td>{dato3.alcoholicGrade}</td>
+                      <td>{dato3.price}</td>
+                      <td>
+                      <button type="button" className="btn btn-primary" onClick={()=>{setIm(dato3.urlImage);setI(dato3.id);setN(dato3.brand);setT(dato3.alcoholicGrade);setP(dato3.price);setShow2(true);temporal.id=dato3.id}}>
+                        Editar 
+                      </button>
+
+                      
+                          {" "}
+                      <button type="button" className="btn btn-danger" onClick={()=>{setIm(dato3.urlImage);Eliminar(dato3); setNro(data_platos.length+data_bebidas.lenght)}}>Eliminar</button>
                       
                       </td>
                       </tr>
                   ))}
                   </tbody>
-              </table>
+          </table>
               <Modal show={show2} onHide={handleClose2}>
                 <Modal.Header closeButton>
                   <Modal.Title>Editar Plato {name}</Modal.Title>
@@ -156,6 +218,7 @@ function PMain(){
                         temporal.name=document.getElementById("name2").value;
                         temporal.type=document.getElementById("type2").value;
                         temporal.price=document.getElementById("price2").value;
+                        temporal.ingredients=Object.assign({},ediIngredient.concat(ing));
                         //console.log(temporal.name);
                         Editar(temporal)
                         //data_platos.push(Object.assign({},temporal));
@@ -167,6 +230,143 @@ function PMain(){
                     <label><b>Tipo de plato</b></label>  <input  id="type2" type="text" name="type2" autoComplete="off" placeholder={type}></input>  <br></br> <br></br>
                     <label><b>Precio del plato</b></label>  <input  id="price2" type="text" name="price2" autoComplete="off" placeholder={price}></input>  <br></br> <br></br>
                     <label for="formFile" class="form-label"><b>Cambiar Imagen</b> <br></br><br></br><img  className="img-fluid" src={imag} alt="Responsive image"></img></label><br></br> <br></br>
+                    <label><b>Ingredientes actuales</b></label><br></br> <br></br>
+                      <div class="container px-4 text-center">
+                        <div class="row gx-5">
+                          <div class="col">
+                          <div class="p-3 border bg-light">
+                          <table className="table">
+                            <thead>
+                                <tr>
+                                
+                                
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {ediIngredient.map((elemenentoz)=>(
+                                    <tr>
+                                    
+                                    <td>{elemenentoz.ingredient.name}</td>
+                                    <td><button type="button"  className="btn btn-danger" onClick={()=>{
+                                      //console.log(ing.indexOf(elemenento)+1);
+                                      
+                                      
+                                      setNrox(ediIngredient.length);}}>Eliminar</button></td>
+                                    
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                            </table> 
+                          </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <label><b>Ingredientes disponibles</b></label><br></br> <br></br>
+                      <div class="container px-4 text-center">
+                        <div class="row gx-5">
+                          <div class="col">
+                          <div class="p-3 border bg-light">
+                          <table className="table">
+                            <thead>
+                                <tr>
+                                
+                                
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {data_ingredientes.map((elemenentox)=>(
+                                    
+                                    <tr>
+                                    
+                                    <td>{elemenentox.name}</td>
+                                    <td><button type="button"  className="btn btn-danger" onClick={()=>{
+                                      //console.log(ing.indexOf(elemenento)+1);
+                                      setAdicionar(AdicionarCreacion(adicionar,elemenentox));
+                                      console.log(poradi)
+                                      
+                                      }}>{adicionar[data_ingredientes.indexOf(elemenentox)]}</button></td>
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                            </table> 
+                          </div>
+                          </div>
+                          
+                        </div>
+                      </div>                  
+
+
+                      <label><b>Insertar ingredientes</b></label> <br></br> <br></br>
+                      
+                      <label>Nombre ingrediente</label> <br></br> 
+                      <input id="Ningrediente" type="text" name="Ningrediente" autoComplete='off'></input><br></br> <br></br>
+                      <label>Precio ingrediente</label> <br></br> 
+                      <input id="Pingrediente" type="text" name="Pingrediente" autoComplete='off'></input><br></br> <br></br>
+                      <label>Stock ingrediente</label> <br></br> 
+                      <input id="Singrediente" type="text" name="Singrediente" autoComplete='off'></input><br></br> <br></br>
+                      <label>Cantidad para el plato</label> <br></br> 
+                      <input id="Cingrediente" type="text" name="Cingrediente" autoComplete='off'></input><br></br> <br></br>
+                      <label><button type="button" className="btn btn-success" onClick={()=>{
+                        
+                        //console.log("Antes----------");
+                        //console.log(JSON.stringify(ingi));
+                        setIngi(Miniformat(document.getElementById("Cingrediente").value,document.getElementById("Ningrediente").value,document.getElementById("Pingrediente").value,document.getElementById("Singrediente").value));
+                      
+                      setIn(ing.concat(Object.assign({},Miniformat(document.getElementById("Cingrediente").value,document.getElementById("Ningrediente").value,document.getElementById("Pingrediente").value,document.getElementById("Singrediente").value))));
+                      //console.log(ing);
+                      setNrox(ing.length+1);
+                      }}>Adicionar</button></label><br></br> <br></br>
+                      <label>
+                      <div className="container px-0 text-center">
+                        <div className="row gx-0">
+                            <div className="col">
+                            <div className="p-3 border bg-light">
+                                
+
+                            <b>Nro de ingredientes {nrox}</b>
+                            <table className="table">
+                            <thead>
+                                <tr>
+                                
+                                
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {ing.map((elemenento)=>(
+                                    <tr>
+                                    
+                                    <td>{elemenento.name}</td>
+                                    <td><button type="button"  className="btn btn-danger" onClick={()=>{
+                                      //console.log(ing.indexOf(elemenento)+1);
+                                      if(ing.indexOf(elemenento)+1===nrox){
+                                        ing.pop();
+                      
+                                      }else{
+                                        ing.splice([ing.indexOf(elemenento)], 1); 
+                                      }
+                                      
+                                      setNrox(ing.length);}}>Eliminar</button></td>
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                            </table> 
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                      </label>
+                      <br></br><br></br>
                     <input class="form-control" type="file" id="formFile"></input><br></br> <br></br>
                     <button type="reset" className="btn btn-danger" onClick={handleClose2}>Cancelar</button>
                     <button type="submit"  className="btn btn-success">Modificar</button> 
@@ -178,6 +378,28 @@ function PMain(){
               <br />
               
                   <b>Nro Platos: {nro}<br></br></b>
+                 
+                  <button type="button" onClick={()=>{
+                    var addg=[]
+                    
+                    for (let i = 0; i < data_ingredientes.length; i++) {
+                      addg.push("Adicionar")
+                    }; 
+                    if(addg.length>0){
+                      setAdicionar(Object.assign({},addg));
+                      setShow(true);
+                    }else{
+                      for (let i = 0; i < data_ingredientes.length; i++) {
+                        addg.push("Adicionar")
+                      }; 
+                      setAdicionar(Object.assign({},addg));
+                      setShow(true);
+                    }
+                    
+                  
+                    //console.log( adicionar)
+                  //console.log( data_ingredientes.length)
+                  }} className="btn btn-success">Crear Plato</button>
                   <Button variant="primary" onClick={handleShow}>
                     Crear plato
                   </Button>
@@ -195,8 +417,16 @@ function PMain(){
                           temporal.type=document.getElementById("type").value;
                           temporal.price=document.getElementById("price").value;
                           temporal.newIngredients=ing;
+                          temporal.ingredients=poradi;
                           //console.log(temporal.name);
                           data_platos.push(Object.assign({},temporal));
+                          var url = setingsu+setingsp+"/api/foods";
+                          fetch(url, {
+                              headers: { "Content-type": "application/json" },
+                              method: "POST",
+                              body: JSON.stringify(Object.assign({},temporal)),
+                              
+                            });
                           setNro(data_platos.length);
                           ing.length=0;
                           setShow(false);
@@ -221,21 +451,18 @@ function PMain(){
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 {data_ingredientes.map((elemenentox)=>(
+                                    
                                     <tr>
                                     
                                     <td>{elemenentox.name}</td>
                                     <td><button type="button"  className="btn btn-danger" onClick={()=>{
                                       //console.log(ing.indexOf(elemenento)+1);
-                                      setAdi(adicionar.concat("Adicionar"));
-                                      counter=counter+1;
-                                      if(adicionar==="Adicionar"){
-                                        setIngP(ingredientesP.concat(elemenentox));
-                                        adicionar[counter]="Adicionado";
-                                      }else{
-                                        setIngP(ingredientesP.slice(counter,1))
-                                      }
-                                      }}>{adicionar[counter]}</button></td>
+                                      setAdicionar(AdicionarCreacion(adicionar,elemenentox));
+                                      console.log(poradi)
+                                      
+                                      }}>{adicionar[data_ingredientes.indexOf(elemenentox)]}</button></td>
                                     </tr>
                                 ))}
 

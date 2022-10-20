@@ -14,7 +14,7 @@ const PreguntasFrecuentes = () => {
    const [menuPrFr,setMenuPrFr] = useState([])
    useEffect(() => {
       obtenerDatosPrFr()
-   });
+   },[]);
 
    const obtenerDatosPrFr= async() =>
    {
