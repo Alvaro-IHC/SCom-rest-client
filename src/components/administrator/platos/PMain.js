@@ -150,6 +150,7 @@ function PMain(){
   const [ediIngredient, setedii]=useState([]);
   return(
       <div>
+        <h1 className="title_jv_adm">Platos</h1>
           <div className="row g-0 text-center">
           <div className="col-sm-6 col-md-8 border bg-light">
           <table className="table">
