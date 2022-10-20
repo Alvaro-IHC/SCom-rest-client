@@ -69,34 +69,7 @@ function Abajo(){
         <div>
             <div class="container px-4 text-center">
                 <div class="row gx-5">
-                    <div class="col">
-                    <div class="p-3 border bg-light">
-                        <b>Aceptar ingredientes</b>
-                        <p>Nro de ingredientes {nro}</p>
-                        <table className="table">
-                        <thead>
-                            <tr>
-                            
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            {Solicitud.map((elemenento)=>(
-                                <tr>
-                                
-                                <td>{elemenento.name}</td>
-                                <td>{elemenento.stock}</td>
-                                <td><button type="button" onClick={()=>{setSolicitud(Aceptar(elemenento));setNro(data.length);}} className="btn btn-success">Aceptar</button></td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                        </table>
-                    </div>
-                    </div>
+                    
                     <div class="col">
                     <div class="p-3 border bg-light">
                     <b>Ingredientes disponibles</b>

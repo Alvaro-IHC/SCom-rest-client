@@ -15,11 +15,13 @@ var data =[
     
 ]
 var temporal={
-    id: 0,
-    name: "string",
-    price: 0,
-    stock: 0
+    amount: 0,
+      name: "string",
+      price: 0,
+      stock: 0
   }
+var newIngredients=[]
+var oldIngredients=[]
 function Eliminar(a){
     data.splice(a-1, 1)
     data.map((orden)=>(
@@ -50,12 +52,51 @@ function JsonGen1(b){
     const JsonArray = JSON.stringify(b);
     console.log(JsonArray)
 }
+function JsonGen2(newI, oldI){
+    var obj={
+        chefId: 3,
+        ingredients: oldI,
+        newIngredients: newI
+    }
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    var url = setingsu+setingsp+"/api/ingredients/request";
+    console.log(JSON.stringify(obj));
+    fetch(url, {
+        headers: { "Content-type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(obj),
+        
+      });
+}
 var alreadyloaded=false
 function LoaData(){
     if(!alreadyloaded){
         data=JSON.parse(JSON.stringify(data2))
     }
     alreadyloaded=true
+}
+function Modificar(dato, cantidad){
+    console.log(cantidad)
+    var itwasnew=false;
+    newIngredients.map((ingrediente)=>{
+        if(ingrediente===dato){
+            dato.ammount=cantidad;
+            itwasnew=true;
+        }
+    });
+    data.map((ingrediente)=>{
+        if(ingrediente===dato){
+            dato.ammount=cantidad;
+        }
+    }); 
+    if(!itwasnew){
+        oldIngredients.push({
+            amount: parseInt(cantidad),
+            id: dato.id
+        })
+        console.log(oldIngredients)
+    }
 }
 function Derecha(){
     const setingsu=settings.url;
@@ -72,11 +113,15 @@ function Derecha(){
     data=loadeddata
     const [name, setD]=useState("");
     const [stock, setC]=useState("");
+    const [precio, setP]=useState("");
     const setDes = (e) => {
         setD(e.target.value);
     }
     const setCan = (e) => {
         setC(e.target.value);
+    }
+    const setPres = (e) => {
+        setP(e.target.value);
     }
     const [nro,setNro]=useState(data.length)
     const [Solicitud,setSolicitud]=useState(data)
@@ -90,15 +135,17 @@ function Derecha(){
                     ev.preventDefault();   
                     temporal.name=name;
                     temporal.stock=stock;
-                    temporal.id=data.length+1;
+                    temporal.price=precio;
                     //console.log(temporal.name);
                     //console.log(temporal.stock);
                     //console.log(temporal.id);
                     data.push(Object.assign({},temporal));
+                    newIngredients.push(Object.assign({},temporal));
                     setNro(data.length);
                 }}
                 ><label><b>name</b></label>  <input  id="name" type="text" name="name" autocomplete="off" onChange={setDes}></input>  <br></br>  <br></br>
-                <label><b>stock</b></label>  <input  id="stock" type="text" name="stock" autocomplete="off" onChange={setCan}></input>  <br></br> <br></br>
+                <label><b>cantidad</b></label>  <input  id="stock" type="text" name="stock" autocomplete="off" onChange={setCan}></input>  <br></br> <br></br>
+                <label><b>precio</b></label>  <input  id="stock" type="text" name="stock" autocomplete="off" onChange={setPres}></input>  <br></br> <br></br>
                 <button type="reset" className="btn btn-danger">Cancelar</button>
                 <button type="submit"  className="btn btn-success">Añadir</button> 
             </form>
@@ -120,6 +167,7 @@ function Derecha(){
                 
                 <th scope="col">name</th>
                 <th scope="col">stock</th>
+                <th scope="col">cantidad</th>
                 <th scope="col">Accion</th>
                 </tr>
             </thead>
@@ -130,13 +178,14 @@ function Derecha(){
                     
                     <td>{elemenento.name}</td>
                     <td>{elemenento.stock}</td>
-                    <td><button type="button" onClick={()=>{setSolicitud(Eliminar(elemenento.id));setNro(data.length);}} className="btn btn-danger">Eliminar</button></td>
+                    <td><input  id="price2" type="text" name="price2" autoComplete="off" placeholder={elemenento.stock}></input></td>
+                    <td><button type="button" onClick={()=>{Modificar(elemenento,document.getElementById("price2").value)}} className="btn btn-success">Adicionar</button></td>
                     </tr>
                 ))}
 
             </tbody>
             </table>
-            <button type="button"  className="btn btn-success" onClick={()=>JsonGen1(data)}>Solicitar</button> 
+            <button type="button"  className="btn btn-success" onClick={()=>JsonGen2(newIngredients,oldIngredients)}>Solicitar</button> 
 
             </div>
             </div>

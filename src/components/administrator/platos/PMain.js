@@ -36,26 +36,145 @@ var temporal=  {
     type: "string"
   
 }
+var temporal2={
+  availabl: true,
+  imageId: 0,
+  ingredients: [
+  ],
+  name: "string",
+  newIngredients: [
+  ],
+  price: 0,
+  type: "string"
+}
+var temporal3={
+  
+    alcoholicGrade: "string",
+    available: true,
+    brand: "string",
+    deleted: false,
+    description: "string",
+    imageId: 0,
+    price: 0,
+    volume: 0
+  
+}  
 function Eliminar(a){
     data_platos.splice([data_platos.indexOf(a)], 1)
+    const setingsu=settings.url;
+    const setingsp=settings.puerto;
+    var url = setingsu+setingsp+"/api/products/"+a.id;
+    fetch(url, {
+  
+        method: "DELETE"
+        
+      });
 }
-function Editar(temp){
+function Eliminar2(a){
+  data_bebidas.splice([data_bebidas.indexOf(a)], 1)
+  const setingsu=settings.url;
+  const setingsp=settings.puerto;
+  var url = setingsu+setingsp+"/api/products/"+a.id;
+  fetch(url, {
+
+      method: "DELETE"
+      
+    });
+}
+function Editar(temp,id){
   var counter=0;
-    data_platos.map((dato)=>{
-    
-      if(dato.id===temp.id){
-        if(temp.name===""){
-          temp.name=data_platos[counter].name;
-        }if(temp.type===""){
-          temp.type=data_platos[counter].type;
-        }if(temp.price===""){
-          temp.price=data_platos[counter].price;
-        }
-          data_platos[counter]=Object.assign({},temp); 
-           
+  data_platos.map((dato)=>{
+  
+    if(dato.id===id){
+      console.log("found");
+      id=dato.id;
+      if(temp.name===""){
+        temp.name=data_platos[counter].name;
+      }if(temp.type===""){
+        temp.type=data_platos[counter].type;
+      }if(temp.price===""){
+        temp.price=data_platos[counter].price;
+      }if(temp.imageId===0){
+        temp.imageId=data_platos[counter].imageId;
       }
-      counter++;
-    })
+        data_platos[counter]=Object.assign({},temp); 
+          
+    }
+    counter++;
+  })
+  const setingsu=settings.url;
+  const setingsp=settings.puerto;
+  var url = setingsu+setingsp+"/api/foods/"+id;
+  console.log(Object.assign({},temp))
+  fetch(url, {
+      headers: { "Content-type": "application/json" },
+      method: "PUT",
+      body: JSON.stringify(Object.assign({},temp)),
+      
+    });
+
+
+
+
+  temp={
+    availabl: true,
+    imageId: 0,
+    ingredients: [
+    ],
+    name: "string",
+    newIngredients: [
+    ],
+    price: 0,
+    type: "string"
+  }
+}
+function Editar2(temp, id){
+  var counter=0;
+  data_bebidas.map((dato)=>{
+  
+    if(dato.id===id){
+      console.log("found");
+      id=dato.id;
+      if(temp.alcoholicGrade===""){
+        temp.alcoholicGrade=data_bebidas[counter].alcoholicGrade;
+      }if(temp.brand===""){
+        temp.brand=data_bebidas[counter].brand;
+      }if(temp.description===""){
+        temp.description=data_bebidas[counter].description;
+      }if(temp.price===""){
+        temp.price=data_bebidas[counter].price;
+      }if(temp.volume===""){
+        temp.volume=data_bebidas[counter].volume;
+      }if(temp.imageId===0){
+        temp.imageId=data_bebidas[counter].imageId;
+      }
+        data_bebidas[counter]=Object.assign({},temp);   
+    }
+    counter++;
+  })
+  const setingsu=settings.url;
+  const setingsp=settings.puerto;
+  var url = setingsu+setingsp+"/api/drinks/"+id;
+  console.log(Object.assign({},temp))
+  fetch(url, {
+      headers: { "Content-type": "application/json" },
+      method: "PUT",
+      body: JSON.stringify(Object.assign({},temp)),
+      
+    });
+
+    temporal3={
+  
+      alcoholicGrade: "string",
+      available: true,
+      brand: "string",
+      deleted: false,
+      description: "string",
+      imageId: 0,
+      price: 0,
+      volume: 0
+    
+  }  
 }
 function Miniformat(a,c,d,e){
   return(
@@ -75,7 +194,7 @@ function EstoNoEsInutil(x){
   return ["Adicionar"];
 }
 var poradi=[]
-function AdicionarCreacion(adicionar, elemenentox){
+function AdicionarCreacion(adicionar, elemenentox, cantidad){
   var aux = Object.assign({},adicionar)
   //console.log(elemenentox);
   var amo=elemenentox.stock;
@@ -83,7 +202,13 @@ function AdicionarCreacion(adicionar, elemenentox){
   if(adicionar[data_ingredientes.indexOf(elemenentox)]==="Adicionar"){
     //setIngP(ingredientesP.concat(elemenentox));
     //console.log("entro");
-    poradi.push({amount: amo, id: idd});
+    console.log(cantidad);
+    if(cantidad===''){
+      poradi.push({amount: 1, id: idd});
+    }else{
+      poradi.push({amount: cantidad, id: idd});
+    }
+    
 
     aux[data_ingredientes.indexOf(elemenentox)]="Adicionado";
     return(aux);
@@ -97,6 +222,59 @@ function AdicionarCreacion(adicionar, elemenentox){
 
   }
 
+}
+var imgdata={id:0}
+function sethc(a){
+  imgdata=a;
+}
+function recovery(a){
+  var heavycopy={}
+  console.log("im in ;)");
+  //console.log(sending);
+  //console.log(a);
+  var formData = new FormData();
+  
+  formData.append("file", a.target.files[0]);
+  
+  const setingsu=settings.url;
+  const setingsp=settings.puerto;
+  var url = setingsu+setingsp+"/api/images";
+  
+  fetch(url, {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+    
+  }).then(response => response.json())
+  .then(data => sethc(JSON.parse(JSON.stringify(Object.assign({},data)))))
+  .catch(error => console.log('error', error));
+  console.log(imgdata);
+}
+async function Sendimage(a){
+  var heavycopy={}
+  console.log("im in ;)");
+  //console.log(sending);
+  //console.log(a);
+  var formData = new FormData();
+  
+  formData.append("file", a.target.files[0]);
+  
+  const setingsu=settings.url;
+  const setingsp=settings.puerto;
+  var url = setingsu+setingsp+"/api/images";
+  
+  const resp = await fetch(url, {
+    method: 'POST',
+    body: formData,
+    redirect: 'follow'
+    
+  })
+  const data = await resp.json();
+  sethc(Object.assign({},data));
+  console.log(imgdata);
+}
+function getdoc(a){
+  return a
 }
 function PMain(){
   const setingsu=settings.url;
@@ -130,8 +308,10 @@ function PMain(){
   data_bebidas=loadeddata3;
   const [show, setShow] = useState(false);
   const [nro,setNro]=useState(data_platos.length);
+  const [nro6,setNro6]=useState(data_bebidas.length);
   const [name, setN]=useState("");
   const [type, setT]=useState("");
+  const [descripcion2, setD2]=useState("");
   const [price, setP]=useState("");
   const [id, setI]=useState(0);
   const [imag, setIm]= useState("");
@@ -146,7 +326,12 @@ function PMain(){
   const handleShow = () => {setShow(true)};
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
+  const [show3, setShow3] = useState(false);
+  const handleClose3 = () => setShow3(false);
+  const [show4, setShow4] = useState(false);
+  const handleClose4 = () => setShow4(false);
   const [nrox, setNrox]=useState(0);
+  const [volume, setvol]=useState(0);
   const [ediIngredient, setedii]=useState([]);
   return(
       <div>
@@ -173,7 +358,23 @@ function PMain(){
                       <td>{dato.type}</td>
                       <td>{dato.price}</td>
                       <td>
-                      <button type="button" className="btn btn-primary" onClick={()=>{setedii(dato.ingredients);setIm(dato.urlImage);setI(dato.id);setN(dato.name);setT(dato.type);setP(dato.price);setShow2(true);temporal.id=dato.id}}>
+                      <button type="button" className="btn btn-primary" onClick={()=>{
+                         var addg=[]
+                    
+                         for (let i = 0; i < data_ingredientes.length; i++) {
+                           addg.push("Adicionar")
+                         }; 
+                         if(addg.length>0){
+                           setAdicionar(Object.assign({},addg));
+                         }else{
+                           for (let i = 0; i < data_ingredientes.length; i++) {
+                             addg.push("Adicionar")
+                           };}; 
+                        setAdicionar(Object.assign({},addg));
+                        imgdata={}; poradi=[];
+                        setIn([]);
+                        setI(dato.id);
+                        setedii(dato.ingredients);setIm(dato.urlImage);setI(dato.id);setN(dato.name);setT(dato.type);setP(dato.price);setShow2(true);temporal.id=dato.id}}>
                         Editar 
                       </button>
 
@@ -192,19 +393,60 @@ function PMain(){
                       <td>{dato3.alcoholicGrade}</td>
                       <td>{dato3.price}</td>
                       <td>
-                      <button type="button" className="btn btn-primary" onClick={()=>{setIm(dato3.urlImage);setI(dato3.id);setN(dato3.brand);setT(dato3.alcoholicGrade);setP(dato3.price);setShow2(true);temporal.id=dato3.id}}>
+                      <button type="button" className="btn btn-primary" onClick={()=>{imgdata={}; poradi=[];setD2(dato3.description);setvol(dato3.volume) ; setIm(dato3.urlImage);setI(dato3.id);setN(dato3.brand);setT(dato3.alcoholicGrade);setP(dato3.price);setShow3(true);temporal.id=dato3.id}}>
                         Editar 
                       </button>
 
                       
                           {" "}
-                      <button type="button" className="btn btn-danger" onClick={()=>{setIm(dato3.urlImage);Eliminar(dato3); setNro(data_platos.length+data_bebidas.lenght)}}>Eliminar</button>
+                      <button type="button" className="btn btn-danger" onClick={()=>{setIm(dato3.urlImage);Eliminar2(dato3); setNro(data_platos.length+data_bebidas.lenght)}}>Eliminar</button>
                       
                       </td>
                       </tr>
                   ))}
                   </tbody>
           </table>
+          <Modal show={show3} onHide={handleClose3}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Editar Bebida {name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <form
+                    onSubmit={ev => {
+                        ev.preventDefault();
+                           
+                        temporal3.brand=document.getElementById("brand2").value;
+                        temporal3.alcoholicGrade=document.getElementById("alcoholicGrade2").value;
+                        temporal3.price=document.getElementById("price3").value;
+                        temporal3.volume=document.getElementById("volume2").value;
+                        temporal3.description=document.getElementById("desc2").value;
+                        if(imgdata.id!=undefined){
+                          temporal3.imageId=imgdata.id;
+                        }else{
+                          temporal3.imageId=0;
+                        }
+                        
+                        //console.log(temporal2);
+                        //console.log(temporal.name);
+                        Editar2(temporal3,id);
+                        //data_platos.push(Object.assign({},temporal));
+                        setNro6(data_platos.length);
+                        setShow3(false);
+                    }}
+                    >
+                    <label><b>Nombre de la bebida </b></label>  <input  id="brand2" type="text" name="brand2" autoComplete="off" placeholder={name}></input>  <br></br>  <br></br>
+                    <label><b>Volumen de la bebida </b></label>  <input  id="volume2" type="text" name="volume2" autoComplete="off" placeholder={volume}></input>  <br></br>  <br></br>
+                    <label><b>Grado alcoholico</b></label>  <input  id="alcoholicGrade2" type="text" name="alcoholicGrade2" autoComplete="off" placeholder={type}></input>  <br></br> <br></br>
+                    <label><b>Precio de la bebida</b></label>  <input  id="price3" type="text" name="price3" autoComplete="off" placeholder={price}></input>  <br></br> <br></br>
+                    <label><b>Descripcion de la bebida</b></label>  <input  id="desc2" type="text" name="desc2" autoComplete="off" placeholder={descripcion2}></input>  <br></br> <br></br>
+                    <label for="formFile" class="form-label"><b>Cambiar Imagen</b> <br></br><br></br><img  className="img-fluid" src={imag} alt="Responsive image"></img></label><br></br> <br></br>
+                    <label><input class="form-control" type="file" id="formFile" onChange={(e)=>{Sendimage(e)}}></input></label><br></br> <br></br>
+                      <br></br><br></br>
+                    <button type="reset" className="btn btn-danger" onClick={handleClose3}>Cancelar</button>
+                    <button type="submit"  className="btn btn-success">Modificar</button> 
+                  </form>
+                </Modal.Body>
+              </Modal>
               <Modal show={show2} onHide={handleClose2}>
                 <Modal.Header closeButton>
                   <Modal.Title>Editar Plato {name}</Modal.Title>
@@ -214,12 +456,20 @@ function PMain(){
                     onSubmit={ev => {
                         ev.preventDefault();
                            
-                        temporal.name=document.getElementById("name2").value;
-                        temporal.type=document.getElementById("type2").value;
-                        temporal.price=document.getElementById("price2").value;
-                        temporal.ingredients=Object.assign({},ediIngredient.concat(ing));
+                        temporal2.name=document.getElementById("name2").value;
+                        temporal2.type=document.getElementById("type2").value;
+                        temporal2.price=document.getElementById("price2").value;
+                        if(imgdata.id!=undefined){
+                          temporal2.imageId=imgdata.id;
+                        }else{
+                          temporal2.imageId=0;
+                        }
+                        
+                        temporal2.ingredients=poradi;
+                        temporal2.newIngredients=ing;
+                        //console.log(temporal2);
                         //console.log(temporal.name);
-                        Editar(temporal)
+                        Editar(temporal2,id);
                         //data_platos.push(Object.assign({},temporal));
                         setNro(data_platos.length);
                         setShow2(false);
@@ -230,6 +480,7 @@ function PMain(){
                     <label><b>Precio del plato</b></label>  <input  id="price2" type="text" name="price2" autoComplete="off" placeholder={price}></input>  <br></br> <br></br>
                     <label for="formFile" class="form-label"><b>Cambiar Imagen</b> <br></br><br></br><img  className="img-fluid" src={imag} alt="Responsive image"></img></label><br></br> <br></br>
                     <label><b>Ingredientes actuales</b></label><br></br> <br></br>
+                    <label><input class="form-control" type="file" id="formFile" onChange={(e)=>{Sendimage(e)}}></input></label><br></br> <br></br>
                       <div class="container px-4 text-center">
                         <div class="row gx-5">
                           <div class="col">
@@ -240,7 +491,7 @@ function PMain(){
                                 
                                 
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Accion</th>
+                                <th scope="col">Cantidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -248,11 +499,7 @@ function PMain(){
                                     <tr>
                                     
                                     <td>{elemenentoz.ingredient.name}</td>
-                                    <td><button type="button"  className="btn btn-danger" onClick={()=>{
-                                      //console.log(ing.indexOf(elemenento)+1);
-                                      
-                                      
-                                      setNrox(ediIngredient.length);}}>Eliminar</button></td>
+                                    <td>{elemenentoz.amount}</td>
                                     
                                     </tr>
                                 ))}
@@ -275,6 +522,7 @@ function PMain(){
                                 
                                 
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad</th>
                                 <th scope="col">Accion</th>
                                 </tr>
                             </thead>
@@ -285,10 +533,12 @@ function PMain(){
                                     <tr>
                                     
                                     <td>{elemenentox.name}</td>
+                                    <td><input  id="price5" type="text" name="price5" autoComplete="off"></input></td>
                                     <td><button type="button"  className="btn btn-danger" onClick={()=>{
-                                      //console.log(ing.indexOf(elemenento)+1);
-                                      setAdicionar(AdicionarCreacion(adicionar,elemenentox));
-                                      console.log(poradi)
+                                      //console.log(getdoc(document.getElementById("price5").value));
+                                      
+                                      setAdicionar(AdicionarCreacion(adicionar,elemenentox,document.getElementById("price5").value));
+                                      //console.log(poradi)
                                       
                                       }}>{adicionar[data_ingredientes.indexOf(elemenentox)]}</button></td>
                                     </tr>
@@ -399,10 +649,63 @@ function PMain(){
                     //console.log( adicionar)
                   //console.log( data_ingredientes.length)
                   }} className="btn btn-success">Crear Plato</button>
-                  <Button variant="primary" onClick={handleShow}>
-                    Crear plato
-                  </Button>
-
+                  <br></br>
+                  <b>Nro Bebidas: {nro6}<br></br></b>
+                 
+                 <button type="button" onClick={()=>{
+                   setShow4(true);
+                   
+                 
+                   //console.log( adicionar)
+                 //console.log( data_ingredientes.length)
+                 }} className="btn btn-success">Crear Bebida</button>
+                 <Modal show={show4} onHide={handleClose4}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Editar Bebida {name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <form
+                    onSubmit={ev => {
+                        ev.preventDefault();
+                           
+                        temporal3.brand=document.getElementById("brand2").value;
+                        temporal3.alcoholicGrade=document.getElementById("alcoholicGrade2").value;
+                        temporal3.price=document.getElementById("price3").value;
+                        temporal3.volume=document.getElementById("volume2").value;
+                        temporal3.description=document.getElementById("desc2").value;
+                        if(imgdata.id!=undefined){
+                          temporal3.imageId=imgdata.id;
+                        }else{
+                          temporal3.imageId=6;
+                        }
+                        data_bebidas.push(Object.assign({},temporal3));
+                          var url = setingsu+setingsp+"/api/drinks";
+                          fetch(url, {
+                              headers: { "Content-type": "application/json" },
+                              method: "POST",
+                              body: JSON.stringify(Object.assign({},temporal3)),
+                              
+                            });
+                          setNro6(data_bebidas.length);
+                        
+                        //data_platos.push(Object.assign({},temporal));
+                        
+                        setShow4(false);
+                    }}
+                    >
+                    <label><b>Nombre de la bebida </b></label>  <input  id="brand2" type="text" name="brand2" autoComplete="off" ></input>  <br></br>  <br></br>
+                    <label><b>Volumen de la bebida </b></label>  <input  id="volume2" type="text" name="volume2" autoComplete="off" ></input>  <br></br>  <br></br>
+                    <label><b>Grado alcoholico</b></label>  <input  id="alcoholicGrade2" type="text" name="alcoholicGrade2" autoComplete="off" ></input>  <br></br> <br></br>
+                    <label><b>Precio de la bebida</b></label>  <input  id="price3" type="text" name="price3" autoComplete="off" ></input>  <br></br> <br></br>
+                    <label><b>Descripcion de la bebida</b></label>  <input  id="desc2" type="text" name="desc2" autoComplete="off" ></input>  <br></br> <br></br>
+                    <label for="formFile" class="form-label"><b>Instertar Imagen</b> <br></br><br></br></label><br></br> <br></br>
+                    <label><input class="form-control" type="file" id="formFile" onChange={(e)=>{Sendimage(e)}}></input></label><br></br> <br></br>
+                      <br></br><br></br>
+                    <button type="reset" className="btn btn-danger" onClick={handleClose4}>Cancelar</button>
+                    <button type="submit"  className="btn btn-success">Crear</button> 
+                  </form>
+                </Modal.Body>
+              </Modal>
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                       <Modal.Title>Adicionar plato</Modal.Title>
@@ -417,6 +720,12 @@ function PMain(){
                           temporal.price=document.getElementById("price").value;
                           temporal.newIngredients=ing;
                           temporal.ingredients=poradi;
+                          if(imgdata.id!=undefined){
+                            temporal.imageId=imgdata.id;
+                          }else{
+                            temporal.imageId=1;
+                          }
+                          
                           //console.log(temporal.name);
                           data_platos.push(Object.assign({},temporal));
                           var url = setingsu+setingsp+"/api/foods";
@@ -433,8 +742,10 @@ function PMain(){
                       >
                       <label><b>Nombre del plato </b></label>  <input  id="name" type="text" name="name" autoComplete="off" ></input>  <br></br>  <br></br>
                       <label><b>Tipo de plato</b></label>  <input  id="type" type="text" name="type" autoComplete="off" ></input>  <br></br> <br></br>
-                      <label><b>Precio del plato</b></label>  <input  id="price" type="text" name="price" autoComplete="off" ></input>  <br></br> <br></br>
-                      <label for="formFile" class="form-label"><b>Insertar imagen</b></label>  <input class="form-control" type="file" id="formFile"></input><br></br> <br></br>
+                      <label><b>Precio del plato</b></label>  <input  id="price" type="text" name="price"  autoComplete="off" ></input>  <br></br> <br></br>
+                      <label for="formFile" class="form-label" ><b>Insertar imagen</b></label> 
+                      <label><input class="form-control" type="file" id="formFile" onChange={(e)=>{Sendimage(e)}}></input></label><br></br> <br></br>
+                      
                       <label><b>Ingredientes actuales</b></label><br></br> <br></br>
                       <div class="container px-4 text-center">
                         <div class="row gx-5">
@@ -456,9 +767,12 @@ function PMain(){
                                     <tr>
                                     
                                     <td>{elemenentox.name}</td>
+                                    <td><input  id="ammount" type="text" name="ammount" autoComplete="off"></input></td>
                                     <td><button type="button"  className="btn btn-danger" onClick={()=>{
                                       //console.log(ing.indexOf(elemenento)+1);
-                                      setAdicionar(AdicionarCreacion(adicionar,elemenentox));
+                                      
+
+                                      setAdicionar(AdicionarCreacion(adicionar,elemenentox,document.getElementById("ammount").value));
                                       console.log(poradi)
                                       
                                       }}>{adicionar[data_ingredientes.indexOf(elemenentox)]}</button></td>
