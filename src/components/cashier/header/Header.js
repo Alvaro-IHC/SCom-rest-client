@@ -18,7 +18,7 @@ const Header = () => {
           <img className="main_icon_jv" src={logo} alt="icono" />
         </div>
         <div className="main_item_jv item_cont_jv">
-          <h2 className=" main_name_jv jv">{localStorage.getItem("username")}</h2>
+          <h3 className=" main_name_jv jv">{localStorage.getItem("username")}</h3>
           <img
             className=" main_picture_jv jv"
             src={messi}

@@ -7,7 +7,6 @@
 .container_jv{
   display: flex;
   flex-direction: row;
-  background-color: #34495E;
   height: 85vh;
   width:100%;
   padding: 3px;
@@ -23,7 +22,8 @@
     width: 30%;
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 82vh;
+    justify-content: space-between;
     
 }
 .right_jv{
@@ -33,8 +33,8 @@
 
 .lefitem_jv{
     width: 20px;
-    border: 2px solid #34495E;
     height: 100px;
+    margin-bottom: 5px;
     
 }
 .left1_jv{
@@ -59,11 +59,12 @@
 
 .main_1form_jv{
     font-family: 'Poppins', sans-serif;
-    background-color: #fff;
+    background-color: #2b879e;
     border-radius: 7px;
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin-bottom: 5px;
     
 }
 
@@ -91,7 +92,7 @@
 
 .container2_jv{
     font-family: 'Poppins', sans-serif;
-    background-color: #fff;
+    background-color:#1a1c27;
     border-radius: 7px;
     display: flex;
     flex-direction: column;
@@ -113,6 +114,7 @@ div label{
     font-family: 'Poppins', sans-serif;
     background-color: #fff;
     border-radius: 7px;
+    border: 3px solid #24252A;
 }
 
 .container3_jv{
@@ -132,6 +134,11 @@ div label{
     width: 80px;
     margin-right: 5px;
 }
+.title_jv{
+    margin-top: 5px;
+    color: white;
+    font-size: 15px;
+}
 
 .main_table3_jv{
     width: 100vh;
@@ -144,7 +151,7 @@ div label{
        padding: 7px;
        border-radius: 4px;
        color: #fff;
-       margin-top: 15px;
+
    }
    .title_table3_jv{
        text-align: center;
@@ -159,7 +166,7 @@ div label{
    }
    .thead_jv{
        
-       background-color: #47627e;
+       background-color:  #2b879e;
        bottom: 3px solid black;
    }
    .tr_jv:nth-child(even){
@@ -173,10 +180,11 @@ div label{
    .tfoot_jv{
        display: flex;
        align-items: flex-end;
-       background-color: #34495E;
+       background-color: #2b879e;
        color:#fff ;
        border-bottom:2px solid#fff;
        border-left:2px solid #fff;
+       margin-top: 5px;
        
    }
 
@@ -209,6 +217,32 @@ div label{
     border: 1px solid rgb(217, 255, 47);
     font-weight: bold;
 
+}
+
+.cont_pedido{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 30vh;
+   
+
+}
+.nit_jv{
+    background-color: #2b879e;
+    height: 35px;
+}
+.tb_ped{
+    width: 100%;
+    background-color: #e5ebbc;
+    
+}
+.td_jv{
+    padding: 7px;
+}
+.cont_ped_jv{
+    height: 20vh;
+    overflow: scroll;
+    width: 50%;
 }
 @media (max-width:1030px) {
     .container_jv{

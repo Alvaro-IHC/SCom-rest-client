@@ -26,7 +26,7 @@ const comeback=(event)=>{
             <NavLink  to="#"  className="link_jv" activeclassname="active_jv" onClick={toPage("system")}>Sistema</NavLink>
           </li>
           <li className="nav_item_jv">
-            <NavLink  to="# " className="link_jv" activeclassname="active_jv"onClick={toPage("roles")}>Roles</NavLink>
+            <NavLink  to="# " className="link_jv" activeclassname="active_jv"onClick={toPage("roles")}>Mesa</NavLink>
           </li>
         </ul>
       </nav>

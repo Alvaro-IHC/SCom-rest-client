@@ -4,6 +4,7 @@ import Header from '../header/Header'
 import User from '../user/User'
 import System from '../system/System'
 import PMain from '../platos/PMain'
+import Table from '../table/Index'
 export default function Index() {
   console.log("estoy en adm");
   const [page,setPage]=useState("users")
@@ -16,7 +17,7 @@ export default function Index() {
     }else if(page==="system"){
       return <System/>;
     }else{
-      return <h1>roles</h1>;
+      return <Table/>;
     }
   }
 

@@ -9,7 +9,7 @@ const CarouselPlatos = () => {
   const [menuP,setMenuP] = useState([])
   useEffect(() => {
      obtenerDatos()
-  });
+  },[]);
 
   const obtenerDatos= async() =>
   {

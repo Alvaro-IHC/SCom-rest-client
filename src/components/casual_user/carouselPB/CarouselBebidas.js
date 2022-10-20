@@ -10,7 +10,7 @@ const CarouselBebidas = () => {
   const [menuB,setMenuB] = useState([])
   useEffect(() => {
      obtenerDatos2()
-  });
+  },[]);
 
   const obtenerDatos2= async() =>
   {
